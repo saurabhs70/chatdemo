@@ -17,7 +17,8 @@
 +(ChatConfig*) sharedInstance;
 -(void)initConfig:(NSString*)channelname andprotocol:(id<delegateforconnection>)delegate;
 -(void)intiSubscribeChannel:(NSString*)channelname;
--(void)sendmessage:(NSString*)channelname;
+
 @property(weak,nonatomic) id <delegateforconnection>delegateconfig;
 -(void)hereall:(NSString*)modeviolator callback:(void (^)(NSArray *allchanels))callback;
+-(void)sendmessage:(NSDictionary*)message andtochannel:(NSString*)channelname callback:(void (^)(bool sent))callback;
 @end

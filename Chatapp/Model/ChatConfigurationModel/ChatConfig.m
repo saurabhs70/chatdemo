@@ -145,22 +145,21 @@
               event.data.presence.timetoken, event.data.channel, event.data.presence.state);
     }
 }
--(void)sendmessage:(NSString*)channelname
+-(void)sendmessage:(NSDictionary*)message andtochannel:(NSString*)channelname callback:(void (^)(bool sent))callback
 {
-NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
-[msg setValue:@"mymessagefromdevice" forKey:@"message"];
-[msg setValue:_client.uuid forKey:@"sender"];
-[self.client publish: msg
+
+[self.client publish: message
            toChannel: channelname withCompletion:^(PNPublishStatus *publishStatus) {
                
                // Check whether request successfully completed or not.
                if (!publishStatus.isError) {
                   
+                   callback(true);
                    
                    // Message successfully published to specified channel.
                }
                else {
-                   
+                   callback(false);
                    /**
                     Handle message publish error. Check 'category' property to find out
                     possible reason because of which request did fail.

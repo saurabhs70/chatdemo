@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     _loggedtext.text=@"my.gmail.com";
+     _loggedtext.text=@"my.gmail.com";//mentor@gmail.com
     // Do any additional setup after loading the view, typically from a nib.
     
 }

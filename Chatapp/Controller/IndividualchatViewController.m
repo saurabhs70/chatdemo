@@ -74,67 +74,17 @@
 
 - (IBAction)chatclicked:(id)sender {
  PubNub *cc=   [Constantobject sharedInstance].client;
-//   // NSString *targetChannel = [cc channels].lastObject;//targetChannel
-//                                    [cc publish: @"Hello from the PubNub Objective-C SDK"
-//                                               toChannel: @"1to1chat" withCompletion:^(PNPublishStatus *publishStatus) {
-//    
-//                                                   // Check whether request successfully completed or not.
-//                                                   if (!publishStatus.isError) {
-//    
-//                                                       // Message successfully published to specified channel.
-//                                                   }
-//                                                   else {
-//    
-//                                                       /**
-//                                                        Handle message publish error. Check 'category' property to find out
-//                                                        possible reason because of which request did fail.
-//                                                        Review 'errorData' property (which has PNErrorData data type) of status
-//                                                        object to get additional information about issue.
-//    
-//                                                        Request can be resent using: [publishStatus retry];
-//                                                        */
-//                                                   }
-//                                               }];
-    
+
     NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
     [msg setValue:@"mymessagefromdevice" forKey:@"message"];
     [msg setValue:cc.uuid forKey:@"sender"];
-    [cc publish: msg
-               toChannel: @"1to1channel" withCompletion:^(PNPublishStatus *publishStatus) {
-                   
-                   // Check whether request successfully completed or not.
-                   if (!publishStatus.isError) {
-                       NSDictionary *dictmessage=msg;
-                       //"5siphone" @"54321"
-                       NSString *chatbetween=[NSString stringWithFormat:@"%@-%@",_reciver,cc.uuid];//1234-5555
-                       //5555-1234
-                       //  if (![[dictmessage valueForKey:@"sender"] isEqualToString:_client.uuid]) {
-                       NSMutableArray *arr=[[NSMutableArray alloc]init];
-                       NSMutableDictionary* retrievedFruits = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"allmessage"]];
-                       [arr addObjectsFromArray:[retrievedFruits objectForKey:chatbetween]];
-                       NSDictionary *dd=[[NSDictionary alloc]initWithObjectsAndKeys:[dictmessage valueForKey:@"message"],@"message",[dictmessage valueForKey:@"sender"],@"sender",nil];
-                       [arr addObject:dd];
-                       [retrievedFruits setObject:arr forKey:chatbetween];
-                       [[NSUserDefaults standardUserDefaults] setObject:retrievedFruits forKey:@"allmessage"];
-                       [[NSUserDefaults standardUserDefaults] synchronize];
-                      
-                       NSMutableDictionary* retrievedFruits1 = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"allmessage"]];
-                      chatmessage= [retrievedFruits1 valueForKey:chatbetween];
-                       [self.tblindi reloadData];
-                       NSLog(@"%@",retrievedFruits);
-                       // Message successfully published to specified channel.
-                   }
-                   else {
-                       
-                       /**
-                        Handle message publish error. Check 'category' property to find out
-                        possible reason because of which request did fail.
-                        Review 'errorData' property (which has PNErrorData data type) of status
-                        object to get additional information about issue.
-                        
-                        Request can be resent using: [publishStatus retry];
-                        */
-                   }
-               }];
-}
+    [[ChatConfig sharedInstance]sendmessage:msg andtochannel:@"" callback:^(bool sent) {
+        
+        if (sent)
+            NSLog(@"send!");
+        else
+            NSLog(@"send error!");
+    
+    }];
+    }
 @end

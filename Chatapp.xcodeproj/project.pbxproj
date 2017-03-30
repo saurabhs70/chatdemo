@@ -18,6 +18,8 @@
 		A53C1AEE1E8CFF100061E11D /* offline.png in Resources */ = {isa = PBXBuildFile; fileRef = A53C1AEC1E8CFF100061E11D /* offline.png */; };
 		A53C1AEF1E8CFF100061E11D /* online.png in Resources */ = {isa = PBXBuildFile; fileRef = A53C1AED1E8CFF100061E11D /* online.png */; };
 		A53C1AF51E8CFFA90061E11D /* SYCStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1AF41E8CFFA90061E11D /* SYCStatusCell.m */; };
+		A53C1AF91E8D1B7D0061E11D /* SYCAskerQustionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1AF81E8D1B7D0061E11D /* SYCAskerQustionCell.m */; };
+		A53C1AFC1E8D1BC60061E11D /* SYCAskerQusetionController.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1AFB1E8D1BC60061E11D /* SYCAskerQusetionController.m */; };
 		A56DF0451E2CD50600CE97C7 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56DF0441E2CD50600CE97C7 /* Contacts.framework */; };
 		A570ECC41E27A5FC001BA181 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A570ECC31E27A5FC001BA181 /* main.m */; };
 		A570ECC71E27A5FC001BA181 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A570ECC61E27A5FC001BA181 /* AppDelegate.m */; };
@@ -66,6 +68,10 @@
 		A53C1AED1E8CFF100061E11D /* online.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = online.png; sourceTree = "<group>"; };
 		A53C1AF31E8CFFA90061E11D /* SYCStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCStatusCell.h; sourceTree = "<group>"; };
 		A53C1AF41E8CFFA90061E11D /* SYCStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCStatusCell.m; sourceTree = "<group>"; };
+		A53C1AF71E8D1B7D0061E11D /* SYCAskerQustionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCAskerQustionCell.h; sourceTree = "<group>"; };
+		A53C1AF81E8D1B7D0061E11D /* SYCAskerQustionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCAskerQustionCell.m; sourceTree = "<group>"; };
+		A53C1AFA1E8D1BC60061E11D /* SYCAskerQusetionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCAskerQusetionController.h; sourceTree = "<group>"; };
+		A53C1AFB1E8D1BC60061E11D /* SYCAskerQusetionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCAskerQusetionController.m; sourceTree = "<group>"; };
 		A56DF0441E2CD50600CE97C7 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		A570ECBF1E27A5FC001BA181 /* Chatapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A570ECC31E27A5FC001BA181 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -122,6 +128,8 @@
 				A53C1AD31E8CE0650061E11D /* OnlineuserViewController.m */,
 				A53C1AD41E8CE0650061E11D /* ViewController.h */,
 				A53C1AD51E8CE0650061E11D /* ViewController.m */,
+				A53C1AFA1E8D1BC60061E11D /* SYCAskerQusetionController.h */,
+				A53C1AFB1E8D1BC60061E11D /* SYCAskerQusetionController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -133,6 +141,8 @@
 				A53C1ADC1E8CE09A0061E11D /* chatcellTableViewCell.m */,
 				A53C1AF31E8CFFA90061E11D /* SYCStatusCell.h */,
 				A53C1AF41E8CFFA90061E11D /* SYCStatusCell.m */,
+				A53C1AF71E8D1B7D0061E11D /* SYCAskerQustionCell.h */,
+				A53C1AF81E8D1B7D0061E11D /* SYCAskerQustionCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -305,8 +315,10 @@
 				A53C1AF51E8CFFA90061E11D /* SYCStatusCell.m in Sources */,
 				A53C1AE91E8CE14E0061E11D /* ChatConfig.m in Sources */,
 				A53C1AD91E8CE0650061E11D /* ViewController.m in Sources */,
+				A53C1AF91E8D1B7D0061E11D /* SYCAskerQustionCell.m in Sources */,
 				A53C1AD81E8CE0650061E11D /* OnlineuserViewController.m in Sources */,
 				A53C1AD71E8CE0650061E11D /* IndividualchatViewController.m in Sources */,
+				A53C1AFC1E8D1BC60061E11D /* SYCAskerQusetionController.m in Sources */,
 				A570ECC71E27A5FC001BA181 /* AppDelegate.m in Sources */,
 				A53C1AE51E8CE0F60061E11D /* Contact.m in Sources */,
 				A570ECC41E27A5FC001BA181 /* main.m in Sources */,
