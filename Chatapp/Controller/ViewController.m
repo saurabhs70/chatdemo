@@ -55,7 +55,9 @@
         }
     else if(status==true)
     {
+        SYCAskerQusetionController *vv=(SYCAskerQusetionController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCAskerQusetionControllerId"];
         
+        [self.navigationController pushViewController:vv animated:YES];
     }
 }
 - (IBAction)btnmodeClicked:(id)sender
