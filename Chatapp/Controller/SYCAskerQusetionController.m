@@ -23,7 +23,25 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (NSInteger)tableView:(UITableView *)tableview numberOfRowsInSection:(NSInteger)section
+{
+    return  10;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    
+    SYCAskerQustionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SYCAskerQustionCellId"];
+    
+    if (cell == nil) {
+        cell = [[SYCAskerQustionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SYCStatusCellId"];
+    }
+    
+    cell.lblquestion.text=@"My Question";
+    cell.lbltagforqa.text=@"Answered";
+    return cell;
+    
+}
 /*
 #pragma mark - Navigation
 

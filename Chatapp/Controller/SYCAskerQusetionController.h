@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-
+#import "SYCAskerQustionCell.h"
 @interface SYCAskerQusetionController : ViewController
 
+@property (weak, nonatomic) IBOutlet UITableView *tblqusetion;
 @end
