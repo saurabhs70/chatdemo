@@ -896,7 +896,7 @@
                   moduleName = "Chatapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/umenit/Desktop/Chatapp-1/Chatapp/Model/ChatConfigurationModel/ChatConfig.m"
-                  timestampString = "512642339.963753"
+                  timestampString = "512643512.414214"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "241"
@@ -911,7 +911,7 @@
                   moduleName = "Chatapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/umenit/Desktop/Chatapp-1/Chatapp/Model/ChatConfigurationModel/ChatConfig.m"
-                  timestampString = "512642339.9657"
+                  timestampString = "512643512.416126"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "241"
@@ -926,7 +926,7 @@
                   moduleName = "Chatapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/umenit/Desktop/Chatapp-1/Chatapp/Model/ChatConfigurationModel/ChatConfig.m"
-                  timestampString = "512642339.967569"
+                  timestampString = "512643512.418034"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "241"
@@ -1343,12 +1343,12 @@
                   moduleName = "Chatapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/umenit/Desktop/Chatapp-1/Chatapp/Controller/IndividualchatViewController.m"
-                  timestampString = "512642339.999132"
+                  timestampString = "512643512.449609"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "82"
-                  endingLineNumber = "82"
-                  offsetFromSymbolStart = "212">
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "524">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1358,11 +1358,11 @@
                   moduleName = "Chatapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/umenit/Desktop/Chatapp-1/Chatapp/Controller/IndividualchatViewController.m"
-                  timestampString = "512642340.001757"
+                  timestampString = "512643512.451532"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
                   offsetFromSymbolStart = "24">
                </Location>
             </Locations>
