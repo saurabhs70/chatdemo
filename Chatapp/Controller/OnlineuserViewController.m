@@ -16,14 +16,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    onlineuser=[[NSMutableArray alloc]init];
-    onlineuser=_allmentor.mutableCopy;
+  
+    mentorPresencelist=[Constantobject sharedInstance].allMentorList;
     // Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(somethingHappens:) name:@"notificationName" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Presencestatusmentor:) name:@"Presencestatuschange" object:nil];
   
 }
--(void)somethingHappens:(NSNotification*)notification
+-(void)Presencestatusmentor:(NSNotification*)notification
 {
+    mentorPresencelist=[Constantobject sharedInstance].allMentorList;
+    [_tblonline reloadData];
     //onlineuser= [Constantobject sharedInstance].onlinecontact;
    // [self.tblonline reloadData];
     
@@ -34,7 +36,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableview numberOfRowsInSection:(NSInteger)section
 {
-    return  onlineuser.count;
+    return  mentorPresencelist.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -45,23 +47,19 @@
     if (cell == nil) {
         cell = [[SYCStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SYCStatusCellId"];
     }
-
-    cell.statusicon.image=[UIImage imageNamed:@"online.png"];
-    cell.statuslbl.text=[onlineuser objectAtIndex:indexPath.row];
+    NSString *channel=[mentorPresencelist objectAtIndex:indexPath.row];
+    if ([[Constantobject sharedInstance].onlineMentorList containsObject:channel])
+        cell.statusicon.image=[UIImage imageNamed:@"online.png"];
+    else
+        cell.statusicon.image=[UIImage imageNamed:@"offline.png"];
+    cell.statuslbl.text=[mentorPresencelist objectAtIndex:indexPath.row];
     return cell;
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    IndividualchatViewController *viewController = (IndividualchatViewController *)[storyboard instantiateViewControllerWithIdentifier:@"IndividualchatViewControllerId"];
-//    viewController.reciver=[onlineuser objectAtIndex:indexPath.row];
-//    NSMutableDictionary* retrievedFruits = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"allmessage"]];
-//    NSLog(@"%@",retrievedFruits);
-//    PubNub *cc=   [Constantobject sharedInstance].client;
-//    NSString *view=[NSString stringWithFormat:@"%@-%@",[onlineuser objectAtIndex:indexPath.row],cc.uuid];//5siphone-54321
-//    viewController.chatmessage=[retrievedFruits valueForKey:view];
-//    [self presentViewController:viewController animated:YES completion:nil];
+    IndividualchatViewController *vv=(IndividualchatViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"IndividualchatViewControllerId"];
+    vv.reciver=[mentorPresencelist objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:vv animated:YES];
 }
 /*
 #pragma mark - Navigation

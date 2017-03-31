@@ -19,6 +19,7 @@
 -(void)intiSubscribeChannel:(NSString*)channelname;
 
 @property(weak,nonatomic) id <delegateforconnection>delegateconfig;
--(void)hereall:(NSString*)modeviolator callback:(void (^)(NSArray *allchanels))callback;
+-(void)hereAllChannels;
 -(void)sendmessage:(NSDictionary*)message andtochannel:(NSString*)channelname callback:(void (^)(bool sent))callback;
+-(void)unsubscribechannle:(NSString*)channelname;
 @end

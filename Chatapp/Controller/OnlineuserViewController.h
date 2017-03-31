@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "SYCStatusCell.h"
+#import "IndividualchatViewController.h"
 @interface OnlineuserViewController : UIViewController<PNObjectEventListener>
 {
-   NSMutableArray *onlineuser;
+    NSArray *mentorPresencelist;
 }
-@property (strong,nonatomic) NSArray *allmentor;
+//@property (strong,nonatomic) NSArray *mentorPresencelist;
 - (IBAction)chat:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITableView *tblonline;

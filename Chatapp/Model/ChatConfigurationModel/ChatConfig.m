@@ -33,7 +33,7 @@
     
         // Subscribe to demo channel with presence observation
         [self.client subscribeToChannels: @[channelname] withPresence:YES];// simulator
-    
+   
     
 }
 -(void)intiSubscribeChannel:(NSString*)channelname
@@ -202,7 +202,7 @@
 //                        }];
 //}
 
--(void)hereall:(NSString*)modeviolator callback:(void (^)(NSArray *allchanels))callback
+-(void)hereAllChannels
 {
     [self.client hereNowWithCompletion:^(PNPresenceGlobalHereNowResult *result, PNErrorStatus *status) {
         
@@ -221,12 +221,14 @@
              result.data.totalOccupancy - total number of active subscribers.
              */
             NSDictionary *dd=result.data.channels;
+            
             NSArray *channelarray=[dd allKeys];
-            callback(channelarray);
-            NSLog(@"%@",result.data.totalChannels);
+            [self allmentorlist:channelarray];
+           // callback(channelarray);
+           // NSLog(@"%@",result.data.totalChannels);
         }
         else {
-            callback(nil);
+           // callback(nil);
             /**
              Handle presence audit error. Check 'category' property
              to find out possible reason because of which request did fail.
@@ -238,5 +240,50 @@
         }
     }];
 }
-
+-(void)allmentorlist:(NSArray*)allonlinechannel
+{
+    if ([Constantobject sharedInstance].allMentorList.count) {
+        NSMutableSet* set1 = [NSMutableSet setWithArray:[Constantobject sharedInstance].allMentorList];
+        NSMutableSet* set2 = [NSMutableSet setWithArray:allonlinechannel];
+        [set1 intersectSet:set2]; //this will give you only the obejcts that are in both sets
+        
+        NSArray* resultforonline = [set1 allObjects];
+        
+        [Constantobject sharedInstance].onlineMentorList=[self filteredarray:resultforonline];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Presencestatuschange" object:nil];
+    }
+    else
+    {
+    [[SYCRequestManager sharedInstance]Requestforlist:(nil) callback:^(NSArray *allchanels) {
+    
+        if (allchanels) {
+            [Constantobject sharedInstance].allMentorList=[self filteredarray:allchanels];
+            NSMutableSet* set1 = [NSMutableSet setWithArray:allchanels];
+            NSMutableSet* set2 = [NSMutableSet setWithArray:allonlinechannel];
+            [set1 intersectSet:set2]; //this will give you only the obejcts that are in both sets
+            
+            NSArray* resultforonline = [set1 allObjects];
+           
+            [Constantobject sharedInstance].onlineMentorList=[self filteredarray:resultforonline];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"Presencestatuschange" object:nil];
+           // NSLog(@"%@",result);//online user
+        }
+        
+    }];
+    }
+}
+-(NSArray*)filteredarray:(NSArray*)nonfilteredarray
+{
+    NSMutableArray *resultforonlinefiltered=[[NSMutableArray alloc]init];
+    [resultforonlinefiltered addObjectsFromArray:nonfilteredarray];
+    NSString *strlogged=[Constantobject sharedInstance].getloggedchannel;
+    if ([resultforonlinefiltered containsObject:strlogged])
+        [resultforonlinefiltered removeObject:strlogged];
+    
+    return resultforonlinefiltered;
+}
+-(void)unsubscribechannle:(NSString*)channelname
+{
+     [self.client unsubscribeFromChannels:@[channelname] withPresence:YES];
+}
 @end

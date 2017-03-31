@@ -25,7 +25,8 @@
     _allmessage=[[NSMutableDictionary alloc]init];
     _client=[[PubNub alloc]init];
     _allcontact=[[NSMutableArray alloc]init];
-    _onlinecontact=[[NSMutableArray alloc]init];
+    _onlineMentorList=[[NSArray alloc]init];
+    _allMentorList=[[NSArray alloc]init];
 }
 -(void)setmodeoflooged:(NSString*)mode andstringforlogged:(NSString*)logged
 {

@@ -73,12 +73,15 @@
 */
 
 - (IBAction)chatclicked:(id)sender {
- PubNub *cc=   [Constantobject sharedInstance].client;
+ //PubNub *cc=   [Constantobject sharedInstance].client;
 
     NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
     [msg setValue:@"mymessagefromdevice" forKey:@"message"];
-    [msg setValue:cc.uuid forKey:@"sender"];
-    [[ChatConfig sharedInstance]sendmessage:msg andtochannel:@"" callback:^(bool sent) {
+    [msg setValue:[[Constantobject sharedInstance]getlogged] forKey:@"sendormode"];
+    [msg setValue:[[Constantobject sharedInstance]getloggedchannel] forKey:@"sendorchannel"];
+    [msg setValue:@"mycategory" forKey:@"sendorcategory"];
+    
+    [[ChatConfig sharedInstance]sendmessage:msg andtochannel:_reciver callback:^(bool sent) {
         
         if (sent)
             NSLog(@"send!");

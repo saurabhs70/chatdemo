@@ -41,20 +41,28 @@
     }
     
 }
+-(void)hearchannle
+{
+    [[ChatConfig sharedInstance] hereAllChannels];
+}
 -(void)updatestatus:(BOOL)status
 {
     if (status==true && [[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
-    [[ChatConfig sharedInstance] hereall:(nil) callback:^(NSArray *allchanels) {
         
-        if (allchanels) {
-            OnlineuserViewController *vv=(OnlineuserViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"OnlineuserViewControllerid"];
-            vv.allmentor=allchanels;
-            [self.navigationController pushViewController:vv animated:YES];
-        }
-    }];
+        [NSTimer scheduledTimerWithTimeInterval: 10.0 target: self
+                                       selector: @selector(hearchannle) userInfo: nil repeats: YES];
+//    [[ChatConfig sharedInstance] hereall:(nil) callback:^(NSArray *allchanels) {
+//        
+//        if (allchanels) {
+           OnlineuserViewController *vv=(OnlineuserViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"OnlineuserViewControllerid"];
+//            vv.allmentor=allchanels;
+           [self.navigationController pushViewController:vv animated:YES];
+//        }
+//    }];
         }
     else if(status==true)
     {
+        
         SYCAskerQusetionController *vv=(SYCAskerQusetionController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCAskerQusetionControllerId"];
         
         [self.navigationController pushViewController:vv animated:YES];
