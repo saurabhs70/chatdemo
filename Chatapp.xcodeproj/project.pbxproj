@@ -14,6 +14,8 @@
 		A52240561E8E1FC500383D22 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = A522404F1E8E1FC500383D22 /* AFURLResponseSerialization.m */; };
 		A52240571E8E1FC500383D22 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52240511E8E1FC500383D22 /* AFURLSessionManager.m */; };
 		A522405A1E8E1FF500383D22 /* SYCRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52240591E8E1FF500383D22 /* SYCRequestManager.m */; };
+		A522405E1E8E6B2400383D22 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A522405D1E8E6B2400383D22 /* libsqlite3.tbd */; };
+		A52240631E8E6B5C00383D22 /* SYCDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52240621E8E6B5C00383D22 /* SYCDataManager.m */; };
 		A53C1AD61E8CE0650061E11D /* AllContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1ACF1E8CE0650061E11D /* AllContactViewController.m */; };
 		A53C1AD71E8CE0650061E11D /* IndividualchatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1AD11E8CE0650061E11D /* IndividualchatViewController.m */; };
 		A53C1AD81E8CE0650061E11D /* OnlineuserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1AD31E8CE0650061E11D /* OnlineuserViewController.m */; };
@@ -68,6 +70,9 @@
 		A52240511E8E1FC500383D22 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		A52240581E8E1FF500383D22 /* SYCRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCRequestManager.h; sourceTree = "<group>"; };
 		A52240591E8E1FF500383D22 /* SYCRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCRequestManager.m; sourceTree = "<group>"; };
+		A522405D1E8E6B2400383D22 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		A52240611E8E6B5C00383D22 /* SYCDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCDataManager.h; sourceTree = "<group>"; };
+		A52240621E8E6B5C00383D22 /* SYCDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCDataManager.m; sourceTree = "<group>"; };
 		A53C1AC11E8CDF090061E11D /* SYC.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYC.pch; sourceTree = "<group>"; };
 		A53C1AC21E8CDF6E0061E11D /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		A53C1ACE1E8CE0650061E11D /* AllContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllContactViewController.h; sourceTree = "<group>"; };
@@ -111,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A522405E1E8E6B2400383D22 /* libsqlite3.tbd in Frameworks */,
 				A56DF0451E2CD50600CE97C7 /* Contacts.framework in Frameworks */,
 				A570ECDC1E27A660001BA181 /* PubNub.framework in Frameworks */,
 				A570ECDB1E27A61B001BA181 /* PubNub.framework in Frameworks */,
@@ -149,6 +155,15 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		A52240601E8E6B4700383D22 /* SYCChatManager */ = {
+			isa = PBXGroup;
+			children = (
+				A52240611E8E6B5C00383D22 /* SYCDataManager.h */,
+				A52240621E8E6B5C00383D22 /* SYCDataManager.m */,
+			);
+			path = SYCChatManager;
+			sourceTree = "<group>";
+		};
 		A53C1AC01E8CDED30061E11D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +177,7 @@
 		A53C1AC41E8CDFA10061E11D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A52240601E8E6B4700383D22 /* SYCChatManager */,
 				A52240431E8E1FAF00383D22 /* SYCManager */,
 				A53C1AE61E8CE1220061E11D /* ChatConfigurationModel */,
 				A53C1ADF1E8CE0F60061E11D /* SYCModel */,
@@ -231,6 +247,7 @@
 		A56DF0431E2CD50600CE97C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A522405D1E8E6B2400383D22 /* libsqlite3.tbd */,
 				A56DF0441E2CD50600CE97C7 /* Contacts.framework */,
 			);
 			name = Frameworks;
@@ -370,6 +387,7 @@
 				A53C1AE91E8CE14E0061E11D /* ChatConfig.m in Sources */,
 				A53C1AD91E8CE0650061E11D /* ViewController.m in Sources */,
 				A53C1AF91E8D1B7D0061E11D /* SYCAskerQustionCell.m in Sources */,
+				A52240631E8E6B5C00383D22 /* SYCDataManager.m in Sources */,
 				A52240521E8E1FC500383D22 /* AFHTTPSessionManager.m in Sources */,
 				A53C1AD81E8CE0650061E11D /* OnlineuserViewController.m in Sources */,
 				A52240531E8E1FC500383D22 /* AFNetworkReachabilityManager.m in Sources */,

@@ -41,7 +41,7 @@
     [self.client subscribeToChannels: @[channelname] withPresence:YES];
 }
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
-    
+     //message_id sender reciver mesasage category timestamp
     // Handle new message stored in message.data.message
     if (![message.data.channel isEqualToString:message.data.subscription]) {
         
@@ -56,7 +56,7 @@
 - (void)client:(PubNub *)client didReceiveStatus:(PNStatus *)status {
     
     if (status.operation == PNSubscribeOperation) {
-        
+       
         // Check whether received information about successful subscription or restore.
         if (status.category == PNConnectedCategory || status.category == PNReconnectedCategory) {
             
