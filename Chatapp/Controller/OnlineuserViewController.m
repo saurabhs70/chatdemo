@@ -57,7 +57,7 @@
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    IndividualchatViewController *vv=(IndividualchatViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"IndividualchatViewControllerId"];
+    SYCQusetionAnswerController *vv=(SYCQusetionAnswerController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCQusetionAnswerControllerId"];
     vv.reciver=[mentorPresencelist objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:vv animated:YES];
 }

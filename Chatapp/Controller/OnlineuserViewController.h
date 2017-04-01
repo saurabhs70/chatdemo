@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SYCStatusCell.h"
-#import "IndividualchatViewController.h"
+//#import "IndividualchatViewController.h"
+#import "SYCQusetionAnswerController.h"
 @interface OnlineuserViewController : UIViewController<PNObjectEventListener>
 {
     NSArray *mentorPresencelist;

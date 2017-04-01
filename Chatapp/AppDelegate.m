@@ -18,9 +18,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[Constantobject sharedInstance]allocInit];
-    [[SYCDataManager sharedInstance]createDB];
+    //[[SYCDataManager sharedInstance]createDB];
    // [[SYCDataManager sharedInstance]saveData:@"shyam@gmail.com" andmessagereciver:@"secon" andmessage:@"message" andmessagecategory:@"forth"];
- NSArray *arr=   [[SYCDataManager sharedInstance]searchmessagehistory:@"shyam@gmail.com" andmessagerecievedby:@"raju@gmail"];
+ //NSArray *arr=   [[SYCDataManager sharedInstance]searchmessagehistory:@"shyam@gmail.com" andmessagerecievedby:@"raju@gmail"];
     //int count=[[SYCDataManager sharedInstance]GetArticlesCount:@"shyam@gmail.com" andmessagerecievedby:@"raju@gmail"];
     NSLog(@"");
     return YES;
