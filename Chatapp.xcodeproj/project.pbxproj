@@ -45,6 +45,7 @@
 		A56525651E8F8A3300BB676A /* MessageEntrySendButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = A56525571E8F8A3300BB676A /* MessageEntrySendButtonPressed.png */; };
 		A56525661E8F8A3300BB676A /* MessageEntrySendButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A56525581E8F8A3300BB676A /* MessageEntrySendButtonPressed@2x.png */; };
 		A565256A1E8F9CA200BB676A /* SYCQACellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A56525691E8F9CA200BB676A /* SYCQACellTableViewCell.m */; };
+		A565256D1E8FBF8500BB676A /* Database.pages in Resources */ = {isa = PBXBuildFile; fileRef = A565256C1E8FBF8500BB676A /* Database.pages */; };
 		A56DF0451E2CD50600CE97C7 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56DF0441E2CD50600CE97C7 /* Contacts.framework */; };
 		A570ECC41E27A5FC001BA181 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A570ECC31E27A5FC001BA181 /* main.m */; };
 		A570ECC71E27A5FC001BA181 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A570ECC61E27A5FC001BA181 /* AppDelegate.m */; };
@@ -135,6 +136,7 @@
 		A56525581E8F8A3300BB676A /* MessageEntrySendButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MessageEntrySendButtonPressed@2x.png"; sourceTree = "<group>"; };
 		A56525681E8F9CA200BB676A /* SYCQACellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCQACellTableViewCell.h; sourceTree = "<group>"; };
 		A56525691E8F9CA200BB676A /* SYCQACellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCQACellTableViewCell.m; sourceTree = "<group>"; };
+		A565256C1E8FBF8500BB676A /* Database.pages */ = {isa = PBXFileReference; lastKnownFileType = file; path = Database.pages; sourceTree = "<group>"; };
 		A56DF0441E2CD50600CE97C7 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		A570ECBF1E27A5FC001BA181 /* Chatapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A570ECC31E27A5FC001BA181 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -307,6 +309,14 @@
 			path = Chatfiled;
 			sourceTree = "<group>";
 		};
+		A565256B1E8FBF8500BB676A /* Doc */ = {
+			isa = PBXGroup;
+			children = (
+				A565256C1E8FBF8500BB676A /* Database.pages */,
+			);
+			path = Doc;
+			sourceTree = "<group>";
+		};
 		A56DF0431E2CD50600CE97C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +373,7 @@
 		A570ECD91E27A61B001BA181 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				A565256B1E8FBF8500BB676A /* Doc */,
 				A56525481E8F8A3300BB676A /* Chatfiled */,
 				A52240441E8E1FC500383D22 /* AFNetworking */,
 				A570ECDA1E27A61B001BA181 /* PubNub.framework */,
@@ -431,6 +442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A565255B1E8F8A3300BB676A /* malerts.png in Resources */,
+				A565256D1E8FBF8500BB676A /* Database.pages in Resources */,
 				A56525621E8F8A3300BB676A /* MessageEntryInputField@2x.png in Resources */,
 				A56525631E8F8A3300BB676A /* MessageEntrySendButton.png in Resources */,
 				A56525661E8F8A3300BB676A /* MessageEntrySendButtonPressed@2x.png in Resources */,

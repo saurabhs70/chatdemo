@@ -48,6 +48,27 @@
         // Message has been received on channel group stored in message.data.subscription.
     }
     else {
+//        NSDictionary *DD=[message.data valueForKey:@"message"];
+//        NSString *RECIVER=[message.data valueForKey:@"channel"];
+//        NSLog(@"");
+//      [[SYCDataManager sharedInstance]saveData:[DD valueForKey:@"sendorchannel"] andmessagereciver:RECIVER andmessage:[DD valueForKey:@"message"] andmessagecategory:[DD valueForKey:@"sendorcategory"]];
+//        NSArray *arr=   [[SYCDataManager sharedInstance]searchmessagehistory:[DD valueForKey:@"sendorchannel"] andmessagerecievedby:RECIVER];
+//        
+//        NSLog(@"");
+        /*--------
+         channel = "dautor@gmail.com";
+         envelope = "<PNEnvelopeInformation: 0x600000283bb0>";
+         message =     {
+         message = Got;
+         sendorcategory = mycategory;
+         sendorchannel = "my@gmail.com";
+         sendormode = Asker;
+         };
+         region = 4;
+         subscription = "dautor@gmail.com";
+         timetoken = 14910381502888578;
+
+         */
         
         // Message has been received on channel stored in message.data.channel.
     }

@@ -58,7 +58,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SYCQusetionAnswerController *vv=(SYCQusetionAnswerController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCQusetionAnswerControllerId"];
-    vv.reciver=[mentorPresencelist objectAtIndex:indexPath.row];
+    vv.reciver=[mentorPresencelist lastObject];
     [self.navigationController pushViewController:vv animated:YES];
 }
 /*

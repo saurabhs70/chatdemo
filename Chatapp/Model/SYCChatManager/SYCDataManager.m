@@ -62,8 +62,8 @@ static sqlite3_stmt *statement = nil;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"insert into chatinfo (message_sender,message_reciver, message_message, message_category,message_timestamp) values (\"%d\",\"%@\", \"%@\", \"%@\",\"%@\")",1,
-                                message_sender, message_reciver, message_message,message_category];
+        NSString *insertSQL = [NSString stringWithFormat:@"insert into chatinfo (message_sender,message_reciver, message_category,message_message,message_timestamp) values (\"%@\",\"%@\", \"%@\", \"%@\",\"%d\")",
+                                message_sender, message_reciver, message_message,message_category,1];
                                 const char *insert_stmt = [insertSQL UTF8String];
                                 sqlite3_prepare_v2(database, insert_stmt,-1, &statement, NULL);
                                 if (sqlite3_step(statement) == SQLITE_DONE)
@@ -90,7 +90,7 @@ static sqlite3_stmt *statement = nil;
                 
           // NSString *querySQL = [NSString stringWithFormat: @"select message_sender, message_reciver, message_message,message_category from chatinfo where message_reciver=\"%@\"",messagereciver];
                 
-            NSString *querySQL = [NSString stringWithFormat: @"SELECT * FROM chatinfo where (message_reciver=\"%@\" and message_message=\"%@\") or (message_reciver=\"%@\" and message_message=\"%@\")",messagereciver,MessageSender,MessageSender,messagereciver];
+            NSString *querySQL = [NSString stringWithFormat: @"SELECT message_sender,message_reciver,message_message  FROM chatinfo where (message_sender=\"%@\" and message_reciver=\"%@\") or (message_reciver=\"%@\" and message_sender=\"%@\")",MessageSender,messagereciver,messagereciver,MessageSender];
                 const char *query_stmt = [querySQL UTF8String];
                 NSMutableArray *resultArray = [[NSMutableArray alloc]init];
                 if (sqlite3_prepare_v2(database,
@@ -100,18 +100,18 @@ static sqlite3_stmt *statement = nil;
                     while(sqlite3_step(statement) == SQLITE_ROW)
                     {
                         NSMutableDictionary *_dataDictionary=[[NSMutableDictionary alloc] init];
-                        NSString *name = [[NSString alloc] initWithUTF8String:
+                        NSString *message_sender = [[NSString alloc] initWithUTF8String:
                                           (const char *) sqlite3_column_text(statement, 0)];
                       //  [resultArray addObject:name];
                         
-                        NSString *department = [[NSString alloc] initWithUTF8String:
+                        NSString *message_reciver = [[NSString alloc] initWithUTF8String:
                                                 (const char *) sqlite3_column_text(statement, 1)];
                        
-                        NSString *year = [[NSString alloc]initWithUTF8String:
+                        NSString *message_message = [[NSString alloc]initWithUTF8String:
                                           (const char *) sqlite3_column_text(statement, 2)];
-                        [_dataDictionary setObject:name forKey:@"name"];
-                        [_dataDictionary setObject:department forKey:@"department"];
-                        [_dataDictionary setObject:year forKey:@"year"];
+                        [_dataDictionary setObject:message_sender forKey:@"message_sender"];
+                        [_dataDictionary setObject:message_reciver forKey:@"message_reciver"];
+                        [_dataDictionary setObject:message_message forKey:@"message_message"];
                         [resultArray addObject:_dataDictionary];
                         // sqlite3_reset(statement);
                        
