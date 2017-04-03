@@ -60,4 +60,14 @@
   
     return viewController;
 }
+
+-(NSString*)TypingToChannel:(NSString*)reciver
+{
+    NSString *conversationchahhel;
+    if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
+     conversationchahhel=[NSString stringWithFormat:@"%@--%@",[[Constantobject sharedInstance]getloggedchannel],reciver];
+        else
+           conversationchahhel=[NSString stringWithFormat:@"%@--%@",reciver,[[Constantobject sharedInstance]getloggedchannel]];
+        return conversationchahhel;
+}
 @end

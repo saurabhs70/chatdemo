@@ -22,4 +22,6 @@
 -(void)hereAllChannels;
 -(void)sendmessage:(NSDictionary*)message andtochannel:(NSString*)channelname callback:(void (^)(bool sent))callback;
 -(void)unsubscribechannle:(NSString*)channelname;
+-(void)addmorechannel:(NSString*)channelname;
+-(void)updatestatus:(NSString*)key andvalue:(NSString*)value anduuid:(NSString*)uuid andchannel:(NSString*)chhhanel;
 @end

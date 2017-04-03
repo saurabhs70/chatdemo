@@ -20,6 +20,7 @@
     mentorPresencelist=[Constantobject sharedInstance].allMentorList;
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Presencestatusmentor:) name:@"Presencestatuschange" object:nil];
+    [self setmenu];
   
 }
 -(void)Presencestatusmentor:(NSNotification*)notification
@@ -100,4 +101,21 @@
 //      }];
 
 }
+-(void)setmenu
+{
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    
+    
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sidebaricon.png"]
+                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
+    
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+    revealController.delegate = self;
+    
+}
+
 @end

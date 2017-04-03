@@ -307,4 +307,31 @@
 {
      [self.client unsubscribeFromChannels:@[channelname] withPresence:YES];
 }
+-(void)addmorechannel:(NSString*)channelname
+{
+     [self.client subscribeToChannels: @[channelname] withPresence:YES];
+}
+
+-(void)updatestatus:(NSString*)key andvalue:(NSString*)value anduuid:(NSString*)uuid andchannel:(NSString*)chhhanel
+{
+    [self.client setState: @{key: value} forUUID:uuid onChannel: chhhanel
+           withCompletion:^(PNClientStateUpdateStatus *status) {
+               
+               if (!status.isError) {
+                   
+                   // Client state successfully modified on specified channel.
+               }
+               else {
+                   
+                   /**
+                    Handle client state modification error. Check 'category' property
+                    to find out possible reason because of which request did fail.
+                    Review 'errorData' property (which has PNErrorData data type) of status
+                    object to get additional information about issue.
+                    
+                    Request can be resent using: [status retry];
+                    */
+               }
+           }];
+}
 @end

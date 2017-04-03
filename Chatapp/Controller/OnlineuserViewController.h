@@ -10,7 +10,8 @@
 #import "SYCStatusCell.h"
 //#import "IndividualchatViewController.h"
 #import "SYCQusetionAnswerController.h"
-@interface OnlineuserViewController : UIViewController<PNObjectEventListener>
+#import "SWRevealViewController.h"
+@interface OnlineuserViewController : UIViewController<SWRevealViewControllerDelegate>
 {
     NSArray *mentorPresencelist;
 }

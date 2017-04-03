@@ -29,6 +29,9 @@
 		A53C1AF51E8CFFA90061E11D /* SYCStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1AF41E8CFFA90061E11D /* SYCStatusCell.m */; };
 		A53C1AF91E8D1B7D0061E11D /* SYCAskerQustionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1AF81E8D1B7D0061E11D /* SYCAskerQustionCell.m */; };
 		A53C1AFC1E8D1BC60061E11D /* SYCAskerQusetionController.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1AFB1E8D1BC60061E11D /* SYCAskerQusetionController.m */; };
+		A53CE6B51E921507003F0214 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A53CE6B41E921507003F0214 /* SWRevealViewController.m */; };
+		A53CE6B81E921640003F0214 /* SYCMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A53CE6B71E921640003F0214 /* SYCMenuViewController.m */; };
+		A53CE6BA1E921897003F0214 /* sidebaricon.png in Resources */ = {isa = PBXBuildFile; fileRef = A53CE6B91E921897003F0214 /* sidebaricon.png */; };
 		A56525471E8F866A00BB676A /* SYCQusetionAnswerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A56525461E8F866A00BB676A /* SYCQusetionAnswerController.m */; };
 		A56525591E8F8A3300BB676A /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A565254A1E8F8A3300BB676A /* HPGrowingTextView.m */; };
 		A565255A1E8F8A3300BB676A /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = A565254C1E8F8A3300BB676A /* HPTextViewInternal.m */; };
@@ -116,6 +119,11 @@
 		A53C1AF81E8D1B7D0061E11D /* SYCAskerQustionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCAskerQustionCell.m; sourceTree = "<group>"; };
 		A53C1AFA1E8D1BC60061E11D /* SYCAskerQusetionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCAskerQusetionController.h; sourceTree = "<group>"; };
 		A53C1AFB1E8D1BC60061E11D /* SYCAskerQusetionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCAskerQusetionController.m; sourceTree = "<group>"; };
+		A53CE6B31E921507003F0214 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		A53CE6B41E921507003F0214 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		A53CE6B61E921640003F0214 /* SYCMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCMenuViewController.h; sourceTree = "<group>"; };
+		A53CE6B71E921640003F0214 /* SYCMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCMenuViewController.m; sourceTree = "<group>"; };
+		A53CE6B91E921897003F0214 /* sidebaricon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sidebaricon.png; sourceTree = "<group>"; };
 		A56525451E8F866A00BB676A /* SYCQusetionAnswerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCQusetionAnswerController.h; sourceTree = "<group>"; };
 		A56525461E8F866A00BB676A /* SYCQusetionAnswerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCQusetionAnswerController.m; sourceTree = "<group>"; };
 		A56525491E8F8A3300BB676A /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
@@ -238,6 +246,8 @@
 				A53C1AFB1E8D1BC60061E11D /* SYCAskerQusetionController.m */,
 				A56525451E8F866A00BB676A /* SYCQusetionAnswerController.h */,
 				A56525461E8F866A00BB676A /* SYCQusetionAnswerController.m */,
+				A53CE6B61E921640003F0214 /* SYCMenuViewController.h */,
+				A53CE6B71E921640003F0214 /* SYCMenuViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -280,10 +290,20 @@
 		A53C1AEB1E8CFEC00061E11D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A53CE6B91E921897003F0214 /* sidebaricon.png */,
 				A53C1AEC1E8CFF100061E11D /* offline.png */,
 				A53C1AED1E8CFF100061E11D /* online.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		A53CE6B21E921507003F0214 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				A53CE6B31E921507003F0214 /* SWRevealViewController.h */,
+				A53CE6B41E921507003F0214 /* SWRevealViewController.m */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		A56525481E8F8A3300BB676A /* Chatfiled */ = {
@@ -373,6 +393,7 @@
 		A570ECD91E27A61B001BA181 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				A53CE6B21E921507003F0214 /* Menu */,
 				A565256B1E8FBF8500BB676A /* Doc */,
 				A56525481E8F8A3300BB676A /* Chatfiled */,
 				A52240441E8E1FC500383D22 /* AFNetworking */,
@@ -442,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A565255B1E8F8A3300BB676A /* malerts.png in Resources */,
+				A53CE6BA1E921897003F0214 /* sidebaricon.png in Resources */,
 				A565256D1E8FBF8500BB676A /* Database.pages in Resources */,
 				A56525621E8F8A3300BB676A /* MessageEntryInputField@2x.png in Resources */,
 				A56525631E8F8A3300BB676A /* MessageEntrySendButton.png in Resources */,
@@ -479,9 +501,11 @@
 				A52240521E8E1FC500383D22 /* AFHTTPSessionManager.m in Sources */,
 				A53C1AD81E8CE0650061E11D /* OnlineuserViewController.m in Sources */,
 				A565256A1E8F9CA200BB676A /* SYCQACellTableViewCell.m in Sources */,
+				A53CE6B81E921640003F0214 /* SYCMenuViewController.m in Sources */,
 				A52240531E8E1FC500383D22 /* AFNetworkReachabilityManager.m in Sources */,
 				A53C1AD71E8CE0650061E11D /* IndividualchatViewController.m in Sources */,
 				A53C1AFC1E8D1BC60061E11D /* SYCAskerQusetionController.m in Sources */,
+				A53CE6B51E921507003F0214 /* SWRevealViewController.m in Sources */,
 				A565255A1E8F8A3300BB676A /* HPTextViewInternal.m in Sources */,
 				A52240571E8E1FC500383D22 /* AFURLSessionManager.m in Sources */,
 				A56525591E8F8A3300BB676A /* HPGrowingTextView.m in Sources */,

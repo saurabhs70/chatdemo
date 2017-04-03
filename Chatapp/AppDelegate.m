@@ -19,7 +19,10 @@
     // Override point for customization after application launch.
     [[Constantobject sharedInstance]allocInit];
   [[SYCDataManager sharedInstance]createDB];
-
+    if ([[Constantobject sharedInstance]getlogged].length)
+    [self setMenu:true];
+else
+    [self setMenu:false];
  //NSArray *arr=   [[SYCDataManager sharedInstance]searchmessagehistory:@"shyam@gmail.com" andmessagerecievedby:@"raju@gmail"];
     //int count=[[SYCDataManager sharedInstance]GetArticlesCount:@"shyam@gmail.com" andmessagerecievedby:@"raju@gmail"];
     NSLog(@"");
@@ -54,5 +57,66 @@
     NSString *loggedchannel=[[Constantobject sharedInstance]getloggedchannel];
     if (loggedchannel.length)
     [[ChatConfig sharedInstance] unsubscribechannle:loggedchannel];
+}
+-(void)setMenu:(BOOL)IsLoggedFlag
+{
+    
+        
+        UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.window = window;
+        
+        // PremiumHomeViewController *frontViewController = [storyboard instantiateViewControllerWithIdentifier:@"PremiumHomeId"];
+        UIViewController *frontViewController;
+        if (IsLoggedFlag) {
+            if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
+                [self connectyoaskerchannel];
+                OnlineuserViewController *frontViewControllerhome=(OnlineuserViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"OnlineuserViewControllerid"];
+                frontViewController=frontViewControllerhome;
+            }
+            else
+            {
+            SYCAskerQusetionController *frontViewControllerhome=(SYCAskerQusetionController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCAskerQusetionControllerId"];
+            frontViewController=frontViewControllerhome;
+            }
+            
+        }
+        else
+        {
+           ViewController *frontViewControllerlogged=(ViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"ViewControllerId"];
+            frontViewController=frontViewControllerlogged;//SYCMenuViewControllerId
+        }
+
+        SYCMenuViewController *rearViewController=(SYCMenuViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCMenuViewControllerId"];
+        
+ 
+        _frontNavigationController= [[UINavigationController alloc] initWithRootViewController:frontViewController];
+        UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+        
+        SWRevealViewController *revealController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:_frontNavigationController];
+        revealController.delegate = self;
+        
+        
+    
+        
+        self.viewController = revealController;
+        
+        self.window.rootViewController = self.viewController;
+    
+        [self.window makeKeyAndVisible];
+    
+}
+-(void)connectyoaskerchannel
+{
+    NSString *loggedaskerchannel=   [[Constantobject sharedInstance]getloggedchannel];
+[[ChatConfig sharedInstance]initConfig:loggedaskerchannel andprotocol:self];
+}
+-(void)updatestatus:(BOOL)status
+{
+    [NSTimer scheduledTimerWithTimeInterval: 10.0 target: self
+                                   selector: @selector(hearchannle) userInfo: nil repeats: YES];
+}
+-(void)hearchannle
+{
+     [[ChatConfig sharedInstance] hereAllChannels];
 }
 @end

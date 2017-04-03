@@ -16,8 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     _loggedtext.text=@"dautor@gmail.com";//@"my.gmail.com";//mentor@gmail.com
+     _loggedtext.text=@"dautor@gmail.com";//@"my@gmail.com";//@"my.gmail.com";//mentor@gmail.com//  "dautor@gmail.com" "email@email.com"
     // Do any additional setup after loading the view, typically from a nib.
+  
     
 }
 
@@ -75,4 +76,5 @@
         else
       [_btnmode setTitle:SYCCHATMODEASKER forState:UIControlStateNormal];
 }
+
 @end

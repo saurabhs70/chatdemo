@@ -16,6 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
+    [[ChatConfig sharedInstance]addmorechannel:[[Constantobject sharedInstance]TypingToChannel:_reciver]];
  [self keyboaradstyatus];
 [self viewloadf];
     // Do any additional setup after loading the view.
@@ -205,6 +207,12 @@
 }
 -(void)AskQuestionAnser
 {
+    NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];//[NSString stringWithFormat:@"%@--%@",_reciver,[[Constantobject sharedInstance]getloggedchannel]];
+   // [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
+    [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:@"true" anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
+    
+    
+    
     if (textView.text.length) {
         
     NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
