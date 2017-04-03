@@ -41,6 +41,8 @@
             NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
             
             
+          //  [self savejson:data];
+            
             
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
             NSArray *arr=[[jsonDict valueForKey:@"response"] valueForKey:@"mentor_educator_list"];
@@ -59,5 +61,48 @@
     }];
     [dataTask resume];
 
+}
+-(void)savejson:(NSData*)urldata
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"data.json"];
+    [urldata writeToFile:filePath atomically:YES];
+    
+    
+    [self getjson];
+    
+    
+    
+}
+-(void)getjson
+{
+//    NSString *searchFilename = @"data.json"; // name of the PDF you are searching for
+//    
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:documentsDirectory];
+//    
+//    NSString *documentsSubpath;
+//    while (documentsSubpath = [direnum nextObject])
+//    {
+//        if (![documentsSubpath.lastPathComponent isEqual:searchFilename]) {
+//            continue;
+//        }
+//        
+//        NSLog(@"found %@", documentsSubpath);
+//    }
+    
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *plistLocation = [documentsDirectory stringByAppendingPathComponent:@"data.json"];
+//    NSLog(@"%@",plistLocation);
+//    NSData *data = [[NSFileManager defaultManager] contentsAtPath:plistLocation];
+//    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//    NSArray *arr=[[jsonDict valueForKey:@"response"] valueForKey:@"mentor_educator_list"];
+//    if (arr) {
+//        
+//    }
 }
 @end

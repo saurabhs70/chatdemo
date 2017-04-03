@@ -16,7 +16,6 @@
 -(BOOL)createDB;
 - (BOOL) saveData:(NSString*)message_sender andmessagereciver:(NSString*)message_reciver
        andmessage:(NSString*)message_message andmessagecategory:(NSString*)message_category;
--(NSArray*) findByRegisterNumber:(NSString*)registerNumber;
 - (NSArray*) searchmessagehistory:(NSString*)MessageSender andmessagerecievedby:(NSString*)messagereciver;
 - (int) GetArticlesCount:(NSString*)MessageSender andmessagerecievedby:(NSString*)messagereciver;
 @end

@@ -214,21 +214,23 @@
     
     
     if (textView.text.length) {
-        
-    NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
-    [msg setValue:textView.text forKey:@"message"];
-    [msg setValue:[[Constantobject sharedInstance]getlogged] forKey:@"sendormode"];
-    [msg setValue:[[Constantobject sharedInstance]getloggedchannel] forKey:@"sendorchannel"];
-    [msg setValue:@"mycategory" forKey:@"sendorcategory"];
-    
-    [[ChatConfig sharedInstance]sendmessage:msg andtochannel:_reciver callback:^(bool sent) {
-        
-        if (sent)
-            NSLog(@"send!");
-        else
-            NSLog(@"send error!");
-        
-    }];
+//        
+//    NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
+//    [msg setValue:textView.text forKey:@"message"];
+//    [msg setValue:[[Constantobject sharedInstance]getlogged] forKey:@"sendormode"];
+//    [msg setValue:[[Constantobject sharedInstance]getloggedchannel] forKey:@"sendorchannel"];
+//    [msg setValue:@"mycategory" forKey:@"sendorcategory"];
+//    
+//    [[ChatConfig sharedInstance]sendmessage:msg andtochannel:_reciver callback:^(bool sent) {
+//        
+//        if (sent)
+//            NSLog(@"send!");
+//        else
+//            NSLog(@"send error!");
+//        
+//    }];
+        textView.text=@"";
+        [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:@"false" anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
     }
 }
 /*
