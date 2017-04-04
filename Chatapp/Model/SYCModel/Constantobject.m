@@ -73,7 +73,7 @@
 -(NSArray*)arr
 {
     NSMutableDictionary *dd=[[NSMutableDictionary alloc]init];
-    [dd setObject:@"my@gmail.com" forKey:@"Asker_id"];
+    [dd setObject:@"ASK_my@gmail.com" forKey:@"Asker_id"];
      [dd setObject:@"Question is what is caching in tech?" forKey:@"Asker_question"];
     [dd setObject:@"1" forKey:@"Asker_question_id"];
      [dd setObject:@"0" forKey:@"Asker_question_status"];

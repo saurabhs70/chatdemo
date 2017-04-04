@@ -19,6 +19,7 @@
   _lblIsTyping.hidden=YES;
     
     [[ChatConfig sharedInstance]addmorechannel:[[Constantobject sharedInstance]TypingToChannel:_reciver]];
+    
       [self settyping:@"false"];
  [self keyboaradstyatus];
 [self viewloadf];
@@ -208,7 +209,7 @@
 
 -(void)growingTextViewDidBeginEditing:(HPGrowingTextView *)growingTextView
 {
-       [self settyping:@"true"];
+    //   [self settyping:@"true"];
 }
 -(BOOL)growingTextView:(HPGrowingTextView *)growingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
@@ -228,12 +229,19 @@
 //    [self performSelector:@selector(updatestatus) withObject:nil afterDelay:0.5];
 //    
 //     NSLog(@"%@",@"change");
-     [self settyping:@"true"];
+    if (growingTextView.text.length==1) {
+        [self settyping:@"true"];
+    }
+    else if (growingTextView.text.length==0)
+    {
+        [self settyping:@"false"];
+    }
+        
 }
 
 -(void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView
 {
-       [self settyping:@"false"];
+     //  [self settyping:@"false"];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -280,6 +288,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self settyping:@"false"];
+    NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];
+    [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
 }
 -(void)isTypingUpdate:(NSNotification *)anote
 {
@@ -296,6 +306,7 @@
 {
     val=status;
     NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];
+   // [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
     [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:status anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
 }
 @end

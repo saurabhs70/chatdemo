@@ -60,11 +60,11 @@
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    SYCQusetionAnswerController *vv=(SYCQusetionAnswerController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCQusetionAnswerControllerId"];
-//    NSDictionary *dd=[qustion objectAtIndex:indexPath.row];
-//    vv.reciver=[dd valueForKey:@"Asker_id"];
-//    [self.navigationController pushViewController:vv animated:YES];
-    [[ChatConfig sharedInstance]unsubscribechannle:[[Constantobject sharedInstance] getloggedchannel]];
+    SYCQusetionAnswerController *vv=(SYCQusetionAnswerController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCQusetionAnswerControllerId"];
+    NSDictionary *dd=[qustion objectAtIndex:indexPath.row];
+    vv.reciver=[dd valueForKey:@"Asker_id"];
+    [self.navigationController pushViewController:vv animated:YES];
+   // [[ChatConfig sharedInstance]unsubscribechannle:[[Constantobject sharedInstance] getloggedchannel]];
 }
 
 -(void)setmenu

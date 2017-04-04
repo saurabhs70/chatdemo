@@ -73,6 +73,7 @@ else
             }
             else
             {
+                 [self connectyoaskerchannel];
             SYCAskerQusetionController *frontViewControllerhome=(SYCAskerQusetionController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCAskerQusetionControllerId"];
             frontViewController=frontViewControllerhome;
             }

@@ -24,7 +24,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCellId"];
@@ -40,14 +40,23 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
     }
-cell.textLabel.text=@"info";
+cell.textLabel.text=@"Activity";
     return cell;
     }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIViewController *Roottocontroller;
     
-       ViewController *frontViewControllerlogged=(ViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"ViewControllerId"];
+    if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
+        OnlineuserViewController *frontViewControllerlogged=(OnlineuserViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"OnlineuserViewControllerid"];
+        Roottocontroller=frontViewControllerlogged;
+    }
+    else
+    {
+       SYCAskerQusetionController *frontViewControllerlogged=(SYCAskerQusetionController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCAskerQusetionControllerId"];
     Roottocontroller=frontViewControllerlogged;
+    
+    }
+    
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:Roottocontroller];
     [navController setViewControllers: @[Roottocontroller] animated: YES];
