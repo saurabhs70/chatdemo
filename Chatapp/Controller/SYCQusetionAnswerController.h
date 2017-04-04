@@ -13,9 +13,12 @@
 {
     UIView *chatview;
     HPGrowingTextView *textView;
+    NSString *val;
+    //NSString * timestamp;
 }
 @property (strong,nonatomic) NSString *reciver;
 @property (weak, nonatomic) IBOutlet UITableView *tblconversation;
+@property (weak, nonatomic) IBOutlet UILabel *lblIsTyping;
 
 
 @end

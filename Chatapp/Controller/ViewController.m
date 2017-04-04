@@ -16,8 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     _loggedtext.text=@"my@gmail.com";//@"my.gmail.com";//mentor@gmail.com//  "dautor@gmail.com" "email@email.com"
-    // Do any additional setup after loading the view, typically from a nib.
+    //_loggedtext.text=[NSString stringWithFormat:@"%@%@",SYCCHANNELMENTORPREFIX,@"dautor@gmail.com"];//
+     _loggedtext.text=[NSString stringWithFormat:@"%@%@",SYCCHANNELASKERPREFIX,@"my@gmail.com"]; //@"dautor@gmail.com";//@"my@gmail.com";//@"my.gmail.com";//mentor@gmail.com//  "dautor@gmail.com" "email@email.com"
+    // Do any additional setup after loading the view, typically from a nib.//@"dautor@gmail.com";//
   
     
 }
@@ -34,7 +35,7 @@
     if ([_btnmode.titleLabel.text isEqualToString:SYCCHATMODEASKER])
         [[Constantobject sharedInstance]setmodeoflooged:SYCCHATMODEASKER andstringforlogged:_loggedtext.text];
     else
-        [[Constantobject sharedInstance]setmodeoflooged:nil andstringforlogged:_loggedtext.text];
+        [[Constantobject sharedInstance]setmodeoflooged:SYCCHATMODEMENTOR andstringforlogged:_loggedtext.text];
     if (_loggedtext.text.length) {
       //  ChatConfig *chaat=[[ChatConfig alloc]init];
      //   chaat.delegateconfig=self;
@@ -50,7 +51,7 @@
 {
     if (status==true && [[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
         
-        [NSTimer scheduledTimerWithTimeInterval: 10.0 target: self
+        [NSTimer scheduledTimerWithTimeInterval: 2.0 target: self
                                        selector: @selector(hearchannle) userInfo: nil repeats: YES];
 //    [[ChatConfig sharedInstance] hereall:(nil) callback:^(NSArray *allchanels) {
 //        

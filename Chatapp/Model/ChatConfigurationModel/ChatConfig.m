@@ -84,7 +84,24 @@
             // Status object for those categories can be casted to `PNSubscribeStatus` for use below.
             PNSubscribeStatus *subscribeStatus = (PNSubscribeStatus *)status;
             if (subscribeStatus.category == PNConnectedCategory) {
-                [self.delegateconfig updatestatus:YES];
+                NSLog(@"%@",subscribeStatus.subscribedChannels);
+               // if (subscribeStatus.subscribedChannels.count==2) {
+                     [self.delegateconfig updatestatus:YES];
+                    self.delegateconfig=nil;
+                ///}
+                /*
+                 if
+                 
+                 Objects =     {
+                 Channels =         (
+                 "my@gmail.com--dautor@gmail.com",
+                 "my@gmail.com--dautor@gmail.com-pnpres",
+                 "dautor@gmail.com",
+                 "dautor@gmail.com-pnpres"
+                 );
+                 */
+                
+               
                 NSLog(@"connected");
             
             }
@@ -162,8 +179,18 @@
     }
     else {
         
-        NSLog(@"%@ changed state at: %@ on %@ to: %@", event.data.presence.uuid,
-              event.data.presence.timetoken, event.data.channel, event.data.presence.state);
+        if (![client.uuid isEqualToString:event.data.presence.uuid]) {
+            NSDictionary *dd=event.data.presence.state;
+            if ([[dd valueForKey:@"isTyping"] isEqualToString:@"true"])
+              //  NSLog(@"%@ is typing....",event.data.presence.uuid);
+                [self setTypingStatus:@"true" Andby:event.data.presence.uuid];
+            else
+                [self setTypingStatus:@"false" Andby:event.data.presence.uuid];
+            
+        }
+      //  NSLog(@"%@ changed state at: %@ on %@ to: %@", event.data.presence.uuid,
+            //  event.data.presence.timetoken, event.data.channel, event.data.presence.state);
+        
     }
 }
 -(void)sendmessage:(NSDictionary*)message andtochannel:(NSString*)channelname callback:(void (^)(bool sent))callback
@@ -244,7 +271,13 @@
             NSDictionary *dd=result.data.channels;
             
             NSArray *channelarray=[dd allKeys];
-            [self allmentorlist:channelarray];
+            
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", SYCCHANNELMENTORPREFIX];
+            NSArray *results = [channelarray filteredArrayUsingPredicate:predicate];
+            [Constantobject sharedInstance].onlineMentorList=results;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"Presencestatuschange" object:nil];
+            NSLog(@"");
+         //   [self allmentorlist:channelarray];
            // callback(channelarray);
            // NSLog(@"%@",result.data.totalChannels);
         }
@@ -333,5 +366,13 @@
                     */
                }
            }];
+}
+-(void)setTypingStatus:(NSString*)typingStatus Andby:(NSString*)uuid
+{
+    NSDictionary *aDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 typingStatus, @"isTyping",
+                                 uuid, @"isTypingUuid",
+                                 nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"isTypingUpdate" object:nil userInfo:aDictionary];
 }
 @end

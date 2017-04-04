@@ -16,8 +16,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
-    mentorPresencelist=[Constantobject sharedInstance].allMentorList;
+   // mentorPresencelist=[Constantobject sharedInstance].allMentorList;
+   [[SYCRequestManager sharedInstance]Requestforlist:(nil) callback:^(NSArray *allchanels) {
+       NSMutableArray *arr=[[NSMutableArray alloc]init];
+       for (NSString *mentorlist in allchanels) {
+          [ arr addObject:[NSString stringWithFormat:@"%@%@",SYCCHANNELMENTORPREFIX,mentorlist]];
+       }
+       mentorPresencelist=arr;
+        [_tblonline reloadData];
+   }];
+    
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Presencestatusmentor:) name:@"Presencestatuschange" object:nil];
     [self setmenu];
@@ -25,7 +33,7 @@
 }
 -(void)Presencestatusmentor:(NSNotification*)notification
 {
-    mentorPresencelist=[Constantobject sharedInstance].allMentorList;
+  //  mentorPresencelist=[Constantobject sharedInstance].allMentorList;
     [_tblonline reloadData];
     //onlineuser= [Constantobject sharedInstance].onlinecontact;
    // [self.tblonline reloadData];
@@ -61,6 +69,7 @@
     SYCQusetionAnswerController *vv=(SYCQusetionAnswerController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCQusetionAnswerControllerId"];
     vv.reciver=[mentorPresencelist lastObject];
     [self.navigationController pushViewController:vv animated:YES];
+    //[[ChatConfig sharedInstance]unsubscribechannle:@"my@gmail.com"];
 }
 /*
 #pragma mark - Navigation

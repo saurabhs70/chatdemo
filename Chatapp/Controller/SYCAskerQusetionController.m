@@ -17,8 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:@"true" anduuid:@"my" andchannel:@"my@gmail.com"];
-    
+  //  [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:@"true" anduuid:@"my" andchannel:@"my@gmail.com"];
+    qustion=[[Constantobject sharedInstance]arr];
+    [self setmenu];
     
 }
 
@@ -28,19 +29,20 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    
-    if(section == 0)
-        return @"New Qustion";
-    else
-        return @"";
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    
+////    if(section == 0)
+////        return @"New Qustion";
+////    else
+////        return @"";
+//    return  qustion.count;
+//}
 - (NSInteger)tableView:(UITableView *)tableview numberOfRowsInSection:(NSInteger)section
 {
-    return  10;
+    return  qustion.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -51,10 +53,34 @@
     if (cell == nil) {
         cell = [[SYCAskerQustionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SYCStatusCellId"];
     }
-    
-    cell.lblquestion.text=@"My Question";
-    cell.lbltagforqa.text=@"Answered";
+    NSDictionary *dd=[qustion objectAtIndex:indexPath.row];
+    cell.lblquestion.text=[dd valueForKey:@"Asker_question"];
+    //cell.lbltagforqa.text=@"Answered";
     return cell;
+    
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    SYCQusetionAnswerController *vv=(SYCQusetionAnswerController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCQusetionAnswerControllerId"];
+//    NSDictionary *dd=[qustion objectAtIndex:indexPath.row];
+//    vv.reciver=[dd valueForKey:@"Asker_id"];
+//    [self.navigationController pushViewController:vv animated:YES];
+    [[ChatConfig sharedInstance]unsubscribechannle:[[Constantobject sharedInstance] getloggedchannel]];
+}
+
+-(void)setmenu
+{
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    
+    
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sidebaricon.png"]
+                                                                         style:UIBarButtonItemStylePlain target:revealController action:@selector(revealToggle:)];
+    
+    self.navigationItem.leftBarButtonItem = revealButtonItem;
+    
+    revealController.delegate = self;
     
 }
 /*

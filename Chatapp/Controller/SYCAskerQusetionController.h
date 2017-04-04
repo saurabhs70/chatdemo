@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "SWRevealViewController.h"
 #import "SYCAskerQustionCell.h"
-@interface SYCAskerQusetionController : ViewController
-
+@interface SYCAskerQusetionController : ViewController<SWRevealViewControllerDelegate>
+{
+    NSArray *qustion;
+}
 @property (weak, nonatomic) IBOutlet UITableView *tblqusetion;
 @end

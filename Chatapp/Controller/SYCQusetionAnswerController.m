@@ -16,10 +16,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+  _lblIsTyping.hidden=YES;
+    
     [[ChatConfig sharedInstance]addmorechannel:[[Constantobject sharedInstance]TypingToChannel:_reciver]];
+      [self settyping:@"false"];
  [self keyboaradstyatus];
 [self viewloadf];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isTypingUpdate:) name:@"isTypingUpdate" object:nil];
+    [_lblIsTyping bringSubviewToFront:_tblconversation];
     // Do any additional setup after loading the view.
 }
 -(void)keyboaradstyatus
@@ -188,6 +192,8 @@
     
     // commit animations
     [UIView commitAnimations];
+    
+  
 }
 
 - (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height
@@ -200,16 +206,44 @@
     chatview.frame = r;
 }
 
+-(void)growingTextViewDidBeginEditing:(HPGrowingTextView *)growingTextView
+{
+       [self settyping:@"true"];
+}
+-(BOOL)growingTextView:(HPGrowingTextView *)growingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+//    if (text.length)
+//        [self settyping:@"true"];
+//    else
+//    [self settyping:@"false"];
+    NSLog(@"f");
+    return YES;
+}
+-(void)growingTextViewDidChange:(HPGrowingTextView *)growingTextView
+{
+   
 
+//    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updatestatus) object:nil];
+//    // start a new one in 0.3 seconds
+//    [self performSelector:@selector(updatestatus) withObject:nil afterDelay:0.5];
+//    
+//     NSLog(@"%@",@"change");
+     [self settyping:@"true"];
+}
+
+-(void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView
+{
+       [self settyping:@"false"];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 -(void)AskQuestionAnser
 {
-    NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];//[NSString stringWithFormat:@"%@--%@",_reciver,[[Constantobject sharedInstance]getloggedchannel]];
-   // [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
-    [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:@"true" anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
+    //[NSString stringWithFormat:@"%@--%@",_reciver,[[Constantobject sharedInstance]getloggedchannel]];
+//   // [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
+//    [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:@"true" anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
     
     
     
@@ -230,9 +264,10 @@
 //        
 //    }];
         textView.text=@"";
-        [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:@"false" anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
+        [self settyping:@"false"];
     }
 }
+
 /*
 #pragma mark - Navigation
 
@@ -242,5 +277,25 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self settyping:@"false"];
+}
+-(void)isTypingUpdate:(NSNotification *)anote
+{
+    NSDictionary *dict = [anote userInfo];
+    if ([[dict objectForKey:@"isTyping"] isEqualToString:@"true"]) {
+        _lblIsTyping.hidden=NO;
+        _lblIsTyping.text=[NSString stringWithFormat:@"%@ is Typing.....",[dict objectForKey:@"isTypingUuid"]];
+    }
+    else
+        _lblIsTyping.hidden=YES;
+  //  AnyClass *objectIWantToTransfer = [dict objectForKey:@"objectName"];
+}
+-(void)settyping:(NSString*)status
+{
+    val=status;
+    NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];
+    [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:status anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
+}
 @end

@@ -10,5 +10,6 @@
 
 @interface SYCMenuViewController : ViewController
 @property (weak, nonatomic) IBOutlet UITableView *tblmenu;
+@property (weak, nonatomic) IBOutlet UILabel *lbltyping;
 
 @end

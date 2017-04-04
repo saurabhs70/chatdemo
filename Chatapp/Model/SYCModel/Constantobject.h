@@ -23,4 +23,5 @@
 -(NSString*)getloggedchannel;
 -(UIViewController *)getviewcontrollerbyid:(NSString*)identifier;
 -(NSString*)TypingToChannel:(NSString*)reciver;
+-(NSArray*)arr;
 @end

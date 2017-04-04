@@ -40,21 +40,22 @@
             // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
             NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
             
+            if (data)
+           [self savejson:data];
+//            
+//            
+//            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+//            NSArray *arr=[[jsonDict valueForKey:@"response"] valueForKey:@"mentor_educator_list"];
+//            if (jsonDict) {
+//                NSMutableArray *mainarray=[[NSMutableArray alloc]init];
+//                for (NSDictionary *dd in arr) {
+//                    [mainarray addObject:[dd valueForKey:@"email"]];
+//                }
             
-          //  [self savejson:data];
-            
-            
-            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-            NSArray *arr=[[jsonDict valueForKey:@"response"] valueForKey:@"mentor_educator_list"];
-            if (jsonDict) {
-                NSMutableArray *mainarray=[[NSMutableArray alloc]init];
-                for (NSDictionary *dd in arr) {
-                    [mainarray addObject:[dd valueForKey:@"email"]];
-                }
-                callback (mainarray);
-                NSLog(@"%@",mainarray);
+                callback ([self getjson]);
+                //NSLog(@"%@",mainarray);
                 // NSLog(@"%@",jsonDict);
-            }
+        
             
         }
         
@@ -76,7 +77,7 @@
     
     
 }
--(void)getjson
+-(NSArray*)getjson
 {
 //    NSString *searchFilename = @"data.json"; // name of the PDF you are searching for
 //    
@@ -93,16 +94,18 @@
 //        
 //        NSLog(@"found %@", documentsSubpath);
 //    }
-    
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *plistLocation = [documentsDirectory stringByAppendingPathComponent:@"data.json"];
-//    NSLog(@"%@",plistLocation);
-//    NSData *data = [[NSFileManager defaultManager] contentsAtPath:plistLocation];
-//    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-//    NSArray *arr=[[jsonDict valueForKey:@"response"] valueForKey:@"mentor_educator_list"];
-//    if (arr) {
-//        
-//    }
+    NSMutableArray *mainarray=[[NSMutableArray alloc]init];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *plistLocation = [documentsDirectory stringByAppendingPathComponent:@"data.json"];
+    NSLog(@"%@",plistLocation);
+    NSData *data = [[NSFileManager defaultManager] contentsAtPath:plistLocation];
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    if (jsonDict) {
+    NSArray *arr=[[jsonDict valueForKey:@"response"] valueForKey:@"mentor_educator_list"];
+        for (NSDictionary *dd in arr)
+            [mainarray addObject:[dd valueForKey:@"email"]];
+    }
+    return mainarray;
 }
 @end
