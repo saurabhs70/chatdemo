@@ -24,4 +24,5 @@
 -(void)unsubscribechannle:(NSString*)channelname;
 -(void)addmorechannel:(NSString*)channelname;
 -(void)updatestatus:(NSString*)key andvalue:(NSString*)value anduuid:(NSString*)uuid andchannel:(NSString*)chhhanel;
+-(void)hearPerticularChannel:(NSString*)channel callback:(void (^)(bool sent))callback;
 @end

@@ -16,8 +16,14 @@
 #define SYCCHATSECKEY @"sub-c-c415f442-d8bf-11e6-bc53-0619f8945a4f"
 #define SYCCHANNELMENTORPREFIX @"MEN_"
 #define SYCCHANNELASKERPREFIX @"ASK_"
+#define SYCCHATDOC @"Chat"
+#define SYCCHATDOCDFORMAT @"json"
 #define SYCCHATHEARTBEAT 120
 #define SYCCHATHEARTBEATINTERVAL 30
 #define SCREENWIDTH  [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT  [UIScreen mainScreen].bounds.size.height
+#define SYCOFFLINEERROR  @"Reciver Not Available!"
+#define SYCMESSAGESENDERROR  @"Message can't send!"
+//#define SYCMESSAGESENDERROR  @"Message can't send!"
+#define SYCOK  @"Ok"
 #endif /* Constant_h */

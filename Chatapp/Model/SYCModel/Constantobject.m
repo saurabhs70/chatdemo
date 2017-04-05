@@ -81,4 +81,24 @@
     return  arr;
     
 }
+-(void)showAlertWithMessage:(NSString *)message withTitle:(NSString *)title withCancelTitle:(NSString *)cancelTitle {
+    
+    self.alertview = nil;
+    
+    if (!self.alertview) {
+        
+        self.alertview = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:nil, nil];
+        
+        [self.alertview show];
+    }
+}
+-(void)showAlertWithText:(UIViewController*)viewcontroller andmessagetitle:(NSString*)title andmessagetext:(NSString*)text
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:text preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:ok];
+    
+    [viewcontroller presentViewController:alertController animated:YES completion:nil];
+}
 @end

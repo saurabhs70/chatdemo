@@ -18,10 +18,13 @@
 @property (strong,nonatomic) NSArray *allMentorList;
 @property (nonatomic, strong) PubNub *client;
 -(void)allocInit;
+@property (nonatomic, strong) UIAlertView *alertview;
 -(void)setmodeoflooged:(NSString*)mode andstringforlogged:(NSString*)logged;
 -(NSString*)getlogged;
 -(NSString*)getloggedchannel;
 -(UIViewController *)getviewcontrollerbyid:(NSString*)identifier;
 -(NSString*)TypingToChannel:(NSString*)reciver;
 -(NSArray*)arr;
+-(void)showAlertWithMessage:(NSString *)message withTitle:(NSString *)title withCancelTitle:(NSString *)cancelTitle;
+-(void)showAlertWithText:(UIViewController*)viewcontroller andmessagetitle:(NSString*)title andmessagetext:(NSString*)text;
 @end

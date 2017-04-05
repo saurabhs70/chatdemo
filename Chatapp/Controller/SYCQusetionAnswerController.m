@@ -256,23 +256,21 @@
     
     
     if (textView.text.length) {
-//        
-//    NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
-//    [msg setValue:textView.text forKey:@"message"];
-//    [msg setValue:[[Constantobject sharedInstance]getlogged] forKey:@"sendormode"];
-//    [msg setValue:[[Constantobject sharedInstance]getloggedchannel] forKey:@"sendorchannel"];
-//    [msg setValue:@"mycategory" forKey:@"sendorcategory"];
-//    
-//    [[ChatConfig sharedInstance]sendmessage:msg andtochannel:_reciver callback:^(bool sent) {
-//        
-//        if (sent)
-//            NSLog(@"send!");
-//        else
-//            NSLog(@"send error!");
-//        
-//    }];
-        textView.text=@"";
-        [self settyping:@"false"];
+//
+        [[ChatConfig sharedInstance]hearPerticularChannel:_reciver callback:^(bool sent) {
+            
+            if (sent) {
+                
+                [self sendMessage];
+            }
+            else
+            {
+                [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCOFFLINEERROR];
+            }
+        }];
+        
+   
+        
     }
 }
 
@@ -308,5 +306,30 @@
     NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];
    // [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
     [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:status anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
+}
+-(void)sendMessage
+{
+    NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
+    [msg setValue:textView.text forKey:@"message"];
+    [msg setValue:[[Constantobject sharedInstance]getlogged] forKey:@"sendormode"];
+    [msg setValue:[[Constantobject sharedInstance]getloggedchannel] forKey:@"sendorchannel"];
+    [msg setValue:@"mycategory" forKey:@"sendorcategory"];
+    
+    [[ChatConfig sharedInstance]sendmessage:msg andtochannel:_reciver callback:^(bool sent) {
+        
+        if (sent)
+        {
+            NSLog(@"send!");
+            textView.text=@"";
+            [self settyping:@"false"];
+           // [[Constantobject sharedInstance]showAlertWithMessage:@"SEND!" withTitle:nil withCancelTitle:SYCOK];
+        }
+        else
+          //  NSLog(@"send error!");
+        {
+            [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:SYCMESSAGESENDERROR andmessagetext:SYCOK];
+        }
+        
+    }];
 }
 @end

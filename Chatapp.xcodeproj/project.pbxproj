@@ -58,6 +58,7 @@
 		A570ECDB1E27A61B001BA181 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A570ECDA1E27A61B001BA181 /* PubNub.framework */; };
 		A570ECDC1E27A660001BA181 /* PubNub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A570ECDA1E27A61B001BA181 /* PubNub.framework */; };
 		A570ECDD1E27A660001BA181 /* PubNub.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A570ECDA1E27A61B001BA181 /* PubNub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A596D06B1E94E57F002D01CB /* SYCChatModule.m in Sources */ = {isa = PBXBuildFile; fileRef = A596D06A1E94E57F002D01CB /* SYCChatModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -155,6 +156,8 @@
 		A570ECD11E27A5FD001BA181 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A570ECD31E27A5FD001BA181 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A570ECDA1E27A61B001BA181 /* PubNub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PubNub.framework; sourceTree = "<group>"; };
+		A596D0691E94E57F002D01CB /* SYCChatModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCChatModule.h; sourceTree = "<group>"; };
+		A596D06A1E94E57F002D01CB /* SYCChatModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCChatModule.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +226,7 @@
 		A53C1AC41E8CDFA10061E11D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A596D0681E94E565002D01CB /* SYCChatModuleManager */,
 				A52240601E8E6B4700383D22 /* SYCChatManager */,
 				A52240431E8E1FAF00383D22 /* SYCManager */,
 				A53C1AE61E8CE1220061E11D /* ChatConfigurationModel */,
@@ -402,6 +406,15 @@
 			path = lib;
 			sourceTree = SOURCE_ROOT;
 		};
+		A596D0681E94E565002D01CB /* SYCChatModuleManager */ = {
+			isa = PBXGroup;
+			children = (
+				A596D0691E94E57F002D01CB /* SYCChatModule.h */,
+				A596D06A1E94E57F002D01CB /* SYCChatModule.m */,
+			);
+			path = SYCChatModuleManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -510,6 +523,7 @@
 				A52240571E8E1FC500383D22 /* AFURLSessionManager.m in Sources */,
 				A56525591E8F8A3300BB676A /* HPGrowingTextView.m in Sources */,
 				A52240561E8E1FC500383D22 /* AFURLResponseSerialization.m in Sources */,
+				A596D06B1E94E57F002D01CB /* SYCChatModule.m in Sources */,
 				A570ECC71E27A5FC001BA181 /* AppDelegate.m in Sources */,
 				A53C1AE51E8CE0F60061E11D /* Contact.m in Sources */,
 				A52240551E8E1FC500383D22 /* AFURLRequestSerialization.m in Sources */,

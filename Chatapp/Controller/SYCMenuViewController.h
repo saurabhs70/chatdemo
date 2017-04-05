@@ -9,7 +9,10 @@
 #import "ViewController.h"
 
 @interface SYCMenuViewController : ViewController
-
+{
+    NSArray *menuarray;
+   
+}
 @property (weak, nonatomic) IBOutlet UITableView *tblmenu;
 @property (weak, nonatomic) IBOutlet UILabel *lbltyping;
 

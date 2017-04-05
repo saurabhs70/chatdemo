@@ -294,6 +294,44 @@
         }
     }];
 }
+-(void)hearPerticularChannel:(NSString*)channel callback:(void (^)(bool sent))callback
+{
+    [self.client hereNowForChannel: channel withVerbosity:PNHereNowUUID
+                        completion:^(PNPresenceChannelHereNowResult *result,
+                                     PNErrorStatus *status) {
+                            
+                            // Check whether request successfully completed or not.
+                            if (!status) {
+                                
+                                //BOOL sentval;
+                                
+                                NSArray *arr=result.data.uuids;
+                                if ([arr containsObject:channel])
+                                     callback (YES);
+                                else
+                                    callback (NO);
+                                /**
+                                 Handle downloaded presence information using:
+                                 result.data.uuids - list of uuids.
+                                 result.data.occupancy - total number of active subscribers.
+                                 */
+                               
+                            }
+                            else {
+                              //  BOOL sentval;
+                                callback (NO);
+                                /**
+                                 Handle presence audit error. Check 'category' property to find
+                                 out possible reason because of which request did fail.
+                                 Review 'errorData' property (which has PNErrorData data type) of status
+                                 object to get additional information about issue.
+                                 
+                                 Request can be resent using: [status retry];
+                                 */
+                            }
+                        }];
+
+}
 -(void)allmentorlist:(NSArray*)allonlinechannel
 {
     if ([Constantobject sharedInstance].allMentorList.count) {

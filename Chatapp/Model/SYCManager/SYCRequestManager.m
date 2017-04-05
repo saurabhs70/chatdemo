@@ -40,10 +40,17 @@
             // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
             NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
             
+            
             if (data)
-           [self savejson:data];
-//            
-//            
+            {
+                NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSArray *arr=[[jsonDict objectForKey:@"response"] objectForKey:@"mentor_educator_list"];
+                NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:arr];
+         //  [self savejson:data];
+                [[SYCChatModule sharedInstance]writeToSycChat:data2 atFilePath:@"MENTOR-LIST"];
+            }
+//
+//            }
 //            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
 //            NSArray *arr=[[jsonDict valueForKey:@"response"] valueForKey:@"mentor_educator_list"];
 //            if (jsonDict) {
@@ -52,7 +59,7 @@
 //                    [mainarray addObject:[dd valueForKey:@"email"]];
 //                }
             
-                callback ([self getjson]);
+                callback (nil);//[self getjson]
                 //NSLog(@"%@",mainarray);
                 // NSLog(@"%@",jsonDict);
         

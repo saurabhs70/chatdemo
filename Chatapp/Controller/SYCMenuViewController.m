@@ -16,6 +16,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   NSArray *askerarray=[[NSArray alloc]initWithObjects:@"Chat",@"Mentor",nil];
+   NSArray *mentorarray=[[NSArray alloc]initWithObjects:@"Activity",nil];
+    if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
+    menuarray=askerarray;
+    else
+        menuarray=mentorarray;
     // Do any additional setup after loading the view.
 }
 
@@ -24,7 +30,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return menuarray.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCellId"];
@@ -40,7 +46,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
     }
-cell.textLabel.text=@"Activity";
+cell.textLabel.text=[menuarray objectAtIndex:indexPath.row];
     return cell;
     }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
