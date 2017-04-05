@@ -48,7 +48,9 @@
                 NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:arr];
          //  [self savejson:data];
                 [[SYCChatModule sharedInstance]writeToSycChat:data2 atFilePath:@"MENTOR-LIST"];
+                
             }
+            callback ([[SYCChatModule sharedInstance]readToSycChat:@"MENTOR-LIST"]);
 //
 //            }
 //            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
@@ -59,7 +61,7 @@
 //                    [mainarray addObject:[dd valueForKey:@"email"]];
 //                }
             
-                callback (nil);//[self getjson]
+              //  callback (nil);//[self getjson]
                 //NSLog(@"%@",mainarray);
                 // NSLog(@"%@",jsonDict);
         
@@ -70,6 +72,42 @@
     [dataTask resume];
 
 }
+-(void)askQuestion:(NSString*)Qustion andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel andTask:(NSString*)taskName callback:(void (^)(bool send))callback
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&mentor_educator_channel_id=%@&question=%@",SYCBASEURL,taskName,askerChannel,mentorChannel,Qustion];
+    NSURL *URL = [NSURL URLWithString:callurl];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+  
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        
+        if (error) {
+            NSLog(@"Error: %@", error);
+            callback (nil);
+        } else {
+            NSLog(@"%@ %@", response, responseObject);
+            NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
+            NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
+            
+            
+            if (data)
+            {
+                
+            }
+         callback (nil);
+            
+            
+        }
+        
+    }];
+    [dataTask resume];
+    
+}
+
 -(void)savejson:(NSData*)urldata
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

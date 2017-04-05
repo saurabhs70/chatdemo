@@ -322,6 +322,9 @@
             NSLog(@"send!");
             textView.text=@"";
             [self settyping:@"false"];
+            [[SYCRequestManager sharedInstance]askQuestion:@"First question to mentor" andAskerChannel:[[Constantobject sharedInstance]getloggedchannel] andMentorChannel:_reciver andTask:@"askQuestion" callback:^(bool send) {
+                
+            }];
            // [[Constantobject sharedInstance]showAlertWithMessage:@"SEND!" withTitle:nil withCancelTitle:SYCOK];
         }
         else

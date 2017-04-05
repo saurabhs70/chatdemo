@@ -19,8 +19,11 @@
    // mentorPresencelist=[Constantobject sharedInstance].allMentorList;
    [[SYCRequestManager sharedInstance]Requestforlist:(nil) callback:^(NSArray *allchanels) {
        NSMutableArray *arr=[[NSMutableArray alloc]init];
-       for (NSString *mentorlist in allchanels) {
-          [ arr addObject:[NSString stringWithFormat:@"%@%@",SYCCHANNELMENTORPREFIX,mentorlist]];
+       for (NSDictionary *mentorlist in allchanels) {
+           NSMutableDictionary *channel=[[NSMutableDictionary alloc]initWithDictionary:mentorlist];
+           NSString *channelname=[NSString stringWithFormat:@"%@%@",SYCCHANNELMENTORPREFIX,[channel objectForKey:@"email"]];
+           [channel setObject:channelname forKey:SYCCHANNELNAME];
+          [ arr addObject:channel];
        }
        mentorPresencelist=arr;
         [_tblonline reloadData];
@@ -56,18 +59,18 @@
     if (cell == nil) {
         cell = [[SYCStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SYCStatusCellId"];
     }
-    NSString *channel=[mentorPresencelist objectAtIndex:indexPath.row];
+    NSString *channel=[[mentorPresencelist objectAtIndex:indexPath.row] objectForKey:SYCCHANNELNAME];
     if ([[Constantobject sharedInstance].onlineMentorList containsObject:channel])
         cell.statusicon.image=[UIImage imageNamed:@"online.png"];
     else
         cell.statusicon.image=[UIImage imageNamed:@"offline.png"];
-    cell.statuslbl.text=[mentorPresencelist objectAtIndex:indexPath.row];
+    cell.statuslbl.text=channel;//[mentorPresencelist objectAtIndex:indexPath.row];
     return cell;
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SYCQusetionAnswerController *vv=(SYCQusetionAnswerController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCQusetionAnswerControllerId"];
-    vv.reciver=[mentorPresencelist lastObject];
+    vv.reciver=[[mentorPresencelist lastObject]objectForKey:SYCCHANNELNAME];
     [self.navigationController pushViewController:vv animated:YES];
     //[[ChatConfig sharedInstance]unsubscribechannle:@"my@gmail.com"];
 }
