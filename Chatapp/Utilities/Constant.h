@@ -27,6 +27,6 @@
 //#define SYCMESSAGESENDERROR  @"Message can't send!"
 #define SYCOK  @"Ok"
 /*----------------ApiCall--------------*/
-#define SYCBASEURL @"http://floovr.in/syc/index.php"
+#define SYCBASEURL @"http://138.68.175.0/api/index.php"  //@"http://floovr.in/syc/index.php"
 #define SYCCHANNELNAME @"channel"
 #endif /* Constant_h */

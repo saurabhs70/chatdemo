@@ -324,6 +324,14 @@
             [self settyping:@"false"];
             [[SYCRequestManager sharedInstance]askQuestion:@"First question to mentor" andAskerChannel:[[Constantobject sharedInstance]getloggedchannel] andMentorChannel:_reciver andTask:@"askQuestion" callback:^(bool send) {
                 
+                if (send) {
+                    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:[[Constantobject sharedInstance]getloggedchannel] andMentorChannel:_reciver callback:^(NSArray *send) {
+                        if (send) {
+                            
+                        }
+                        
+                    }];
+                }
             }];
            // [[Constantobject sharedInstance]showAlertWithMessage:@"SEND!" withTitle:nil withCancelTitle:SYCOK];
         }

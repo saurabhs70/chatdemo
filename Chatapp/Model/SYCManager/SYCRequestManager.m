@@ -77,7 +77,10 @@
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&mentor_educator_channel_id=%@&question=%@",SYCBASEURL,taskName,askerChannel,mentorChannel,Qustion];
+    
+    NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
+    NSString *result = [Qustion stringByAddingPercentEncodingWithAllowedCharacters:set];
+    NSString *callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&mentor_educator_channel_id=%@&question=%@",SYCBASEURL,taskName,askerChannel,mentorChannel,result];
     NSURL *URL = [NSURL URLWithString:callurl];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
   
@@ -96,9 +99,19 @@
             
             if (data)
             {
+                NSError* error;
+                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:kNilOptions
+                                                                       error:&error];
                 
+                if ([[[json valueForKey:@"response"]valueForKey:@"success"] isEqualToString:@"true"])
+                callback (YES);
+                else
+                    callback (false);
             }
-         callback (nil);
+            else
+                callback (nil);
+         
             
             
         }
@@ -107,6 +120,54 @@
     [dataTask resume];
     
 }
+-(void)getChatList:(NSString*)taskName andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel callback:(void (^)(NSArray *Responsearray))callback
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+   // http://floovr.in/syc/index.php?task=getQuestionAnswerChat&asker_channel_id=ASK_email1@email.com
+    
+    //NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
+    //NSString *result = [Qustion stringByAddingPercentEncodingWithAllowedCharacters:set];
+    NSString *callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&mentor_educator_channel_id=%@",SYCBASEURL,taskName,askerChannel,mentorChannel];
+    NSURL *URL = [NSURL URLWithString:callurl];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        
+        if (error) {
+            NSLog(@"Error: %@", error);
+            callback (nil);
+        } else {
+            NSLog(@"%@ %@", response, responseObject);
+            NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
+            NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
+            
+            
+            if (data)
+            {
+                NSError* error;
+                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:kNilOptions
+                                                                       error:&error];
+                NSArray *arr=[[json valueForKey:@"response"]valueForKey:@"response"];
+                callback (arr);
+            }
+            else
+                callback (nil);
+            
+            
+            
+        }
+        
+    }];
+    [dataTask resume];
+    
+}
+
 
 -(void)savejson:(NSData*)urldata
 {
