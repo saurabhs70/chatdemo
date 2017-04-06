@@ -120,6 +120,58 @@
     [dataTask resume];
     
 }
+
+-(void)giveAnswerbyid:(NSString*)Qustionid andAnswer:(NSString*)answer andTask:(NSString*)taskName callback:(void (^)(bool send))callback
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
+    NSString *result = [answer stringByAddingPercentEncodingWithAllowedCharacters:set];
+    
+//http://138.68.175.0/api/index.php?task=submitAnswerByEducatorMentor&question_id=4&answer=test%20data%20answer
+
+    NSString *callurl=[NSString stringWithFormat:@"%@?task=%@&question_id=%@&answer=%@",SYCBASEURL,taskName,Qustionid,result];
+    NSURL *URL = [NSURL URLWithString:callurl];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        
+        if (error) {
+            NSLog(@"Error: %@", error);
+            callback (nil);
+        } else {
+            NSLog(@"%@ %@", response, responseObject);
+            NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
+            NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
+            
+            
+            if (data)
+            {
+                NSError* error;
+                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:kNilOptions
+                                                                       error:&error];
+                
+                if ([[[json valueForKey:@"response"]valueForKey:@"success"] isEqualToString:@"true"])
+                    callback (YES);
+                else
+                    callback (false);
+            }
+            else
+                callback (nil);
+            
+            
+            
+        }
+        
+    }];
+    [dataTask resume];
+    
+}
 -(void)getChatList:(NSString*)taskName andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel callback:(void (^)(NSArray *Responsearray))callback
 {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -154,7 +206,19 @@
                                                                      options:kNilOptions
                                                                        error:&error];
                 NSArray *arr=[[json valueForKey:@"response"]valueForKey:@"response"];
-                callback (arr);
+                
+                NSMutableArray *listarray=[[NSMutableArray alloc]init];
+                
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:arr];
+                [[SYCChatModule sharedInstance]writeToSycChat:data atFilePath:[NSString stringWithFormat:@"%@-%@",askerChannel,mentorChannel]];
+                NSArray *gg=[[SYCChatModule sharedInstance]readToSycChat:[NSString stringWithFormat:@"%@-%@",askerChannel,mentorChannel]];
+                for (NSDictionary *dict in gg) {
+                    SYCChatConversation *chat=[[SYCChatConversation alloc]initWithSycConverstion:[dict objectForKey:@"asker_id"] andMentorId:[dict objectForKey:@"mentor_id"] andQuestionId:[dict objectForKey:@"qusetion_id"] andAnswerlist:[dict objectForKey:@"answer"]];
+                    [listarray addObject:chat];
+                    
+                }
+                
+                callback (listarray);
             }
             else
                 callback (nil);

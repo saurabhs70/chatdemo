@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A51C90201E96155C00A7FFED /* SYCChatConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = A51C901F1E96155C00A7FFED /* SYCChatConversation.m */; };
 		A52240521E8E1FC500383D22 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52240461E8E1FC500383D22 /* AFHTTPSessionManager.m */; };
 		A52240531E8E1FC500383D22 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52240491E8E1FC500383D22 /* AFNetworkReachabilityManager.m */; };
 		A52240541E8E1FC500383D22 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = A522404B1E8E1FC500383D22 /* AFSecurityPolicy.m */; };
@@ -76,6 +77,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A51C901E1E96155C00A7FFED /* SYCChatConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCChatConversation.h; sourceTree = "<group>"; };
+		A51C901F1E96155C00A7FFED /* SYCChatConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCChatConversation.m; sourceTree = "<group>"; };
 		A52240451E8E1FC500383D22 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		A52240461E8E1FC500383D22 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		A52240471E8E1FC500383D22 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -411,6 +414,8 @@
 			children = (
 				A596D0691E94E57F002D01CB /* SYCChatModule.h */,
 				A596D06A1E94E57F002D01CB /* SYCChatModule.m */,
+				A51C901E1E96155C00A7FFED /* SYCChatConversation.h */,
+				A51C901F1E96155C00A7FFED /* SYCChatConversation.m */,
 			);
 			path = SYCChatModuleManager;
 			sourceTree = "<group>";
@@ -523,6 +528,7 @@
 				A52240571E8E1FC500383D22 /* AFURLSessionManager.m in Sources */,
 				A56525591E8F8A3300BB676A /* HPGrowingTextView.m in Sources */,
 				A52240561E8E1FC500383D22 /* AFURLResponseSerialization.m in Sources */,
+				A51C90201E96155C00A7FFED /* SYCChatConversation.m in Sources */,
 				A596D06B1E94E57F002D01CB /* SYCChatModule.m in Sources */,
 				A570ECC71E27A5FC001BA181 /* AppDelegate.m in Sources */,
 				A53C1AE51E8CE0F60061E11D /* Contact.m in Sources */,

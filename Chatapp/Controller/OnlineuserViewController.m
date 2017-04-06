@@ -70,7 +70,13 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SYCQusetionAnswerController *vv=(SYCQusetionAnswerController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCQusetionAnswerControllerId"];
-    vv.reciver=[[mentorPresencelist lastObject]objectForKey:SYCCHANNELNAME];
+    //vv.reciver=[[mentorPresencelist lastObject]objectForKey:SYCCHANNELNAME];
+    SYCChatConversation *chatcon;
+   // if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
+        chatcon =[[SYCChatConversation alloc]initWithSycConverstion:[[Constantobject sharedInstance]getloggedchannel] andMentorId:[[mentorPresencelist lastObject]objectForKey:SYCCHANNELNAME]  andQuestionId:nil andAnswerlist:nil];
+    
+    
+    vv.conversationchannel=chatcon;
     [self.navigationController pushViewController:vv animated:YES];
     //[[ChatConfig sharedInstance]unsubscribechannle:@"my@gmail.com"];
 }

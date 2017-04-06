@@ -13,18 +13,27 @@
 @end
 
 @implementation SYCQusetionAnswerController
-
+@synthesize conversationchannel;
 - (void)viewDidLoad {
     [super viewDidLoad];
   _lblIsTyping.hidden=YES;
-    
-    [[ChatConfig sharedInstance]addmorechannel:[[Constantobject sharedInstance]TypingToChannel:_reciver]];
+    if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
+    {
+        _reciver=conversationchannel.mentor_id;
+    [[ChatConfig sharedInstance]addmorechannel:[[Constantobject sharedInstance]TypingToChannel:conversationchannel.mentor_id]];
+    }
+    else
+    {
+         _reciver=conversationchannel.asker_id;
+       [[ChatConfig sharedInstance]addmorechannel:[[Constantobject sharedInstance]TypingToChannel:conversationchannel.asker_id]];
+    }
     
       [self settyping:@"false"];
  [self keyboaradstyatus];
 [self viewloadf];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isTypingUpdate:) name:@"isTypingUpdate" object:nil];
     [_lblIsTyping bringSubviewToFront:_tblconversation];
+  [self loadchat];
     // Do any additional setup after loading the view.
 }
 -(void)keyboaradstyatus
@@ -39,10 +48,17 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 }
+//conversationarray
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+   return conversationarray.count;
+}
 - (NSInteger)tableView:(UITableView *)tableview numberOfRowsInSection:(NSInteger)section
 {
-    return 10;//chatmessage.count;
+    SYCChatConversation *vv=[conversationarray objectAtIndex:section];
+    return vv.answer.count+1;//chatmessage.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
@@ -67,7 +83,17 @@
     //    }
     //
     //    cell.lblsender.text=[dd valueForKey:@"message"];//[onlineuser objectAtIndex:indexPath.row];//[NSString stringWithFormat:@""];//
-    cell.lblsender.text=@"dfdfdfdf";//[dd valueForKey:@"message"];
+    SYCChatConversation *vv=[conversationarray objectAtIndex:indexPath.section];
+    if (indexPath.row==0) {
+        
+        cell.lblsender.text=vv.qusetion_id;
+    }
+    else
+    {
+        int valtoans=(int)indexPath.row-1;
+        NSDictionary *artr=[vv.answer objectAtIndex:valtoans];
+        cell.lblsender.text=[artr valueForKey:@"answer"];//@"ll";//[vv.answer objectAtIndex:valtoans];//[dd valueForKey:@"message"];;
+    }
     
     
     
@@ -322,17 +348,45 @@
             NSLog(@"send!");
             textView.text=@"";
             [self settyping:@"false"];
-            [[SYCRequestManager sharedInstance]askQuestion:@"First question to mentor" andAskerChannel:[[Constantobject sharedInstance]getloggedchannel] andMentorChannel:_reciver andTask:@"askQuestion" callback:^(bool send) {
+            if ([[[Constantobject sharedInstance]getlogged]isEqualToString:SYCCHATMODEASKER]) {
+                
+            
+            [[SYCRequestManager sharedInstance]askQuestion:@"First question to mentor" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id andTask:@"askQuestion" callback:^(bool send) {
                 
                 if (send) {
-                    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:[[Constantobject sharedInstance]getloggedchannel] andMentorChannel:_reciver callback:^(NSArray *send) {
+                    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id callback:^(NSArray *send) {
                         if (send) {
-                            
+                            conversationarray=send;
+                            [self.tblconversation reloadData];
                         }
                         
                     }];
                 }
             }];
+            
+           }
+            else
+            {
+            //-----for mentor-------------
+              SYCChatConversation *chatcove=  [conversationarray lastObject];
+                [[SYCRequestManager sharedInstance] giveAnswerbyid:chatcove.qusetion_id andAnswer:@"i have given first answer" andTask:@"submitAnswerByEducatorMentor" callback:^(bool send) {
+                    
+                    if (send) {
+                        [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id callback:^(NSArray *send) {
+                            if (send) {
+                                conversationarray=send;
+                                [self.tblconversation reloadData];
+                            }
+                            
+                        }];
+                    }
+                    
+                }];
+        
+            }
+            
+            
+            
            // [[Constantobject sharedInstance]showAlertWithMessage:@"SEND!" withTitle:nil withCancelTitle:SYCOK];
         }
         else
@@ -342,5 +396,30 @@
         }
         
     }];
+}
+
+-(void)loadchat
+{
+   
+   
+    /*---------online case---------*/
+    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id callback:^(NSArray *send) {
+        if (send) {
+            conversationarray=send;
+            [self.tblconversation reloadData];
+        }
+        
+    }];
+    //*---------offline case---------*//
+//    NSString *getfilename;
+//   if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
+//       getfilename= [NSString stringWithFormat:@"%@-%@",[[Constantobject sharedInstance]getloggedchannel],_reciver];
+//    else
+//       getfilename= [NSString stringWithFormat:@"%@-%@",_reciver,[[Constantobject sharedInstance]getloggedchannel]];
+//    
+//    NSArray *offlinearray=[[SYCChatModule sharedInstance]readToSycChat:getfilename];
+//   SYCChatConversation *conv=[[SYCChatConversation alloc]init];
+//    conversationarray=[conv getListConversation:offlinearray];
+//    [self.tblconversation reloadData];
 }
 @end

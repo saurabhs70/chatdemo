@@ -62,7 +62,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SYCQusetionAnswerController *vv=(SYCQusetionAnswerController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCQusetionAnswerControllerId"];
     NSDictionary *dd=[qustion objectAtIndex:indexPath.row];
-    vv.reciver=[dd valueForKey:@"Asker_id"];
+    SYCChatConversation *chatcon;
+    if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEMENTOR])
+   chatcon =[[SYCChatConversation alloc]initWithSycConverstion:[dd valueForKey:@"Asker_id"] andMentorId: [[Constantobject sharedInstance]getloggedchannel] andQuestionId:nil andAnswerlist:nil];
+    vv.conversationchannel=chatcon;//[dd valueForKey:@"Asker_id"];
     [self.navigationController pushViewController:vv animated:YES];
    // [[ChatConfig sharedInstance]unsubscribechannle:[[Constantobject sharedInstance] getloggedchannel]];
 }

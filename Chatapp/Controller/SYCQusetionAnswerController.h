@@ -9,13 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "HPGrowingTextView.h"
 #import "SYCQACellTableViewCell.h"
+#import "SYCChatConversation.h"
 @interface SYCQusetionAnswerController : UIViewController<HPGrowingTextViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     UIView *chatview;
     HPGrowingTextView *textView;
     NSString *val;
+    NSArray *conversationarray;
+   // NSString *askerchannel;
+    //NSString *mentorchannel;
     //NSString * timestamp;
 }
+@property (strong,nonatomic) SYCChatConversation *conversationchannel;
 @property (strong,nonatomic) NSString *reciver;
 @property (weak, nonatomic) IBOutlet UITableView *tblconversation;
 @property (weak, nonatomic) IBOutlet UILabel *lblIsTyping;
