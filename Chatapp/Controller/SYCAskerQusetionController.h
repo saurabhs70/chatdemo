@@ -12,6 +12,7 @@
 @interface SYCAskerQusetionController : ViewController<SWRevealViewControllerDelegate>
 {
     NSArray *qustion;
+    NSMutableArray *arrayofquestion;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tblqusetion;
 @end

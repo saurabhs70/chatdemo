@@ -85,11 +85,12 @@
     //    cell.lblsender.text=[dd valueForKey:@"message"];//[onlineuser objectAtIndex:indexPath.row];//[NSString stringWithFormat:@""];//
     SYCChatConversation *vv=[conversationarray objectAtIndex:indexPath.section];
     if (indexPath.row==0) {
-        
-        cell.lblsender.text=vv.qusetion_id;
+        cell.lblsender.textColor=[UIColor redColor];
+        cell.lblsender.text=vv.qusetion;
     }
     else
     {
+         cell.lblsender.textColor=[UIColor greenColor];
         int valtoans=(int)indexPath.row-1;
         NSDictionary *artr=[vv.answer objectAtIndex:valtoans];
         cell.lblsender.text=[artr valueForKey:@"answer"];//@"ll";//[vv.answer objectAtIndex:valtoans];//[dd valueForKey:@"message"];;
@@ -346,12 +347,12 @@
         if (sent)
         {
             NSLog(@"send!");
-            textView.text=@"";
+            
             [self settyping:@"false"];
             if ([[[Constantobject sharedInstance]getlogged]isEqualToString:SYCCHATMODEASKER]) {
                 
             
-            [[SYCRequestManager sharedInstance]askQuestion:@"First question to mentor" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id andTask:@"askQuestion" callback:^(bool send) {
+            [[SYCRequestManager sharedInstance]askQuestion:textView.text andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id andTask:@"askQuestion" callback:^(bool send) {
                 
                 if (send) {
                     [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id callback:^(NSArray *send) {
@@ -369,7 +370,7 @@
             {
             //-----for mentor-------------
               SYCChatConversation *chatcove=  [conversationarray lastObject];
-                [[SYCRequestManager sharedInstance] giveAnswerbyid:chatcove.qusetion_id andAnswer:@"i have given first answer" andTask:@"submitAnswerByEducatorMentor" callback:^(bool send) {
+                [[SYCRequestManager sharedInstance] giveAnswerbyid:chatcove.qusetion_id andAnswer:textView.text andTask:@"submitAnswerByEducatorMentor" callback:^(bool send) {
                     
                     if (send) {
                         [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id callback:^(NSArray *send) {
@@ -386,7 +387,7 @@
             }
             
             
-            
+            textView.text=@"";
            // [[Constantobject sharedInstance]showAlertWithMessage:@"SEND!" withTitle:nil withCancelTitle:SYCOK];
         }
         else

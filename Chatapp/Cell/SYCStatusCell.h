@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *statusicon;
 
 @property (weak, nonatomic) IBOutlet UILabel *statuslbl;
+@property (weak, nonatomic) IBOutlet UIImageView *imgprofileicon;
+
 @end

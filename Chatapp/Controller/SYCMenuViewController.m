@@ -53,8 +53,16 @@ cell.textLabel.text=[menuarray objectAtIndex:indexPath.row];
     UIViewController *Roottocontroller;
     
     if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
+        if (indexPath.row==0) {
+            
+            SYCChatConversationAsker *frontViewControllerlogged=(SYCChatConversationAsker*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCChatConversationAskerId"];
+            Roottocontroller=frontViewControllerlogged;
+        }
+        else
+        {
         OnlineuserViewController *frontViewControllerlogged=(OnlineuserViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"OnlineuserViewControllerid"];
         Roottocontroller=frontViewControllerlogged;
+        }
     }
     else
     {

@@ -64,7 +64,13 @@
         cell.statusicon.image=[UIImage imageNamed:@"online.png"];
     else
         cell.statusicon.image=[UIImage imageNamed:@"offline.png"];
-    cell.statuslbl.text=channel;//[mentorPresencelist objectAtIndex:indexPath.row];
+    cell.statuslbl.text=[NSString stringWithFormat:@"%@ %@",[[mentorPresencelist objectAtIndex:indexPath.row] objectForKey:@"name"],[[mentorPresencelist objectAtIndex:indexPath.row] objectForKey:@"last_name"]];//channel;//[mentorPresencelist objectAtIndex:indexPath.row];
+    
+    cell.imgprofileicon.layer.cornerRadius = cell.imgprofileicon.frame.size.width / 2;
+    cell.imgprofileicon.clipsToBounds = YES;
+    [ cell.imgprofileicon sd_setImageWithURL:[NSURL URLWithString:[[mentorPresencelist objectAtIndex:indexPath.row] objectForKey:@"profile_pic_url"] ]
+                        placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
     return cell;
     
 }
@@ -73,7 +79,7 @@
     //vv.reciver=[[mentorPresencelist lastObject]objectForKey:SYCCHANNELNAME];
     SYCChatConversation *chatcon;
    // if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
-        chatcon =[[SYCChatConversation alloc]initWithSycConverstion:[[Constantobject sharedInstance]getloggedchannel] andMentorId:[[mentorPresencelist lastObject]objectForKey:SYCCHANNELNAME]  andQuestionId:nil andAnswerlist:nil];
+        chatcon =[[SYCChatConversation alloc]initWithSycConverstion:[[Constantobject sharedInstance]getloggedchannel] andMentorId:[[mentorPresencelist lastObject]objectForKey:SYCCHANNELNAME]  andQuestionId:nil andquestion:nil andquestimestamp:nil andAnswerlist:nil];
     
     
     vv.conversationchannel=chatcon;

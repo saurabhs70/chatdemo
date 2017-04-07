@@ -45,6 +45,7 @@
             {
                 NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSArray *arr=[[jsonDict objectForKey:@"response"] objectForKey:@"mentor_educator_list"];
+                
                 NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:arr];
          //  [self savejson:data];
                 [[SYCChatModule sharedInstance]writeToSycChat:data2 atFilePath:@"MENTOR-LIST"];
@@ -182,9 +183,27 @@
     
     //NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
     //NSString *result = [Qustion stringByAddingPercentEncodingWithAllowedCharacters:set];
-    NSString *callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&mentor_educator_channel_id=%@",SYCBASEURL,taskName,askerChannel,mentorChannel];
+    NSString *callurl;
+    NSString *filepath;
+    if (askerChannel.length && mentorChannel.length )
+    {
+    callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&mentor_educator_channel_id=%@",SYCBASEURL,taskName,askerChannel,mentorChannel];
+        filepath=[NSString stringWithFormat:@"%@-%@",askerChannel,mentorChannel];
+    }
+    else if (askerChannel.length)
+    {
+        callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@",SYCBASEURL,taskName,askerChannel];
+        filepath=askerChannel;
+    }
+    else if (mentorChannel.length)
+    {
+        callurl=[NSString stringWithFormat:@"%@?task=%@&mentor_educator_channel_id=%@",SYCBASEURL,taskName,mentorChannel];
+        filepath=mentorChannel;
+    }
     NSURL *URL = [NSURL URLWithString:callurl];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    
+    
     
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
@@ -210,14 +229,20 @@
                 NSMutableArray *listarray=[[NSMutableArray alloc]init];
                 
                 NSData *data = [NSKeyedArchiver archivedDataWithRootObject:arr];
-                [[SYCChatModule sharedInstance]writeToSycChat:data atFilePath:[NSString stringWithFormat:@"%@-%@",askerChannel,mentorChannel]];
-                NSArray *gg=[[SYCChatModule sharedInstance]readToSycChat:[NSString stringWithFormat:@"%@-%@",askerChannel,mentorChannel]];
+                [[SYCChatModule sharedInstance]writeToSycChat:data atFilePath:filepath];
+                NSArray *gg=[[SYCChatModule sharedInstance]readToSycChat:filepath];
+                NSLog(@"%lu shyam  %lu---%@",(unsigned long)gg.count,(unsigned long)arr.count,json_string);
                 for (NSDictionary *dict in gg) {
-                    SYCChatConversation *chat=[[SYCChatConversation alloc]initWithSycConverstion:[dict objectForKey:@"asker_id"] andMentorId:[dict objectForKey:@"mentor_id"] andQuestionId:[dict objectForKey:@"qusetion_id"] andAnswerlist:[dict objectForKey:@"answer"]];
+                    SYCChatConversation *chat=[[SYCChatConversation alloc]initWithSycConverstion:[dict objectForKey:@"asker_id"] andMentorId:[dict objectForKey:@"mentor_id"] andQuestionId:[dict objectForKey:@"qusetion_id"] andquestion:[dict objectForKey:@"question"] andquestimestamp:[dict objectForKey:@"qusetion_time"] andAnswerlist:[dict objectForKey:@"answer"]];
                     [listarray addObject:chat];
                     
                 }
-                
+                if (askerChannel.length && mentorChannel.length )
+                {
+          NSArray *arrfinal=      [[listarray reverseObjectEnumerator] allObjects];
+                callback (arrfinal);
+                }
+                else
                 callback (listarray);
             }
             else

@@ -19,10 +19,49 @@
     // Do any additional setup after loading the view.
   //  [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:@"true" anduuid:@"my" andchannel:@"my@gmail.com"];
     qustion=[[Constantobject sharedInstance]arr];
-    [self setmenu];
-    
+ [self setmenu];
+    NSString *str=[[Constantobject sharedInstance]getloggedchannel];
+    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:nil andMentorChannel:str callback:^(NSArray *send) {
+        if (send) {
+            arrayofquestion=[[NSMutableArray alloc]init];
+            [arrayofquestion addObjectsFromArray:send];
+            // conversationarray=send;
+            [self.tblqusetion reloadData];
+            NSLog(@"raju  %lu",(unsigned long)arrayofquestion.count);
+        }
+        
+    }];
+  //  [self mentorrefresh];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshmentormessasge" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mentorrefresh:) name:@"refreshmentormessasge" object:nil];
 }
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshmentormessasge" object:nil];
+}
+-(void)mentorrefresh:(NSNotification*)notification
+{
+    NSArray* userInfo = [notification.object valueForKey:@"total"];
+    //NSArray* total = [userInfo valueForKey:@"total"];
+    
+    arrayofquestion=[[NSMutableArray alloc]init];
+            [arrayofquestion addObjectsFromArray:userInfo];
+    //            // conversationarray=send;
+            [self.tblqusetion reloadData];
 
+    
+//    NSString *str=[[Constantobject sharedInstance]getloggedchannel];
+//    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:nil andMentorChannel:str callback:^(NSArray *send) {
+//        if (send) {
+//            arrayofquestion=[[NSMutableArray alloc]init];
+//            [arrayofquestion addObjectsFromArray:send];
+//            // conversationarray=send;
+//            [self.tblqusetion reloadData];
+//             NSLog(@"raju  %lu",(unsigned long)arrayofquestion.count);
+//        }
+//        
+//    }];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -42,7 +81,7 @@
 //}
 - (NSInteger)tableView:(UITableView *)tableview numberOfRowsInSection:(NSInteger)section
 {
-    return  qustion.count;
+    return  arrayofquestion.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -53,18 +92,24 @@
     if (cell == nil) {
         cell = [[SYCAskerQustionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SYCStatusCellId"];
     }
-    NSDictionary *dd=[qustion objectAtIndex:indexPath.row];
-    cell.lblquestion.text=[dd valueForKey:@"Asker_question"];
+    SYCChatConversation *vv=[arrayofquestion objectAtIndex:indexPath.row];
+    NSDictionary *dd=vv.answer.lastObject;
+    if (dd)
+        cell.lbltagforqa.text=@"Answered";
+    else
+        cell.lbltagforqa.text=@"new question";
+    cell.lblquestion.text=vv.qusetion;//[dd valueForKey:@"Asker_question"];
+    cell.lblanswer.text=[dd valueForKey:@"answer"];
     //cell.lbltagforqa.text=@"Answered";
     return cell;
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SYCQusetionAnswerController *vv=(SYCQusetionAnswerController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCQusetionAnswerControllerId"];
-    NSDictionary *dd=[qustion objectAtIndex:indexPath.row];
+    SYCChatConversation *question=[arrayofquestion objectAtIndex:indexPath.row];
     SYCChatConversation *chatcon;
     if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEMENTOR])
-   chatcon =[[SYCChatConversation alloc]initWithSycConverstion:[dd valueForKey:@"Asker_id"] andMentorId: [[Constantobject sharedInstance]getloggedchannel] andQuestionId:nil andAnswerlist:nil];
+   chatcon =[[SYCChatConversation alloc]initWithSycConverstion:question.asker_id andMentorId: [[Constantobject sharedInstance]getloggedchannel] andQuestionId:nil andquestion:nil andquestimestamp:nil andAnswerlist:nil];
     vv.conversationchannel=chatcon;//[dd valueForKey:@"Asker_id"];
     [self.navigationController pushViewController:vv animated:YES];
    // [[ChatConfig sharedInstance]unsubscribechannle:[[Constantobject sharedInstance] getloggedchannel]];

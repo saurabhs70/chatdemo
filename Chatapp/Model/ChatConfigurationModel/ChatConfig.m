@@ -43,11 +43,37 @@
 - (void)client:(PubNub *)client didReceiveMessage:(PNMessageResult *)message {
      //message_id sender reciver mesasage category timestamp
     // Handle new message stored in message.data.message
+  
+    ///
     if (![message.data.channel isEqualToString:message.data.subscription]) {
         
         // Message has been received on channel group stored in message.data.subscription.
     }
     else {
+        
+        if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshaskermessasge" object:nil];
+        else
+        {
+           
+            
+            NSString *str=[[Constantobject sharedInstance]getloggedchannel];
+                [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:nil andMentorChannel:str callback:^(NSArray *send) {
+                    if (send) {
+                        NSDictionary* userInfo = @{@"total":send};
+                         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshmentormessasge" object:userInfo];
+
+//                        arrayofquestion=[[NSMutableArray alloc]init];
+//                        [arrayofquestion addObjectsFromArray:send];
+//                        // conversationarray=send;
+//                        [self.tblqusetion reloadData];
+//                         NSLog(@"raju  %lu",(unsigned long)arrayofquestion.count);
+                    }
+                    
+                }];
+            
+            
+        }
 //        NSDictionary *DD=[message.data valueForKey:@"message"];
 //        NSString *RECIVER=[message.data valueForKey:@"channel"];
 //        NSLog(@"");

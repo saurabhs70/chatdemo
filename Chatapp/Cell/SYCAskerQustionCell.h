@@ -11,5 +11,6 @@
 @interface SYCAskerQustionCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *lblquestion;
 @property (weak, nonatomic) IBOutlet UILabel *lbltagforqa;
+@property (weak, nonatomic) IBOutlet UILabel *lblanswer;
 
 @end
