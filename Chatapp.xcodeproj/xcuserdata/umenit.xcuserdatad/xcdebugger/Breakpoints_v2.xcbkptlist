@@ -2654,11 +2654,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Model/SYCChatModuleManager/SYCChatModule.m"
-            timestampString = "513081836.648366"
+            timestampString = "513594646.451928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "-writeToSycChat:atFilePath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2670,11 +2670,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Model/SYCChatModuleManager/SYCChatModule.m"
-            timestampString = "513081836.648366"
+            timestampString = "513594646.451928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "-getpath:andfilename:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2766,11 +2766,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Model/SYCChatModuleManager/SYCChatModule.m"
-            timestampString = "513082245.390315"
+            timestampString = "513594646.451928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "-readToSycChat:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4350,11 +4350,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Controller/SYCMenuViewController.m"
-            timestampString = "513587832.767275"
+            timestampString = "513594989.587401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4388,6 +4388,22 @@
             startingLineNumber = "63"
             endingLineNumber = "63"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chatapp/Model/SYCChatModuleManager/SYCChatModule.m"
+            timestampString = "513594646.451928"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "-getpath:andfilename:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

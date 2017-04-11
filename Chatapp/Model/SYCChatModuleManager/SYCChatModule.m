@@ -33,10 +33,16 @@
 }
 -(NSString*)getpath:(NSString*)folderName andfilename:(NSString*)Filename
 {
+    NSString *dataPath;
+    
     NSError *error;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
-    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",SYCCHATDOC]];
+    if ([Filename isEqualToString:SYCONLINEDOCLIST])
+        dataPath  = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",SYCONLINEDOC]];
+    else
+        dataPath  = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",SYCCHATDOC]];
+ //  dataPath  = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",SYCCHATDOC]];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath])
         [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error];
@@ -58,5 +64,15 @@
   NSArray *arr=  [self getData:filepathtowrite];
     return arr;
 }
-
+-(void)removechatlist
+{
+    NSString *dataPath;
+    
+   // NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
+  
+        dataPath  = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",SYCCHATDOC]];
+    [[NSFileManager defaultManager] removeItemAtPath:dataPath error:nil];
+}
 @end

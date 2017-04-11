@@ -33,7 +33,7 @@
         
         if (error) {
             NSLog(@"Error: %@", error);
-            callback ([[SYCChatModule sharedInstance]readToSycChat:@"MENTOR-LIST"]);
+            callback ([[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST]);
         } else {
             NSLog(@"%@ %@", response, responseObject);
             NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -48,10 +48,10 @@
                 
                 NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:arr];
          //  [self savejson:data];
-                [[SYCChatModule sharedInstance]writeToSycChat:data2 atFilePath:@"MENTOR-LIST"];
+                [[SYCChatModule sharedInstance]writeToSycChat:data2 atFilePath:SYCONLINEDOCLIST];
                 
             }
-            callback ([[SYCChatModule sharedInstance]readToSycChat:@"MENTOR-LIST"]);
+            callback ([[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST]);
 //
 //            }
 //            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
