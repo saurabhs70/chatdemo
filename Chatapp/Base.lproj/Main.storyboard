@@ -42,16 +42,6 @@
                                     <action selector="btnchatclicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Lj-d3-8mP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DbV-qt-Brj">
-                                <frame key="frameInset" minX="59" minY="375" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xK-lR-pNB">
-                                <frame key="frameInset" minX="244" minY="388" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -84,7 +74,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="111"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Opy-pt-mt4" id="rLI-NU-WeN">
-                                            <frame key="frameInset" width="375" height="111"/>
+                                            <frame key="frameInset" width="375" height="110"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJ9-03-QeP">
@@ -166,7 +156,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Zx-Au-XRe" id="WXs-Od-xiH">
-                                            <frame key="frameInset" width="375" height="90"/>
+                                            <frame key="frameInset" width="375" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNo-2h-U7N">
@@ -199,13 +189,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="R06-f4-AX9" firstAttribute="height" secondItem="aM3-bg-eCt" secondAttribute="height" multiplier="0.8771" constant="-2.0257000000000289" id="GT4-3c-Sh8"/>
-                            <constraint firstItem="FDs-Im-nnY" firstAttribute="top" secondItem="R06-f4-AX9" secondAttribute="bottom" constant="84" id="UgO-sm-kUa"/>
+                            <constraint firstItem="FDs-Im-nnY" firstAttribute="top" secondItem="R06-f4-AX9" secondAttribute="bottom" constant="87" id="UgO-sm-kUa"/>
                             <constraint firstItem="R06-f4-AX9" firstAttribute="centerX" secondItem="aM3-bg-eCt" secondAttribute="centerX" id="ddm-nc-igc"/>
                             <constraint firstItem="R06-f4-AX9" firstAttribute="width" secondItem="aM3-bg-eCt" secondAttribute="width" id="lqF-Jh-eUN"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="lblIsTyping" destination="BZy-f9-b3O" id="Jwa-te-mGZ"/>
+                        <outlet property="tblchatcontsant" destination="UgO-sm-kUa" id="4e7-Qo-cTA"/>
                         <outlet property="tblconversation" destination="R06-f4-AX9" id="EES-Vl-wQh"/>
                     </connections>
                 </viewController>
@@ -303,7 +294,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VoR-j9-sFc" id="DhB-jf-upU">
-                                            <frame key="frameInset" width="375" height="44"/>
+                                            <frame key="frameInset" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>

@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *loggedtext;
 - (IBAction)btnunsc:(id)sender;
 - (IBAction)hearall:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextView *lbltxt;
 
 @end
 

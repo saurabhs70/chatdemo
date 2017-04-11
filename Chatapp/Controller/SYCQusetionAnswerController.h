@@ -16,6 +16,7 @@
     HPGrowingTextView *textView;
     NSString *val;
     NSArray *conversationarray;
+    CGRect keyboardBoundsview;
    // NSString *askerchannel;
     //NSString *mentorchannel;
     //NSString * timestamp;
@@ -25,5 +26,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tblconversation;
 @property (weak, nonatomic) IBOutlet UILabel *lblIsTyping;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tblchatcontsant;
 
 @end

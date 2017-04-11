@@ -15,4 +15,5 @@
 -(void)askQuestion:(NSString*)Qustion andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel andTask:(NSString*)taskName callback:(void (^)(bool send))callback;
 -(void)getChatList:(NSString*)taskName andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel callback:(void (^)(NSArray* Responsearray))callback;
 -(void)giveAnswerbyid:(NSString*)Qustionid andAnswer:(NSString*)answer andTask:(NSString*)taskName callback:(void (^)(bool send))callback;
+-(void)checkdata:(NSString*)Qustionid  callback:(void (^)(NSAttributedString *send))callback;
 @end

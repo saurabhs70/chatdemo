@@ -33,7 +33,7 @@
         
         if (error) {
             NSLog(@"Error: %@", error);
-            callback (nil);
+            callback ([[SYCChatModule sharedInstance]readToSycChat:@"MENTOR-LIST"]);
         } else {
             NSLog(@"%@ %@", response, responseObject);
             NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -210,7 +210,22 @@
         
         if (error) {
             NSLog(@"Error: %@", error);
-            callback (nil);
+          //  callback (nil);
+            NSArray *gg=[[SYCChatModule sharedInstance]readToSycChat:filepath];
+            NSMutableArray *listarray=[[NSMutableArray alloc]init];
+            for (NSDictionary *dict in gg) {
+                SYCChatConversation *chat=[[SYCChatConversation alloc]initWithSycConverstion:[dict objectForKey:@"asker_id"] andMentorId:[dict objectForKey:@"mentor_id"] andQuestionId:[dict objectForKey:@"qusetion_id"] andquestion:[dict objectForKey:@"question"] andquestimestamp:[dict objectForKey:@"qusetion_time"] andAnswerlist:[dict objectForKey:@"answer"]];
+                [listarray addObject:chat];
+                
+            }
+            if (askerChannel.length && mentorChannel.length )
+            {
+                NSArray *arrfinal=      [[listarray reverseObjectEnumerator] allObjects];
+                callback (arrfinal);
+            }
+            else
+                callback (listarray);
+            
         } else {
             NSLog(@"%@ %@", response, responseObject);
             NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -302,5 +317,82 @@
             [mainarray addObject:[dd valueForKey:@"email"]];
     }
     return mainarray;
+}
+
+-(void)checkdata:(NSString*)Qustionid  callback:(void (^)(NSAttributedString *send))callback
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+   // NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
+ //   NSString *result = [answer stringByAddingPercentEncodingWithAllowedCharacters:set];
+    
+    //http://138.68.175.0/api/index.php?task=submitAnswerByEducatorMentor&question_id=4&answer=test%20data%20answer
+    
+    NSString *callurl=@"http://floovr.in/fapi/v2/get_product_details.php?p_id=4532";//[NSString stringWithFormat:@"%@?task=%@&question_id=%@&answer=%@",SYCBASEURL,taskName,Qustionid,result];
+    NSURL *URL = [NSURL URLWithString:callurl];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        
+        if (error) {
+            NSLog(@"Error: %@", error);
+            callback (nil);
+        } else {
+            NSLog(@"%@ %@", response, responseObject);
+            NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
+            NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
+
+            
+            if (data)
+            {
+                NSError* error;
+                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:kNilOptions
+                                                                       error:&error];
+                
+                
+                
+                if ([json valueForKey:@"content_data"])
+                {
+                    NSString *ss=[self convertHTML:[json valueForKey:@"content_data"]];
+                    NSAttributedString *vv=[[NSAttributedString alloc]initWithData:[[json valueForKey:@"content_data"] dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:nil error:nil];
+                    callback (vv);
+                }
+                else
+                    callback (nil);
+            }
+            else
+                callback (nil);
+            
+            
+            
+        }
+        
+    }];
+    [dataTask resume];
+    
+}
+-(NSString *)convertHTML:(NSString *)html {
+    
+    NSScanner *myScanner;
+    NSString *text = nil;
+    myScanner = [NSScanner scannerWithString:html];
+    
+    while ([myScanner isAtEnd] == NO) {
+        
+        [myScanner scanUpToString:@"<" intoString:NULL] ;
+        
+        [myScanner scanUpToString:@">" intoString:&text] ;
+        
+        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>", text] withString:@""];
+    }
+    //
+    html = [html stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    return html;
 }
 @end

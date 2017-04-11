@@ -18,11 +18,12 @@
 #define SYCCHANNELASKERPREFIX @"ASK_"
 #define SYCCHATDOC @"Chat"
 #define SYCCHATDOCDFORMAT @"json"
-#define SYCCHATHEARTBEAT 120
-#define SYCCHATHEARTBEATINTERVAL 30
+#define SYCCHATHEARTBEAT 5//120
+#define SYCCHATHEARTBEATINTERVAL 2
 #define SCREENWIDTH  [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT  [UIScreen mainScreen].bounds.size.height
 #define SYCOFFLINEERROR  @"Reciver Not Available!"
+#define SYCNOTFINDANSWER  @"Wait for answer!"
 #define SYCMESSAGESENDERROR  @"Message can't send!"
 //#define SYCMESSAGESENDERROR  @"Message can't send!"
 #define SYCOK  @"Ok"

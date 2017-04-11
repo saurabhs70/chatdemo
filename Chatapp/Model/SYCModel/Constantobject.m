@@ -32,12 +32,14 @@
 {
     if (mode.length) {
     [[NSUserDefaults standardUserDefaults] setObject:mode forKey:@"Modelogged"];
+         [[NSUserDefaults standardUserDefaults] setObject:logged forKey:@"Modeloggedchannel"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     }
     else
+    {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Modelogged"];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:logged forKey:@"Modeloggedchannel"];
+      [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Modeloggedchannel"];
+    }
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 -(NSString*)getlogged

@@ -52,28 +52,12 @@
     else {
         
         if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshaskermessasge" object:nil];
+           // [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshaskermessasge" object:nil];
+            [self performSelector:@selector(refreshcon)  withObject:nil afterDelay:0.8];
         else
         {
-           
-            
-            NSString *str=[[Constantobject sharedInstance]getloggedchannel];
-                [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:nil andMentorChannel:str callback:^(NSArray *send) {
-                    if (send) {
-                        NSDictionary* userInfo = @{@"total":send};
-                         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshmentormessasge" object:userInfo];
-
-//                        arrayofquestion=[[NSMutableArray alloc]init];
-//                        [arrayofquestion addObjectsFromArray:send];
-//                        // conversationarray=send;
-//                        [self.tblqusetion reloadData];
-//                         NSLog(@"raju  %lu",(unsigned long)arrayofquestion.count);
-                    }
-                    
-                }];
-            
-            
-        }
+            [self performSelector:@selector(refreshConvMentor)  withObject:nil afterDelay:0.8];
+       }
 //        NSDictionary *DD=[message.data valueForKey:@"message"];
 //        NSString *RECIVER=[message.data valueForKey:@"channel"];
 //        NSLog(@"");
@@ -99,7 +83,29 @@
         // Message has been received on channel stored in message.data.channel.
     }
 }
-
+-(void)refreshConvMentor
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshmessageforaskermentor" object:nil];
+}
+-(void)refreshcon
+{
+                NSString *str=[[Constantobject sharedInstance]getloggedchannel];
+    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:str andMentorChannel:nil callback:^(NSArray *send) {
+                        if (send) {
+                            NSDictionary* userInfo = @{@"total":send};
+                             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshaskermessasge" object:userInfo];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshmessageforaskermentor" object:nil];
+                            
+    
+    //                        arrayofquestion=[[NSMutableArray alloc]init];
+    //                        [arrayofquestion addObjectsFromArray:send];
+    //                        // conversationarray=send;
+    //                        [self.tblqusetion reloadData];
+    //                         NSLog(@"raju  %lu",(unsigned long)arrayofquestion.count);
+                        }
+                        
+                    }];
+}
 - (void)client:(PubNub *)client didReceiveStatus:(PNStatus *)status {
     
     if (status.operation == PNSubscribeOperation) {
@@ -308,6 +314,8 @@
            // NSLog(@"%@",result.data.totalChannels);
         }
         else {
+            [Constantobject sharedInstance].onlineMentorList=nil;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"Presencestatuschange" object:nil];
            // callback(nil);
             /**
              Handle presence audit error. Check 'category' property

@@ -34,6 +34,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isTypingUpdate:) name:@"isTypingUpdate" object:nil];
     [_lblIsTyping bringSubviewToFront:_tblconversation];
   [self loadchat];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadchat) name:@"refreshmessageforaskermentor" object:nil];
+    
+
+
     // Do any additional setup after loading the view.
 }
 -(void)keyboaradstyatus
@@ -183,7 +187,7 @@
     
     // Need to translate the bounds to account for rotation.
     keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
-    
+    keyboardBoundsview=keyboardBounds;
     // get a rect for the textView frame
     CGRect containerFrame = chatview.frame;
     containerFrame.origin.y = self.view.bounds.size.height - (keyboardBounds.size.height + containerFrame.size.height);
@@ -199,6 +203,12 @@
     
     // commit animations
     [UIView commitAnimations];
+    if (_tblconversation.contentSize.height > _tblconversation.frame.size.height)
+    {
+        CGPoint offset = CGPointMake(0, _tblconversation.contentSize.height -     _tblconversation.frame.size.height);
+        [_tblconversation setContentOffset:offset animated:YES];
+    }
+    _tblchatcontsant.constant=(SCREENHEIGHT-keyboardBounds.size.height)+containerFrame.size.height;
 }
 
 -(void) keyboardWillHide:(NSNotification *)note{
@@ -220,7 +230,7 @@
     
     // commit animations
     [UIView commitAnimations];
-    
+    _tblchatcontsant.constant=87;//(SCREENHEIGHT-keyboardBounds.size.height)+containerFrame.size.height;
   
 }
 
@@ -259,11 +269,17 @@
     if (growingTextView.text.length==1) {
         [self settyping:@"true"];
     }
+//    else if (growingTextView.text.length>1)
+//    {
+//        if (_lblIsTyping.hidden==YES) {
+//            [self settyping:@"true"];
+//        }
+//    }
     else if (growingTextView.text.length==0)
     {
         [self settyping:@"false"];
     }
-        
+        _tblchatcontsant.constant=(SCREENHEIGHT-keyboardBoundsview.size.height)+growingTextView.frame.size.height;
 }
 
 -(void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView
@@ -281,9 +297,27 @@
 //    [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:@"true" anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
     
     
-    
+    if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
+        
+        if (conversationarray.count) {
+          SYCChatConversation *conversationchannel2=conversationarray.lastObject;
+            if (conversationchannel2.answer.count) {
+                [self postMessage];
+            }
+            else
+             [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCNOTFINDANSWER];
+        }
+        else
+            [self postMessage];
+    }
+    else
+        [self postMessage];
+   
+}
+-(void)postMessage
+{
     if (textView.text.length) {
-//
+        //
         [[ChatConfig sharedInstance]hearPerticularChannel:_reciver callback:^(bool sent) {
             
             if (sent) {
@@ -296,11 +330,10 @@
             }
         }];
         
-   
+        
         
     }
 }
-
 /*
 #pragma mark - Navigation
 

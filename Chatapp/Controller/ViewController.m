@@ -17,10 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 _loggedtext.text=[NSString stringWithFormat:@"%@%@",SYCCHANNELMENTORPREFIX,@"dautor@gmail.com"];//
-// _loggedtext.text=[NSString stringWithFormat:@"%@%@",SYCCHANNELASKERPREFIX,@"bill@gmail.com"]; //@"dautor@gmail.com";//@"my@gmail.com";//@"my.gmail.com";//mentor@gmail.com//  "dautor@gmail.com" "email@email.com"
+//_loggedtext.text=[NSString stringWithFormat:@"%@%@",SYCCHANNELASKERPREFIX,@"bill@gmail.com"]; //@"dautor@gmail.com";//@"my@gmail.com";//@"my.gmail.com";//mentor@gmail.com//  "dautor@gmail.com" "email@email.com"
     // Do any additional setup after loading the view, typically from a nib.//@"dautor@gmail.com";//
-  
-    
+//    [[SYCRequestManager sharedInstance]checkdata:@"" callback:^(NSAttributedString *send) {
+//        [_lbltxt setAttributedText:send];
+//    }];
+      self.revealViewController.panGestureRecognizer.enabled=NO;
 }
 
 
@@ -72,6 +74,7 @@ _loggedtext.text=[NSString stringWithFormat:@"%@%@",SYCCHANNELMENTORPREFIX,@"dau
 }
 - (IBAction)btnmodeClicked:(id)sender
 {
+    //if ([_btnmode.titleLabel.text containsString:SYCCHANNELMENTORPREFIX])
     if ([_btnmode.titleLabel.text isEqualToString:SYCCHATMODEASKER])
         [_btnmode setTitle:SYCCHATMODEMENTOR forState:UIControlStateNormal];
         else

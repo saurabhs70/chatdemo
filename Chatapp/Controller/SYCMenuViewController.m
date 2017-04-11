@@ -16,8 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   NSArray *askerarray=[[NSArray alloc]initWithObjects:@"Chat",@"Mentor",nil];
-   NSArray *mentorarray=[[NSArray alloc]initWithObjects:@"Activity",nil];
+   NSArray *askerarray=[[NSArray alloc]initWithObjects:@"Chat",@"Mentor",@"Logout!",nil];
+   NSArray *mentorarray=[[NSArray alloc]initWithObjects:@"Activity",@"Logout!",nil];
     if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
     menuarray=askerarray;
     else
@@ -58,16 +58,30 @@ cell.textLabel.text=[menuarray objectAtIndex:indexPath.row];
             SYCChatConversationAsker *frontViewControllerlogged=(SYCChatConversationAsker*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCChatConversationAskerId"];
             Roottocontroller=frontViewControllerlogged;
         }
+      else  if (indexPath.row==1) {
+            
+            OnlineuserViewController *frontViewControllerlogged=(OnlineuserViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"OnlineuserViewControllerid"];
+            Roottocontroller=frontViewControllerlogged;
+        }
         else
         {
-        OnlineuserViewController *frontViewControllerlogged=(OnlineuserViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"OnlineuserViewControllerid"];
-        Roottocontroller=frontViewControllerlogged;
+            ViewController *frontViewControllerlogged=(ViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"ViewControllerId"];
+            Roottocontroller=frontViewControllerlogged;
+             [[Constantobject sharedInstance]setmodeoflooged:nil andstringforlogged:nil];
         }
     }
     else
     {
+         if (indexPath.row==0) {
        SYCAskerQusetionController *frontViewControllerlogged=(SYCAskerQusetionController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCAskerQusetionControllerId"];
     Roottocontroller=frontViewControllerlogged;
+             [[Constantobject sharedInstance]setmodeoflooged:nil andstringforlogged:nil];
+         }
+         else
+         {
+             ViewController *frontViewControllerlogged=(ViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"ViewControllerId"];
+             Roottocontroller=frontViewControllerlogged;
+         }
     
     }
     

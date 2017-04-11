@@ -20,7 +20,7 @@
    listmentor= [[SYCChatModule sharedInstance]readToSycChat:@"MENTOR-LIST"];
     // Do any additional setup after loading the view.
     [self setmenu];
-    [self askerrefresh];
+  [self askerrefresh];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Presencestatusmentor:) name:@"Presencestatuschange" object:nil];
    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(askerrefresh) name:@"refreshaskermessasge" object:nil];
      
