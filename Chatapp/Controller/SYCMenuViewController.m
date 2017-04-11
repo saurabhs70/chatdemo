@@ -68,6 +68,7 @@ cell.textLabel.text=[menuarray objectAtIndex:indexPath.row];
             ViewController *frontViewControllerlogged=(ViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"ViewControllerId"];
             Roottocontroller=frontViewControllerlogged;
              [[Constantobject sharedInstance]setmodeoflooged:nil andstringforlogged:nil];
+            [[SYCChatModule sharedInstance]removechatlist];
         }
     }
     else
@@ -75,12 +76,14 @@ cell.textLabel.text=[menuarray objectAtIndex:indexPath.row];
          if (indexPath.row==0) {
        SYCAskerQusetionController *frontViewControllerlogged=(SYCAskerQusetionController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCAskerQusetionControllerId"];
     Roottocontroller=frontViewControllerlogged;
-             [[Constantobject sharedInstance]setmodeoflooged:nil andstringforlogged:nil];
+          
          }
          else
          {
              ViewController *frontViewControllerlogged=(ViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"ViewControllerId"];
              Roottocontroller=frontViewControllerlogged;
+             [[SYCChatModule sharedInstance]removechatlist];
+             [[Constantobject sharedInstance]setmodeoflooged:nil andstringforlogged:nil];
          }
     
     }

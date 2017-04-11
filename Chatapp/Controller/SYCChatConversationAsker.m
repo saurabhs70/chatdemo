@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-   listmentor= [[SYCChatModule sharedInstance]readToSycChat:@"MENTOR-LIST"];
+   listmentor= [[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST];
     // Do any additional setup after loading the view.
     [self setmenu];
   [self askerrefresh];
