@@ -90,14 +90,14 @@
     SYCChatConversation *vv=[conversationarray objectAtIndex:indexPath.section];
     if (indexPath.row==0) {
         cell.lblsender.textColor=[UIColor redColor];
-        cell.lblsender.text=vv.qusetion;
+        cell.lblsender.text=vv.question;
     }
     else
     {
          cell.lblsender.textColor=[UIColor greenColor];
         int valtoans=(int)indexPath.row-1;
-        NSDictionary *artr=[vv.answer objectAtIndex:valtoans];
-        cell.lblsender.text=[artr valueForKey:@"answer"];//@"ll";//[vv.answer objectAtIndex:valtoans];//[dd valueForKey:@"message"];;
+        SYCChatConversationAnswer *artr=[vv.answer objectAtIndex:valtoans];
+        cell.lblsender.text=artr.answer;//[artr valueForKey:@"answer"];//@"ll";//[vv.answer objectAtIndex:valtoans];//[dd valueForKey:@"message"];;
     }
     
     

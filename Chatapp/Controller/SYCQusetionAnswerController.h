@@ -10,6 +10,7 @@
 #import "HPGrowingTextView.h"
 #import "SYCQACellTableViewCell.h"
 #import "SYCChatConversation.h"
+#import "SYCChatConversationAnswer.h"
 @interface SYCQusetionAnswerController : UIViewController<HPGrowingTextViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     UIView *chatview;

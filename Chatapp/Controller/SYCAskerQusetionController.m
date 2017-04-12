@@ -93,13 +93,13 @@
         cell = [[SYCAskerQustionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SYCStatusCellId"];
     }
     SYCChatConversation *vv=[arrayofquestion objectAtIndex:indexPath.row];
-    NSDictionary *dd=vv.answer.lastObject;
+    SYCChatConversationAnswer *dd=vv.answer.lastObject;
     if (dd)
         cell.lbltagforqa.text=@"Answered";
     else
         cell.lbltagforqa.text=@"new question";
-    cell.lblquestion.text=vv.qusetion;//[dd valueForKey:@"Asker_question"];
-    cell.lblanswer.text=[dd valueForKey:@"answer"];
+    cell.lblquestion.text=vv.question;//[dd valueForKey:@"Asker_question"];
+    cell.lblanswer.text=dd.answer;
     //cell.lbltagforqa.text=@"Answered";
     return cell;
     

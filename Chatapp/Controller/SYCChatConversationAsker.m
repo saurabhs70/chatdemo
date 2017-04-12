@@ -103,7 +103,7 @@
         cell.lblqastatus.text=@"Answered";
     else
         cell.lblquestion.text=@"new question";
-    cell.lblquestion.text=vv.qusetion;//[dd valueForKey:@"Asker_question"];
+    cell.lblquestion.text=vv.question;//[dd valueForKey:@"Asker_question"];
     cell.lblanswer.text=[dd valueForKey:@"answer"];
     if ([[[Constantobject sharedInstance]onlineMentorList] containsObject:vv.mentor_id] )
         cell.imgpresence.image=[UIImage imageNamed:@"online.png"];

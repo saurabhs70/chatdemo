@@ -7,16 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55DC821E7A3946A0D3B4FCBA /* libPods-Chatapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5FA85B401DF921A2B3BEA46 /* libPods-Chatapp.a */; };
 		A51C90201E96155C00A7FFED /* SYCChatConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = A51C901F1E96155C00A7FFED /* SYCChatConversation.m */; };
-		A52240521E8E1FC500383D22 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52240461E8E1FC500383D22 /* AFHTTPSessionManager.m */; };
-		A52240531E8E1FC500383D22 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52240491E8E1FC500383D22 /* AFNetworkReachabilityManager.m */; };
-		A52240541E8E1FC500383D22 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = A522404B1E8E1FC500383D22 /* AFSecurityPolicy.m */; };
-		A52240551E8E1FC500383D22 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = A522404D1E8E1FC500383D22 /* AFURLRequestSerialization.m */; };
-		A52240561E8E1FC500383D22 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = A522404F1E8E1FC500383D22 /* AFURLResponseSerialization.m */; };
-		A52240571E8E1FC500383D22 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52240511E8E1FC500383D22 /* AFURLSessionManager.m */; };
 		A522405A1E8E1FF500383D22 /* SYCRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52240591E8E1FF500383D22 /* SYCRequestManager.m */; };
 		A522405E1E8E6B2400383D22 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A522405D1E8E6B2400383D22 /* libsqlite3.tbd */; };
 		A52240631E8E6B5C00383D22 /* SYCDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A52240621E8E6B5C00383D22 /* SYCDataManager.m */; };
+		A52A99461E9E3306005AF495 /* SYCMentor.m in Sources */ = {isa = PBXBuildFile; fileRef = A52A99451E9E3306005AF495 /* SYCMentor.m */; };
+		A52A99491E9E4897005AF495 /* SYCChatConversationAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = A52A99481E9E4897005AF495 /* SYCChatConversationAnswer.m */; };
+		A52A994D1E9E4CB7005AF495 /* SYCMessageStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A52A994C1E9E4CB7005AF495 /* SYCMessageStatus.m */; };
 		A53C1AD61E8CE0650061E11D /* AllContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1ACF1E8CE0650061E11D /* AllContactViewController.m */; };
 		A53C1AD71E8CE0650061E11D /* IndividualchatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1AD11E8CE0650061E11D /* IndividualchatViewController.m */; };
 		A53C1AD81E8CE0650061E11D /* OnlineuserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A53C1AD31E8CE0650061E11D /* OnlineuserViewController.m */; };
@@ -98,26 +96,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		716D62D260DAE429C2391700 /* Pods-Chatapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chatapp/Pods-Chatapp.debug.xcconfig"; sourceTree = "<group>"; };
 		A51C901E1E96155C00A7FFED /* SYCChatConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCChatConversation.h; sourceTree = "<group>"; };
 		A51C901F1E96155C00A7FFED /* SYCChatConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCChatConversation.m; sourceTree = "<group>"; };
-		A52240451E8E1FC500383D22 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		A52240461E8E1FC500383D22 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		A52240471E8E1FC500383D22 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		A52240481E8E1FC500383D22 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		A52240491E8E1FC500383D22 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		A522404A1E8E1FC500383D22 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		A522404B1E8E1FC500383D22 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		A522404C1E8E1FC500383D22 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		A522404D1E8E1FC500383D22 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		A522404E1E8E1FC500383D22 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		A522404F1E8E1FC500383D22 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		A52240501E8E1FC500383D22 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		A52240511E8E1FC500383D22 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		A52240581E8E1FF500383D22 /* SYCRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCRequestManager.h; sourceTree = "<group>"; };
 		A52240591E8E1FF500383D22 /* SYCRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCRequestManager.m; sourceTree = "<group>"; };
 		A522405D1E8E6B2400383D22 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		A52240611E8E6B5C00383D22 /* SYCDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCDataManager.h; sourceTree = "<group>"; };
 		A52240621E8E6B5C00383D22 /* SYCDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCDataManager.m; sourceTree = "<group>"; };
+		A52A99441E9E3306005AF495 /* SYCMentor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCMentor.h; sourceTree = "<group>"; };
+		A52A99451E9E3306005AF495 /* SYCMentor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCMentor.m; sourceTree = "<group>"; };
+		A52A99471E9E4897005AF495 /* SYCChatConversationAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCChatConversationAnswer.h; sourceTree = "<group>"; };
+		A52A99481E9E4897005AF495 /* SYCChatConversationAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCChatConversationAnswer.m; sourceTree = "<group>"; };
+		A52A994B1E9E4CB7005AF495 /* SYCMessageStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCMessageStatus.h; sourceTree = "<group>"; };
+		A52A994C1E9E4CB7005AF495 /* SYCMessageStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCMessageStatus.m; sourceTree = "<group>"; };
 		A53C1AC11E8CDF090061E11D /* SYC.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYC.pch; sourceTree = "<group>"; };
 		A53C1AC21E8CDF6E0061E11D /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		A53C1ACE1E8CE0650061E11D /* AllContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllContactViewController.h; sourceTree = "<group>"; };
@@ -225,6 +217,8 @@
 		A5DFB49B1E977A8800A6E3AE /* UIView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCache.m"; sourceTree = "<group>"; };
 		A5DFB49C1E977A8800A6E3AE /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A5DFB49D1E977A8800A6E3AE /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		DF3874C079D3A6062F397C13 /* Pods-Chatapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chatapp/Pods-Chatapp.release.xcconfig"; sourceTree = "<group>"; };
+		E5FA85B401DF921A2B3BEA46 /* libPods-Chatapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Chatapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +230,7 @@
 				A56DF0451E2CD50600CE97C7 /* Contacts.framework in Frameworks */,
 				A570ECDC1E27A660001BA181 /* PubNub.framework in Frameworks */,
 				A570ECDB1E27A61B001BA181 /* PubNub.framework in Frameworks */,
+				55DC821E7A3946A0D3B4FCBA /* libPods-Chatapp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,26 +246,6 @@
 			path = SYCManager;
 			sourceTree = "<group>";
 		};
-		A52240441E8E1FC500383D22 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				A52240451E8E1FC500383D22 /* AFHTTPSessionManager.h */,
-				A52240461E8E1FC500383D22 /* AFHTTPSessionManager.m */,
-				A52240471E8E1FC500383D22 /* AFNetworking.h */,
-				A52240481E8E1FC500383D22 /* AFNetworkReachabilityManager.h */,
-				A52240491E8E1FC500383D22 /* AFNetworkReachabilityManager.m */,
-				A522404A1E8E1FC500383D22 /* AFSecurityPolicy.h */,
-				A522404B1E8E1FC500383D22 /* AFSecurityPolicy.m */,
-				A522404C1E8E1FC500383D22 /* AFURLRequestSerialization.h */,
-				A522404D1E8E1FC500383D22 /* AFURLRequestSerialization.m */,
-				A522404E1E8E1FC500383D22 /* AFURLResponseSerialization.h */,
-				A522404F1E8E1FC500383D22 /* AFURLResponseSerialization.m */,
-				A52240501E8E1FC500383D22 /* AFURLSessionManager.h */,
-				A52240511E8E1FC500383D22 /* AFURLSessionManager.m */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
 		A52240601E8E6B4700383D22 /* SYCChatManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +253,25 @@
 				A52240621E8E6B5C00383D22 /* SYCDataManager.m */,
 			);
 			path = SYCChatManager;
+			sourceTree = "<group>";
+		};
+		A52A99431E9E32EA005AF495 /* SYCMENTORMODULE */ = {
+			isa = PBXGroup;
+			children = (
+				A52A99441E9E3306005AF495 /* SYCMentor.h */,
+				A52A99451E9E3306005AF495 /* SYCMentor.m */,
+			);
+			path = SYCMENTORMODULE;
+			sourceTree = "<group>";
+		};
+		A52A994A1E9E4C9F005AF495 /* SYCMessageStatus */ = {
+			isa = PBXGroup;
+			children = (
+				A52A994B1E9E4CB7005AF495 /* SYCMessageStatus.h */,
+				A52A994C1E9E4CB7005AF495 /* SYCMessageStatus.m */,
+			);
+			name = SYCMessageStatus;
+			path = SYCMENTORMODULE/SYCMessageStatus;
 			sourceTree = "<group>";
 		};
 		A53C1AC01E8CDED30061E11D /* Utilities */ = {
@@ -293,6 +287,8 @@
 		A53C1AC41E8CDFA10061E11D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A52A994A1E9E4C9F005AF495 /* SYCMessageStatus */,
+				A52A99431E9E32EA005AF495 /* SYCMENTORMODULE */,
 				A596D0681E94E565002D01CB /* SYCChatModuleManager */,
 				A52240601E8E6B4700383D22 /* SYCChatManager */,
 				A52240431E8E1FAF00383D22 /* SYCManager */,
@@ -417,6 +413,7 @@
 			children = (
 				A522405D1E8E6B2400383D22 /* libsqlite3.tbd */,
 				A56DF0441E2CD50600CE97C7 /* Contacts.framework */,
+				E5FA85B401DF921A2B3BEA46 /* libPods-Chatapp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -427,6 +424,7 @@
 				A570ECC11E27A5FC001BA181 /* Chatapp */,
 				A570ECC01E27A5FC001BA181 /* Products */,
 				A56DF0431E2CD50600CE97C7 /* Frameworks */,
+				DD2AE6CBEAADA65455B9C34E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -472,7 +470,6 @@
 				A53CE6B21E921507003F0214 /* Menu */,
 				A565256B1E8FBF8500BB676A /* Doc */,
 				A56525481E8F8A3300BB676A /* Chatfiled */,
-				A52240441E8E1FC500383D22 /* AFNetworking */,
 				A570ECDA1E27A61B001BA181 /* PubNub.framework */,
 			);
 			path = lib;
@@ -485,6 +482,8 @@
 				A596D06A1E94E57F002D01CB /* SYCChatModule.m */,
 				A51C901E1E96155C00A7FFED /* SYCChatConversation.h */,
 				A51C901F1E96155C00A7FFED /* SYCChatConversation.m */,
+				A52A99471E9E4897005AF495 /* SYCChatConversationAnswer.h */,
+				A52A99481E9E4897005AF495 /* SYCChatConversationAnswer.m */,
 			);
 			path = SYCChatModuleManager;
 			sourceTree = "<group>";
@@ -535,6 +534,15 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		DD2AE6CBEAADA65455B9C34E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				716D62D260DAE429C2391700 /* Pods-Chatapp.debug.xcconfig */,
+				DF3874C079D3A6062F397C13 /* Pods-Chatapp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -542,10 +550,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A570ECD61E27A5FD001BA181 /* Build configuration list for PBXNativeTarget "Chatapp" */;
 			buildPhases = (
+				191A69FF87D13C901E528AAA /* [CP] Check Pods Manifest.lock */,
 				A570ECBB1E27A5FC001BA181 /* Sources */,
 				A570ECBC1E27A5FC001BA181 /* Frameworks */,
 				A570ECBD1E27A5FC001BA181 /* Resources */,
 				A570ECDE1E27A660001BA181 /* Embed Frameworks */,
+				3F9D007F19C68BA573A61C71 /* [CP] Embed Pods Frameworks */,
+				8AD93DE857509B345C4BF14F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -619,11 +630,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		191A69FF87D13C901E528AAA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3F9D007F19C68BA573A61C71 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chatapp/Pods-Chatapp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8AD93DE857509B345C4BF14F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chatapp/Pods-Chatapp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A570ECBB1E27A5FC001BA181 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A52A99461E9E3306005AF495 /* SYCMentor.m in Sources */,
 				A53C1AE41E8CE0F60061E11D /* Constantobject.m in Sources */,
 				A5DFB46F1E97690500A6E3AE /* SYCChatConversationAsker.m in Sources */,
 				A522405A1E8E1FF500383D22 /* SYCRequestManager.m in Sources */,
@@ -632,12 +692,10 @@
 				A53C1AD91E8CE0650061E11D /* ViewController.m in Sources */,
 				A53C1AF91E8D1B7D0061E11D /* SYCAskerQustionCell.m in Sources */,
 				A52240631E8E6B5C00383D22 /* SYCDataManager.m in Sources */,
-				A52240521E8E1FC500383D22 /* AFHTTPSessionManager.m in Sources */,
 				A53C1AD81E8CE0650061E11D /* OnlineuserViewController.m in Sources */,
 				A565256A1E8F9CA200BB676A /* SYCQACellTableViewCell.m in Sources */,
 				A53CE6B81E921640003F0214 /* SYCMenuViewController.m in Sources */,
 				A5DFB4A51E977A8800A6E3AE /* SDWebImageDecoder.m in Sources */,
-				A52240531E8E1FC500383D22 /* AFNetworkReachabilityManager.m in Sources */,
 				A5DFB4A81E977A8800A6E3AE /* SDWebImageManager.m in Sources */,
 				A53C1AD71E8CE0650061E11D /* IndividualchatViewController.m in Sources */,
 				A53C1AFC1E8D1BC60061E11D /* SYCAskerQusetionController.m in Sources */,
@@ -645,12 +703,11 @@
 				A5DFB4AB1E977A8800A6E3AE /* UIImage+GIF.m in Sources */,
 				A53CE6B51E921507003F0214 /* SWRevealViewController.m in Sources */,
 				A565255A1E8F8A3300BB676A /* HPTextViewInternal.m in Sources */,
-				A52240571E8E1FC500383D22 /* AFURLSessionManager.m in Sources */,
 				A5DFB4A21E977A8800A6E3AE /* SDImageCache.m in Sources */,
 				A5DFB4A71E977A8800A6E3AE /* SDWebImageDownloaderOperation.m in Sources */,
 				A56525591E8F8A3300BB676A /* HPGrowingTextView.m in Sources */,
-				A52240561E8E1FC500383D22 /* AFURLResponseSerialization.m in Sources */,
 				A5DFB4AA1E977A8800A6E3AE /* UIButton+WebCache.m in Sources */,
+				A52A99491E9E4897005AF495 /* SYCChatConversationAnswer.m in Sources */,
 				A51C90201E96155C00A7FFED /* SYCChatConversation.m in Sources */,
 				A5DFB4A61E977A8800A6E3AE /* SDWebImageDownloader.m in Sources */,
 				A596D06B1E94E57F002D01CB /* SYCChatModule.m in Sources */,
@@ -661,14 +718,13 @@
 				A5DFB4AD1E977A8800A6E3AE /* UIImage+WebP.m in Sources */,
 				A5DFB4A01E977A8800A6E3AE /* NSData+ImageContentType.m in Sources */,
 				A5DFB4B01E977A8800A6E3AE /* UIView+WebCache.m in Sources */,
-				A52240551E8E1FC500383D22 /* AFURLRequestSerialization.m in Sources */,
 				A5DFB4A91E977A8800A6E3AE /* SDWebImagePrefetcher.m in Sources */,
 				A5DFB4AC1E977A8800A6E3AE /* UIImage+MultiFormat.m in Sources */,
 				A5DFB4A41E977A8800A6E3AE /* SDWebImageCompat.m in Sources */,
 				A56525471E8F866A00BB676A /* SYCQusetionAnswerController.m in Sources */,
 				A5DFB4A11E977A8800A6E3AE /* NSImage+WebCache.m in Sources */,
-				A52240541E8E1FC500383D22 /* AFSecurityPolicy.m in Sources */,
 				A5DFB4A31E977A8800A6E3AE /* SDImageCacheConfig.m in Sources */,
+				A52A994D1E9E4CB7005AF495 /* SYCMessageStatus.m in Sources */,
 				A570ECC41E27A5FC001BA181 /* main.m in Sources */,
 				A53C1ADD1E8CE09A0061E11D /* chatcellTableViewCell.m in Sources */,
 				A5DFB4AF1E977A8800A6E3AE /* UIImageView+WebCache.m in Sources */,
@@ -789,6 +845,7 @@
 		};
 		A570ECD71E27A5FD001BA181 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 716D62D260DAE429C2391700 /* Pods-Chatapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CBZE86VY6D;
@@ -797,6 +854,16 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				GCC_PREFIX_HEADER = Chatapp/Utilities/SYC.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)/**",
+					"\"${PODS_ROOT}/Headers/Public\"/**",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"/**",
+					"\"${PODS_ROOT}/Headers/Public/ISO8601DateFormatterValueTransformer\"/**",
+					"\"${PODS_ROOT}/Headers/Public/RKValueTransformers\"/**",
+					"\"${PODS_ROOT}/Headers/Public/RestKit\"/**",
+					"\"${PODS_ROOT}/Headers/Public/SOCKit\"/**",
+					"\"${PODS_ROOT}/Headers/Public/TransitionKit\"/**",
+				);
 				INFOPLIST_FILE = Chatapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -807,6 +874,7 @@
 		};
 		A570ECD81E27A5FD001BA181 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF3874C079D3A6062F397C13 /* Pods-Chatapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = CBZE86VY6D;
@@ -815,6 +883,16 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				GCC_PREFIX_HEADER = Chatapp/Utilities/SYC.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)/**",
+					"\"${PODS_ROOT}/Headers/Public\"/**",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"/**",
+					"\"${PODS_ROOT}/Headers/Public/ISO8601DateFormatterValueTransformer\"/**",
+					"\"${PODS_ROOT}/Headers/Public/RKValueTransformers\"/**",
+					"\"${PODS_ROOT}/Headers/Public/RestKit\"/**",
+					"\"${PODS_ROOT}/Headers/Public/SOCKit\"/**",
+					"\"${PODS_ROOT}/Headers/Public/TransitionKit\"/**",
+				);
 				INFOPLIST_FILE = Chatapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

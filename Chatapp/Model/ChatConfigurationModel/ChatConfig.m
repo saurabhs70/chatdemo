@@ -85,10 +85,28 @@
 }
 -(void)refreshConvMentor
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshmessageforaskermentor" object:nil];
+    
+    NSString *str=[[Constantobject sharedInstance]getloggedchannel];
+    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:nil andMentorChannel:str callback:^(NSArray *send) {
+        if (send) {
+            NSDictionary* userInfo = @{@"total":send};
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshmentormessasge" object:userInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshmessageforaskermentor" object:nil];
+            
+            
+            //                        arrayofquestion=[[NSMutableArray alloc]init];
+            //                        [arrayofquestion addObjectsFromArray:send];
+            //                        // conversationarray=send;
+            //                        [self.tblqusetion reloadData];
+            //                         NSLog(@"raju  %lu",(unsigned long)arrayofquestion.count);
+        }
+        
+    }];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"refreshmessageforaskermentor" object:nil];
 }
 -(void)refreshcon
 {
+    
                 NSString *str=[[Constantobject sharedInstance]getloggedchannel];
     [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:str andMentorChannel:nil callback:^(NSArray *send) {
                         if (send) {

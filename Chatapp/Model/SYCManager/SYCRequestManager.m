@@ -8,8 +8,21 @@
 //
 
 #import "SYCRequestManager.h"
-
+#import "SYCMentor.h"
+#import "SYCChatConversation.h"
+#import "SYCChatConversationAnswer.h"
+#import "SYCMessageStatus.h"
+@interface SYCRequestManager () {
+    RKObjectMapping* _firstobjOM;
+   RKObjectMapping* _chatConvOM;
+    RKObjectMapping* _chatConAnswervOM;
+    RKObjectMapping* _MessageStatusOM;
+}
+@end
 @implementation SYCRequestManager
+
+@synthesize MANAGERBASEURL;
+
 + (SYCRequestManager *)sharedInstance {
     static SYCRequestManager *__instance;
     static dispatch_once_t onceToken;
@@ -18,115 +31,150 @@
     });
     return __instance;
 }
+-(void)BaseManager{
+    NSURL *baseURL = [NSURL URLWithString:BASEURL];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    //[client setDefaultHeader:@"sessiontoken" value:[PLSetupDataManager sharedInstance].token];
+    // initialize RestKit
+    RKObjectManager *objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
+    [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"text/html"];
+    [RKObjectManager setSharedManager:objectManager];
+    //  [[PPRequestManager sharedInstance]myFullName:objectManager];
+    MANAGERBASEURL=objectManager;
+}
+- (void)ResponseObjectMappingConfiguration {
+    _firstobjOM = [RKObjectMapping mappingForClass:[SYCMentor class]];
+    [_firstobjOM addAttributeMappingsFromArray:@[@"work_experience_id",@"name",@"last_name",@"user_id",@"organization",@"role_name_organization",@"profile_pic_url",@"subject_id",@"subject_name",@"role_name",@"email"]];
+    
+     /*--------Question Answer Response---------*/
+    _chatConvOM=[RKObjectMapping mappingForClass:[SYCChatConversation class]];
+    [_chatConvOM  addAttributeMappingsFromArray:@[@"asker_id",@"mentor_id",@"qusetion_id",@"question",@"qusetion_timestamp"]];
+   
+    /*----------question's answer------------*/
+  //  SYCChatConversationAnswer
+  
+  _chatConAnswervOM=[RKObjectMapping mappingForClass:[SYCChatConversationAnswer class]];
+    [_chatConAnswervOM  addAttributeMappingsFromArray:@[@"answer",@"chat_time",]];
+    /*--------Merge for Answer to chat question-------*/
+    [_chatConvOM addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"answer" toKeyPath:@"answer" withMapping:_chatConAnswervOM]];
+    
+    
+    /*---------_MessageStatus--------*/
+    
+    _MessageStatusOM=[RKObjectMapping mappingForClass:[SYCMessageStatus class]];
+     [_MessageStatusOM  addAttributeMappingsFromArray:@[@"success",@"message",]];
+    
+}
 -(void)Requestforlist:(NSString*)name callback:(void (^)(NSArray *allchanels))callback
 {
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSURL *URL = [NSURL URLWithString:@"http://floovr.in/syc/index.php?task=getEducatorMentorList"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-    // request.HTTPBody = [xml dataUsingEncoding:NSUTF8StringEncoding];
-    //request.HTTPMethod = @"POST";
-    //[request setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"];
+    NSIndexSet *successStatusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:_firstobjOM method:RKRequestMethodGET pathPattern:nil keyPath:@"response.mentor_educator_list" statusCodes:successStatusCodes];
     
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+    //@"http://floovr.in/syc/index.php?task=getEducatorMentorList"];mentor_educator_list
+    
+    // NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASEURL,@"/wp_mpfeedback"]];
+   // NSString *strbase=@"http://138.68.175.0/api/index.php?task=getEducatorOrMentorListBySubjectId&subject_id=6&page_id=1";  response.mentor_or_educator_list
+    NSString *strbase=@"http://floovr.in/syc/index.php?task=getEducatorMentorList";
+    NSURL *url = [NSURL URLWithString:strbase];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"text/html"];
+    RKObjectRequestOperation *operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[responseDescriptor]];
+    
+    // NSMutableDictionary *parameters=[[NSMutableDictionary alloc]init];
+    //[parameters setObject:ObjectOrNull(methodname) forKey:@"task"];
+    
+    [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         
-        if (error) {
-            NSLog(@"Error: %@", error);
-            callback ([[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST]);
-        } else {
-            NSLog(@"%@ %@", response, responseObject);
-            NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
-            NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
-            
-            
-            if (data)
-            {
-                NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            NSArray *arr=[[jsonDict objectForKey:@"response"] objectForKey:@"mentor_educator_list"];
-                
-                NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:arr];
-         //  [self savejson:data];
-                [[SYCChatModule sharedInstance]writeToSycChat:data2 atFilePath:SYCONLINEDOCLIST];
-                
+        // parse the response---
+        //NSArray *myDic = [NSJSONSerialization JSONObjectWithData:operation.HTTPRequestOperation.responseData options:NSJSONReadingMutableLeaves error:nil];
+        
+       NSArray *list = mappingResult.array;
+        if (list.count) {
+            NSMutableArray *arr=[[NSMutableArray alloc]init];
+            for (SYCMentor *mentorobj in list) {
+                if ([mentorobj.role_name isEqualToString:SYCCHATMODEEDUCTOR])
+                    
+                mentorobj.loggedchannel=[NSString stringWithFormat:@"%@%@",SYCCHANNELEDUCATORPREFIX,mentorobj.email];
+                else
+                   mentorobj.loggedchannel=[NSString stringWithFormat:@"%@%@",SYCCHANNELMENTORPREFIX,mentorobj.email];
+                [arr addObject:mentorobj];
             }
-            callback ([[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST]);
-//
-//            }
-//            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-//            NSArray *arr=[[jsonDict valueForKey:@"response"] valueForKey:@"mentor_educator_list"];
-//            if (jsonDict) {
-//                NSMutableArray *mainarray=[[NSMutableArray alloc]init];
-//                for (NSDictionary *dd in arr) {
-//                    [mainarray addObject:[dd valueForKey:@"email"]];
-//                }
-            
-              //  callback (nil);//[self getjson]
-                //NSLog(@"%@",mainarray);
-                // NSLog(@"%@",jsonDict);
-        
-            
+            NSData *dataArray = [NSKeyedArchiver archivedDataWithRootObject:list];
+            [[SYCChatModule sharedInstance]writeToSycChat:dataArray atFilePath:SYCONLINEDOCLIST];
         }
+        callback ([[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST]);
+        //   Allsellerlist *gg=[arrlocation objectAtIndex:0];
+       //callback(list);
+        // NSLog(@"=======:%@",myDic);
+        //NSLog(@"MY email============ %@ ",[myDic objectForKey:@"Email"]);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+        callback(nil);
         
     }];
-    [dataTask resume];
+    [operation start];
+    
+
 
 }
 -(void)askQuestion:(NSString*)Qustion andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel andTask:(NSString*)taskName callback:(void (^)(bool send))callback
 {
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
     NSString *result = [Qustion stringByAddingPercentEncodingWithAllowedCharacters:set];
     NSString *callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&mentor_educator_channel_id=%@&question=%@",SYCBASEURL,taskName,askerChannel,mentorChannel,result];
     NSURL *URL = [NSURL URLWithString:callurl];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+ //   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
   
+   
+    NSIndexSet *successStatusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:_MessageStatusOM method:RKRequestMethodGET pathPattern:nil keyPath:@"response" statusCodes:successStatusCodes];
     
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+    //@"http://floovr.in/syc/index.php?task=getEducatorMentorList"];mentor_educator_list
+    
+    // NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASEURL,@"/wp_mpfeedback"]];
+    // NSString *strbase=@"http://138.68.175.0/api/index.php?task=getEducatorOrMentorListBySubjectId&subject_id=6&page_id=1";  response.mentor_or_educator_list
+    
+   // NSURL *url = [NSURL URLWithString:callurl];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"text/html"];
+    RKObjectRequestOperation *operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[responseDescriptor]];
+    
+    // NSMutableDictionary *parameters=[[NSMutableDictionary alloc]init];
+    //[parameters setObject:ObjectOrNull(methodname) forKey:@"task"];
+    
+    [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         
-        if (error) {
-            NSLog(@"Error: %@", error);
-            callback (nil);
-        } else {
-            NSLog(@"%@ %@", response, responseObject);
-            NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
-            NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
-            
-            
-            if (data)
-            {
-                NSError* error;
-                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                     options:kNilOptions
-                                                                       error:&error];
-                
-                if ([[[json valueForKey:@"response"]valueForKey:@"success"] isEqualToString:@"true"])
-                callback (YES);
-                else
-                    callback (false);
-            }
-            else
-                callback (nil);
-         
-            
-            
-        }
+        // parse the response---
+        //NSArray *myDic = [NSJSONSerialization JSONObjectWithData:operation.HTTPRequestOperation.responseData options:NSJSONReadingMutableLeaves error:nil];
+        
+        SYCMessageStatus *list = mappingResult.array.lastObject;
+        if ([list.success isEqualToString:@"true"])
+            callback(YES);
+        else
+            callback(NO);
+        //   callback ([[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST]);
+        //   Allsellerlist *gg=[arrlocation objectAtIndex:0];
+        //callback(list);
+        // NSLog(@"=======:%@",myDic);
+        //NSLog(@"MY email============ %@ ",[myDic objectForKey:@"Email"]);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+        callback(nil);
         
     }];
-    [dataTask resume];
+    [operation start];
+
+    
+    
     
 }
 
 -(void)giveAnswerbyid:(NSString*)Qustionid andAnswer:(NSString*)answer andTask:(NSString*)taskName callback:(void (^)(bool send))callback
 {
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+   
     
     NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
     NSString *result = [answer stringByAddingPercentEncodingWithAllowedCharacters:set];
@@ -135,49 +183,54 @@
 
     NSString *callurl=[NSString stringWithFormat:@"%@?task=%@&question_id=%@&answer=%@",SYCBASEURL,taskName,Qustionid,result];
     NSURL *URL = [NSURL URLWithString:callurl];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
     
+    NSIndexSet *successStatusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:_MessageStatusOM method:RKRequestMethodGET pathPattern:nil keyPath:@"response" statusCodes:successStatusCodes];
     
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+    //@"http://floovr.in/syc/index.php?task=getEducatorMentorList"];mentor_educator_list
+    
+    // NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASEURL,@"/wp_mpfeedback"]];
+    // NSString *strbase=@"http://138.68.175.0/api/index.php?task=getEducatorOrMentorListBySubjectId&subject_id=6&page_id=1";  response.mentor_or_educator_list
+    
+    // NSURL *url = [NSURL URLWithString:callurl];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"text/html"];
+    RKObjectRequestOperation *operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[responseDescriptor]];
+    
+    // NSMutableDictionary *parameters=[[NSMutableDictionary alloc]init];
+    //[parameters setObject:ObjectOrNull(methodname) forKey:@"task"];
+    
+    [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         
-        if (error) {
-            NSLog(@"Error: %@", error);
-            callback (nil);
-        } else {
-            NSLog(@"%@ %@", response, responseObject);
-            NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
-            NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
-            
-            
-            if (data)
-            {
-                NSError* error;
-                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                     options:kNilOptions
-                                                                       error:&error];
-                
-                if ([[[json valueForKey:@"response"]valueForKey:@"success"] isEqualToString:@"true"])
-                    callback (YES);
-                else
-                    callback (false);
-            }
-            else
-                callback (nil);
-            
-            
-            
-        }
+        // parse the response---
+        //NSArray *myDic = [NSJSONSerialization JSONObjectWithData:operation.HTTPRequestOperation.responseData options:NSJSONReadingMutableLeaves error:nil];
+        
+        SYCMessageStatus *list = mappingResult.array.lastObject;
+        if ([list.success isEqualToString:@"true"])
+            callback(YES);
+        else
+            callback(NO);
+        //   callback ([[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST]);
+        //   Allsellerlist *gg=[arrlocation objectAtIndex:0];
+        //callback(list);
+        // NSLog(@"=======:%@",myDic);
+        //NSLog(@"MY email============ %@ ",[myDic objectForKey:@"Email"]);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+        callback(nil);
         
     }];
-    [dataTask resume];
+    [operation start];
+    
+   
     
 }
 -(void)getChatList:(NSString*)taskName andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel callback:(void (^)(NSArray *Responsearray))callback
 {
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
    // http://floovr.in/syc/index.php?task=getQuestionAnswerChat&asker_channel_id=ASK_email1@email.com
     
@@ -200,75 +253,128 @@
         callurl=[NSString stringWithFormat:@"%@?task=%@&mentor_educator_channel_id=%@",SYCBASEURL,taskName,mentorChannel];
         filepath=mentorChannel;
     }
-    NSURL *URL = [NSURL URLWithString:callurl];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+  
     
     
+    NSIndexSet *successStatusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:_chatConvOM method:RKRequestMethodGET pathPattern:nil keyPath:@"response.response" statusCodes:successStatusCodes];
     
+    //@"http://floovr.in/syc/index.php?task=getEducatorMentorList"];mentor_educator_list
     
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+    // NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASEURL,@"/wp_mpfeedback"]];
+    // NSString *strbase=@"http://138.68.175.0/api/index.php?task=getEducatorOrMentorListBySubjectId&subject_id=6&page_id=1";  response.mentor_or_educator_list
+    
+    NSURL *url = [NSURL URLWithString:callurl];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"text/html"];
+    RKObjectRequestOperation *operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[responseDescriptor]];
+    
+    // NSMutableDictionary *parameters=[[NSMutableDictionary alloc]init];
+    //[parameters setObject:ObjectOrNull(methodname) forKey:@"task"];
+    
+    [operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         
-        if (error) {
-            NSLog(@"Error: %@", error);
-          //  callback (nil);
-            NSArray *gg=[[SYCChatModule sharedInstance]readToSycChat:filepath];
-            NSMutableArray *listarray=[[NSMutableArray alloc]init];
-            for (NSDictionary *dict in gg) {
-                SYCChatConversation *chat=[[SYCChatConversation alloc]initWithSycConverstion:[dict objectForKey:@"asker_id"] andMentorId:[dict objectForKey:@"mentor_id"] andQuestionId:[dict objectForKey:@"qusetion_id"] andquestion:[dict objectForKey:@"question"] andquestimestamp:[dict objectForKey:@"qusetion_time"] andAnswerlist:[dict objectForKey:@"answer"]];
-                [listarray addObject:chat];
-                
-            }
-            if (askerChannel.length && mentorChannel.length )
-            {
-                NSArray *arrfinal=      [[listarray reverseObjectEnumerator] allObjects];
-                callback (arrfinal);
-            }
-            else
-                callback (listarray);
-            
-        } else {
-            NSLog(@"%@ %@", response, responseObject);
-            NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
-            NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
-            
-            
-            if (data)
-            {
-                NSError* error;
-                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                     options:kNilOptions
-                                                                       error:&error];
-                NSArray *arr=[[json valueForKey:@"response"]valueForKey:@"response"];
-                
-                NSMutableArray *listarray=[[NSMutableArray alloc]init];
-                
-                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:arr];
-                [[SYCChatModule sharedInstance]writeToSycChat:data atFilePath:filepath];
-                NSArray *gg=[[SYCChatModule sharedInstance]readToSycChat:filepath];
-                NSLog(@"%lu shyam  %lu---%@",(unsigned long)gg.count,(unsigned long)arr.count,json_string);
-                for (NSDictionary *dict in gg) {
-                    SYCChatConversation *chat=[[SYCChatConversation alloc]initWithSycConverstion:[dict objectForKey:@"asker_id"] andMentorId:[dict objectForKey:@"mentor_id"] andQuestionId:[dict objectForKey:@"qusetion_id"] andquestion:[dict objectForKey:@"question"] andquestimestamp:[dict objectForKey:@"qusetion_time"] andAnswerlist:[dict objectForKey:@"answer"]];
-                    [listarray addObject:chat];
-                    
-                }
-                if (askerChannel.length && mentorChannel.length )
-                {
-          NSArray *arrfinal=      [[listarray reverseObjectEnumerator] allObjects];
-                callback (arrfinal);
-                }
-                else
-                callback (listarray);
-            }
-            else
-                callback (nil);
-            
-            
-            
+        // parse the response---
+        //NSArray *myDic = [NSJSONSerialization JSONObjectWithData:operation.HTTPRequestOperation.responseData options:NSJSONReadingMutableLeaves error:nil];
+        
+        NSArray *list = mappingResult.array;
+        if (list.count) {
+          NSData *dataArray = [NSKeyedArchiver archivedDataWithRootObject:list];
+            [[SYCChatModule sharedInstance]writeToSycChat:dataArray atFilePath:filepath];
         }
+        NSArray *gg=[[SYCChatModule sharedInstance]readToSycChat:filepath];
+        NSLog(@"%@",@"ff");
+        if (askerChannel.length && mentorChannel.length )
+                            {
+                     NSArray *arrfinal=      [[gg reverseObjectEnumerator] allObjects];
+                            callback (arrfinal);
+                            }
+                            else
+                            callback (gg);
+        
+     //   callback ([[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST]);
+        //   Allsellerlist *gg=[arrlocation objectAtIndex:0];
+        //callback(list);
+        // NSLog(@"=======:%@",myDic);
+        //NSLog(@"MY email============ %@ ",[myDic objectForKey:@"Email"]);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+        callback(nil);
         
     }];
-    [dataTask resume];
+    [operation start];
+    
+    
+    
+    
+    
+//    
+//    
+//    
+//    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+//        
+//        if (error) {
+//            NSLog(@"Error: %@", error);
+//          //  callback (nil);
+//            NSArray *gg=[[SYCChatModule sharedInstance]readToSycChat:filepath];
+//            NSMutableArray *listarray=[[NSMutableArray alloc]init];
+//            for (NSDictionary *dict in gg) {
+//                SYCChatConversation *chat=[[SYCChatConversation alloc]initWithSycConverstion:[dict objectForKey:@"asker_id"] andMentorId:[dict objectForKey:@"mentor_id"] andQuestionId:[dict objectForKey:@"qusetion_id"] andquestion:[dict objectForKey:@"question"] andquestimestamp:[dict objectForKey:@"qusetion_time"] andAnswerlist:[dict objectForKey:@"answer"]];
+//                [listarray addObject:chat];
+//                
+//            }
+//            if (askerChannel.length && mentorChannel.length )
+//            {
+//                NSArray *arrfinal=      [[listarray reverseObjectEnumerator] allObjects];
+//                callback (arrfinal);
+//            }
+//            else
+//                callback (listarray);
+//            
+//        } else {
+//            NSLog(@"%@ %@", response, responseObject);
+//            NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//            // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
+//            NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
+//            
+//            
+//            if (data)
+//            {
+//                NSError* error;
+//                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+//                                                                     options:kNilOptions
+//                                                                       error:&error];
+//                NSArray *arr=[[json valueForKey:@"response"]valueForKey:@"response"];
+//                
+//                NSMutableArray *listarray=[[NSMutableArray alloc]init];
+//                
+//                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:arr];
+//                [[SYCChatModule sharedInstance]writeToSycChat:data atFilePath:filepath];
+//                NSArray *gg=[[SYCChatModule sharedInstance]readToSycChat:filepath];
+//                NSLog(@"%lu shyam  %lu---%@",(unsigned long)gg.count,(unsigned long)arr.count,json_string);
+//                for (NSDictionary *dict in gg) {
+//                    SYCChatConversation *chat=[[SYCChatConversation alloc]initWithSycConverstion:[dict objectForKey:@"asker_id"] andMentorId:[dict objectForKey:@"mentor_id"] andQuestionId:[dict objectForKey:@"qusetion_id"] andquestion:[dict objectForKey:@"question"] andquestimestamp:[dict objectForKey:@"qusetion_time"] andAnswerlist:[dict objectForKey:@"answer"]];
+//                    [listarray addObject:chat];
+//                    
+//                }
+//                if (askerChannel.length && mentorChannel.length )
+//                {
+//          NSArray *arrfinal=      [[listarray reverseObjectEnumerator] allObjects];
+//                callback (arrfinal);
+//                }
+//                else
+//                callback (listarray);
+//            }
+//            else
+//                callback (nil);
+//            
+//            
+//            
+//        }
+//        
+//    }];
+//    [dataTask resume];
     
 }
 
@@ -321,59 +427,59 @@
 
 -(void)checkdata:(NSString*)Qustionid  callback:(void (^)(NSAttributedString *send))callback
 {
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-   // NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
- //   NSString *result = [answer stringByAddingPercentEncodingWithAllowedCharacters:set];
-    
-    //http://138.68.175.0/api/index.php?task=submitAnswerByEducatorMentor&question_id=4&answer=test%20data%20answer
-    
-    NSString *callurl=@"http://floovr.in/fapi/v2/get_product_details.php?p_id=4532";//[NSString stringWithFormat:@"%@?task=%@&question_id=%@&answer=%@",SYCBASEURL,taskName,Qustionid,result];
-    NSURL *URL = [NSURL URLWithString:callurl];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-    
-    
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        
-        if (error) {
-            NSLog(@"Error: %@", error);
-            callback (nil);
-        } else {
-            NSLog(@"%@ %@", response, responseObject);
-            NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-            // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
-            NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
-
-            
-            if (data)
-            {
-                NSError* error;
-                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
-                                                                     options:kNilOptions
-                                                                       error:&error];
-                
-                
-                
-                if ([json valueForKey:@"content_data"])
-                {
-                    NSString *ss=[self convertHTML:[json valueForKey:@"content_data"]];
-                    NSAttributedString *vv=[[NSAttributedString alloc]initWithData:[[json valueForKey:@"content_data"] dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:nil error:nil];
-                    callback (vv);
-                }
-                else
-                    callback (nil);
-            }
-            else
-                callback (nil);
-            
-            
-            
-        }
-        
-    }];
-    [dataTask resume];
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    
+//   // NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
+// //   NSString *result = [answer stringByAddingPercentEncodingWithAllowedCharacters:set];
+//    
+//    //http://138.68.175.0/api/index.php?task=submitAnswerByEducatorMentor&question_id=4&answer=test%20data%20answer
+//    
+//    NSString *callurl=@"http://floovr.in/fapi/v2/get_product_details.php?p_id=4532";//[NSString stringWithFormat:@"%@?task=%@&question_id=%@&answer=%@",SYCBASEURL,taskName,Qustionid,result];
+//    NSURL *URL = [NSURL URLWithString:callurl];
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+//    
+//    
+//    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+//        
+//        if (error) {
+//            NSLog(@"Error: %@", error);
+//            callback (nil);
+//        } else {
+//            NSLog(@"%@ %@", response, responseObject);
+//            NSString *json_string = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//            // NSString *newStr = [json_string substringWithRange:NSMakeRange(2, [json_string length]-2)];
+//            NSData* data = [json_string dataUsingEncoding:NSUTF8StringEncoding];
+//
+//            
+//            if (data)
+//            {
+//                NSError* error;
+//                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
+//                                                                     options:kNilOptions
+//                                                                       error:&error];
+//                
+//                
+//                
+//                if ([json valueForKey:@"content_data"])
+//                {
+//                    NSString *ss=[self convertHTML:[json valueForKey:@"content_data"]];
+//                    NSAttributedString *vv=[[NSAttributedString alloc]initWithData:[[json valueForKey:@"content_data"] dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInt:NSUTF8StringEncoding]} documentAttributes:nil error:nil];
+//                    callback (vv);
+//                }
+//                else
+//                    callback (nil);
+//            }
+//            else
+//                callback (nil);
+//            
+//            
+//            
+//        }
+//        
+//    }];
+//    [dataTask resume];
     
 }
 -(NSString *)convertHTML:(NSString *)html {

@@ -18,14 +18,14 @@
     [super viewDidLoad];
    // mentorPresencelist=[Constantobject sharedInstance].allMentorList;
    [[SYCRequestManager sharedInstance]Requestforlist:(nil) callback:^(NSArray *allchanels) {
-       NSMutableArray *arr=[[NSMutableArray alloc]init];
-       for (NSDictionary *mentorlist in allchanels) {
-           NSMutableDictionary *channel=[[NSMutableDictionary alloc]initWithDictionary:mentorlist];
-           NSString *channelname=[NSString stringWithFormat:@"%@%@",SYCCHANNELMENTORPREFIX,[channel objectForKey:@"email"]];
-           [channel setObject:channelname forKey:SYCCHANNELNAME];
-          [ arr addObject:channel];
-       }
-       mentorPresencelist=arr;
+//       NSMutableArray *arr=[[NSMutableArray alloc]init];
+//       for (NSDictionary *mentorlist in allchanels) {
+//           NSMutableDictionary *channel=[[NSMutableDictionary alloc]initWithDictionary:mentorlist];
+//           NSString *channelname=[NSString stringWithFormat:@"%@%@",SYCCHANNELMENTORPREFIX,[channel objectForKey:@"email"]];
+//           [channel setObject:channelname forKey:SYCCHANNELNAME];
+//          [ arr addObject:channel];
+//       }
+       mentorPresencelist=allchanels;
         [_tblonline reloadData];
    }];
     
@@ -59,16 +59,17 @@
     if (cell == nil) {
         cell = [[SYCStatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SYCStatusCellId"];
     }
-    NSString *channel=[[mentorPresencelist objectAtIndex:indexPath.row] objectForKey:SYCCHANNELNAME];
+  SYCMentor *mentor=  [mentorPresencelist objectAtIndex:indexPath.row];
+    NSString *channel=mentor.loggedchannel;//[[mentorPresencelist objectAtIndex:indexPath.row] objectForKey:SYCCHANNELNAME];
     if ([[Constantobject sharedInstance].onlineMentorList containsObject:channel])
         cell.statusicon.image=[UIImage imageNamed:@"online.png"];
     else
         cell.statusicon.image=[UIImage imageNamed:@"offline.png"];
-    cell.statuslbl.text=[NSString stringWithFormat:@"%@ %@",[[mentorPresencelist objectAtIndex:indexPath.row] objectForKey:@"name"],[[mentorPresencelist objectAtIndex:indexPath.row] objectForKey:@"last_name"]];//channel;//[mentorPresencelist objectAtIndex:indexPath.row];
+    cell.statuslbl.text=[NSString stringWithFormat:@"%@ %@",mentor.name,mentor.last_name];//channel;//[mentorPresencelist objectAtIndex:indexPath.row];
     
     cell.imgprofileicon.layer.cornerRadius = cell.imgprofileicon.frame.size.width / 2;
     cell.imgprofileicon.clipsToBounds = YES;
-    [ cell.imgprofileicon sd_setImageWithURL:[NSURL URLWithString:[[mentorPresencelist objectAtIndex:indexPath.row] objectForKey:@"profile_pic_url"] ]
+    [ cell.imgprofileicon sd_setImageWithURL:[NSURL URLWithString:mentor.profile_pic_url ]
                         placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
     return cell;
@@ -76,10 +77,11 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SYCQusetionAnswerController *vv=(SYCQusetionAnswerController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCQusetionAnswerControllerId"];
+    SYCMentor *mentor= [mentorPresencelist objectAtIndex:indexPath.row];
     //vv.reciver=[[mentorPresencelist lastObject]objectForKey:SYCCHANNELNAME];
     SYCChatConversation *chatcon;
    // if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
-        chatcon =[[SYCChatConversation alloc]initWithSycConverstion:[[Constantobject sharedInstance]getloggedchannel] andMentorId:[[mentorPresencelist lastObject]objectForKey:SYCCHANNELNAME]  andQuestionId:nil andquestion:nil andquestimestamp:nil andAnswerlist:nil];
+        chatcon =[[SYCChatConversation alloc]initWithSycConverstion:[[Constantobject sharedInstance]getloggedchannel] andMentorId:mentor.loggedchannel  andQuestionId:nil andquestion:nil andquestimestamp:nil andAnswerlist:nil];
     
     
     vv.conversationchannel=chatcon;
