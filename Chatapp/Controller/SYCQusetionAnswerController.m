@@ -36,12 +36,22 @@
   [self loadchat];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadchat) name:@"refreshmessageforaskermentor" object:nil];
     
-
+   checktypingstatus= [NSTimer scheduledTimerWithTimeInterval: 2.0 target: self
+                                   selector: @selector(checkingTypingstatus) userInfo: nil repeats: YES];
 
     // Do any additional setup after loading the view.
 }
+-(void)checkingTypingstatus
+{
+     NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];
+    [[ChatConfig sharedInstance]hearPerticularChannelforTyping:conversationchahhel anduuid:_reciver callback:^(bool sent) {
+        
+    }];
+}
 -(void)keyboaradstyatus
 {
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(keyPressed:) name: UITextFieldTextDidChangeNotification object: nil];
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -51,6 +61,10 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+}
+-(void) keyPressed: (NSNotification*) notification
+{
+    NSLog(@"%@", [[notification object]text]);
 }
 //conversationarray
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -348,6 +362,7 @@
     [self settyping:@"false"];
     NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];
     [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
+    [checktypingstatus invalidate];
 }
 -(void)isTypingUpdate:(NSNotification *)anote
 {

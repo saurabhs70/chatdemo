@@ -17,6 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
     [[Constantobject sharedInstance]allocInit];
     [[SYCRequestManager sharedInstance]ResponseObjectMappingConfiguration];
   [[SYCDataManager sharedInstance]createDB];

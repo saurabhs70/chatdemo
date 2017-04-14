@@ -346,6 +346,32 @@
         }
     }];
 }
+-(void)hearPerticularChannelforTyping:(NSString*)channel anduuid:(NSString*)uuidfortyping callback:(void (^)(bool sent))callback
+{
+    [self.client stateForUUID:uuidfortyping onChannel:channel
+               withCompletion:^(PNChannelClientStateResult *result, PNErrorStatus *status) {
+                   
+                   if (!status) {
+                       NSDictionary *dd=  result.data.state;
+                       [self setTypingStatus:[dd valueForKey:@"isTyping"] Andby:uuidfortyping];
+                       
+                       NSLog(@"");
+                       // Handle downloaded state information using: result.data.state
+                   }
+                   else{
+                     
+                       /**
+                        Handle client state audit error. Check 'category' property
+                        to find out possible reason because of which request did fail.
+                        Review 'errorData' property (which has PNErrorData data type) of status
+                        object to get additional information about issue.
+                        
+                        Request can be resent using: [status retry];
+                        */
+                   }
+               }];
+}
+
 -(void)hearPerticularChannel:(NSString*)channel callback:(void (^)(bool sent))callback
 {
     [self.client hereNowForChannel: channel withVerbosity:PNHereNowUUID

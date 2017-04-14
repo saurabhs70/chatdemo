@@ -18,6 +18,7 @@
     NSString *val;
     NSArray *conversationarray;
     CGRect keyboardBoundsview;
+    NSTimer *checktypingstatus;
    // NSString *askerchannel;
     //NSString *mentorchannel;
     //NSString * timestamp;

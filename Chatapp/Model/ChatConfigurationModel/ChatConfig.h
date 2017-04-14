@@ -25,4 +25,5 @@
 -(void)addmorechannel:(NSString*)channelname;
 -(void)updatestatus:(NSString*)key andvalue:(NSString*)value anduuid:(NSString*)uuid andchannel:(NSString*)chhhanel;
 -(void)hearPerticularChannel:(NSString*)channel callback:(void (^)(bool sent))callback;
+-(void)hearPerticularChannelforTyping:(NSString*)channel anduuid:(NSString*)uuidfortyping callback:(void (^)(bool sent))callback;
 @end
