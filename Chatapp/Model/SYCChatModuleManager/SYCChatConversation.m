@@ -10,7 +10,7 @@
 
 @implementation SYCChatConversation
 @synthesize asker_id,mentor_id,qusetion_id,answer,qusetion_time,question;
--(id)initWithSycConverstion:(NSString*)askerId andMentorId:(NSString*)mentorId andQuestionId:(NSString*)questionId andquestion:(NSString*)questiontitle andquestimestamp:(NSString*)timesamp andAnswerlist:(NSArray*)Answerlist
+-(id)initWithSycConverstion:(NSString*)askerId andMentorId:(NSString*)mentorId andQuestionId:(NSString*)questionId andquestion:(NSString*)questiontitle andquestimestamp:(NSString*)timesamp andAnswerlist:(NSString*)Answerlist
 {
     self=[super init];
     if (self) {

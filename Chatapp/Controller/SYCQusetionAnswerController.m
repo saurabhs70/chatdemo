@@ -70,11 +70,15 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
    return conversationarray.count;
+  //  return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableview numberOfRowsInSection:(NSInteger)section
 {
     SYCChatConversation *vv=[conversationarray objectAtIndex:section];
-    return vv.answer.count+1;//chatmessage.count;
+    if(vv.answer.length)
+        return 2;
+    else
+        return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,15 +107,16 @@
     //    cell.lblsender.text=[dd valueForKey:@"message"];//[onlineuser objectAtIndex:indexPath.row];//[NSString stringWithFormat:@""];//
     SYCChatConversation *vv=[conversationarray objectAtIndex:indexPath.section];
     if (indexPath.row==0) {
+    
         cell.lblsender.textColor=[UIColor redColor];
         cell.lblsender.text=vv.question;
     }
     else
     {
          cell.lblsender.textColor=[UIColor greenColor];
-        int valtoans=(int)indexPath.row-1;
-        SYCChatConversationAnswer *artr=[vv.answer objectAtIndex:valtoans];
-        cell.lblsender.text=artr.answer;//[artr valueForKey:@"answer"];//@"ll";//[vv.answer objectAtIndex:valtoans];//[dd valueForKey:@"message"];;
+       // int valtoans=(int)indexPath.row-1;
+       // SYCChatConversationAnswer *artr=[vv.answer objectAtIndex:valtoans];
+        cell.lblsender.text=vv.answer;//[artr valueForKey:@"answer"];//@"ll";//[vv.answer objectAtIndex:valtoans];//[dd valueForKey:@"message"];;
     }
     
     
@@ -361,7 +366,7 @@ if(comparetime==7)
         
         if (conversationarray.count) {
           SYCChatConversation *conversationchannel2=conversationarray.lastObject;
-            if (conversationchannel2.answer.count) {
+            if (conversationchannel2.answer.length) {
                 [self postMessage];
             }
             else

@@ -98,7 +98,7 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"email endswith %@",[str objectAtIndex:1]];
     NSArray *filteredArray = [listmentor filteredArrayUsingPredicate:predicate];
     
-    NSDictionary *dd=vv.answer.lastObject;
+    NSString *dd=vv.answer;
     if (dd)
         cell.lblqastatus.text=@"Answered";
     else

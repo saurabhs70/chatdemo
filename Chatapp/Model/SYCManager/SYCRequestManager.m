@@ -48,7 +48,7 @@
     
      /*--------Question Answer Response---------*/
     _chatConvOM=[RKObjectMapping mappingForClass:[SYCChatConversation class]];
-    [_chatConvOM  addAttributeMappingsFromArray:@[@"asker_id",@"mentor_id",@"qusetion_id",@"question",@"qusetion_timestamp"]];
+    [_chatConvOM  addAttributeMappingsFromArray:@[@"asker_id",@"mentor_id",@"qusetion_id",@"question",@"qusetion_timestamp",@"answer"]];
    
     /*----------question's answer------------*/
   //  SYCChatConversationAnswer
