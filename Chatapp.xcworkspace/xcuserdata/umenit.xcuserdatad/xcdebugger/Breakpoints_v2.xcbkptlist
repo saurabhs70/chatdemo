@@ -278,7 +278,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Model/SYCManager/SYCRequestManager.m"
@@ -560,22 +560,6 @@
             startingLineNumber = "67"
             endingLineNumber = "67"
             landmarkName = "-keyPressed:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chatapp/Model/ChatConfigurationModel/ChatConfig.m"
-            timestampString = "514201381.174852"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
-            landmarkName = "-hereAllChannels"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -873,22 +857,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Chatapp/Model/ChatConfigurationModel/ChatConfig.m"
-            timestampString = "515592426.849249"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
-            landmarkName = "-hereAllChannels"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Chatapp/AppDelegate.m"
             timestampString = "515593772.873464"
             startingColumnNumber = "9223372036854775807"
@@ -982,7 +950,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Controller/SYCQusetionAnswerController.m"
@@ -998,27 +966,27 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Controller/SYCQusetionAnswerController.m"
-            timestampString = "515761219.038293"
+            timestampString = "515763459.487405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
             landmarkName = "-sendMessage"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__42-[SYCQusetionAnswerController sendMessage]_block_invoke.308"
                   moduleName = "Chatapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/umenit/Desktop/Chatapp-1/Chatapp/Controller/SYCQusetionAnswerController.m"
-                  timestampString = "515761674.614048"
+                  timestampString = "515762493.54328"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "493"
@@ -1026,14 +994,14 @@
                   offsetFromSymbolStart = "70">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__42-[SYCQusetionAnswerController sendMessage]_block_invoke_2.309"
                   moduleName = "Chatapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/umenit/Desktop/Chatapp-1/Chatapp/Controller/SYCQusetionAnswerController.m"
-                  timestampString = "515761674.618288"
+                  timestampString = "515762493.545623"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "493"
@@ -1142,15 +1110,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Controller/SYCQusetionAnswerController.m"
-            timestampString = "515761219.038293"
+            timestampString = "515763459.487405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "495"
-            endingLineNumber = "495"
+            startingLineNumber = "497"
+            endingLineNumber = "497"
             landmarkName = "-sendMessage"
             landmarkType = "7">
          </BreakpointContent>
@@ -1158,7 +1126,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Model/SYCManager/SYCRequestManager.m"
@@ -1190,7 +1158,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Model/SYCManager/SYCRequestManager.m"
@@ -1200,6 +1168,38 @@
             startingLineNumber = "474"
             endingLineNumber = "474"
             landmarkName = "-getChatListforquestionanswer:andAskerChannel:andMentorChannel:andquestion:andlistanswer:anduser_id:callback:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chatapp/Model/SYCManager/SYCRequestManager.m"
+            timestampString = "515762623.125654"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "-giveAnswerbyid:andAnswer:andTask:callback:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chatapp/Controller/SYCAskerQusetionController.m"
+            timestampString = "515764964.181712"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

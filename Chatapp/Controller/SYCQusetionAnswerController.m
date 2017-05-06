@@ -222,12 +222,12 @@
     
     // commit animations
     [UIView commitAnimations];
-    if (_tblconversation.contentSize.height > _tblconversation.frame.size.height)
-    {
-        CGPoint offset = CGPointMake(0, _tblconversation.contentSize.height -     _tblconversation.frame.size.height);
-        [_tblconversation setContentOffset:offset animated:YES];
-    }
-    _tblchatcontsant.constant=(SCREENHEIGHT-keyboardBounds.size.height)+containerFrame.size.height;
+//    if (_tblconversation.contentSize.height > _tblconversation.frame.size.height)
+//    {
+//        CGPoint offset = CGPointMake(0, _tblconversation.contentSize.height -     _tblconversation.frame.size.height);
+//        [_tblconversation setContentOffset:offset animated:YES];
+//    }
+//    _tblchatcontsant.constant=(SCREENHEIGHT-keyboardBounds.size.height)+containerFrame.size.height;
 }
 
 -(void) keyboardWillHide:(NSNotification *)note{
@@ -249,18 +249,18 @@
     
     // commit animations
     [UIView commitAnimations];
-    _tblchatcontsant.constant=87;//(SCREENHEIGHT-keyboardBounds.size.height)+containerFrame.size.height;
+  //  _tblchatcontsant.constant=87;//(SCREENHEIGHT-keyboardBounds.size.height)+containerFrame.size.height;
   
 }
 
 - (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height
 {
-    float diff = (growingTextView.frame.size.height - height);
-    
-    CGRect r = chatview.frame;
-    r.size.height -= diff;
-    r.origin.y += diff;
-    chatview.frame = r;
+//    float diff = (growingTextView.frame.size.height - height);
+//    
+//    CGRect r = chatview.frame;
+//    r.size.height -= diff;
+//    r.origin.y += diff;
+//    chatview.frame = r;
 }
 
 -(void)growingTextViewDidBeginEditing:(HPGrowingTextView *)growingTextView
@@ -344,7 +344,7 @@ if(comparetime==7)
 //        }
 //    }
     
-        _tblchatcontsant.constant=(SCREENHEIGHT-keyboardBoundsview.size.height)+growingTextView.frame.size.height;
+     //   _tblchatcontsant.constant=(SCREENHEIGHT-keyboardBoundsview.size.height)+growingTextView.frame.size.height;
 }
 
 -(void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView
@@ -467,7 +467,8 @@ if(comparetime==7)
                     
                     
                     [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
-                        
+                        conversationarray=Responsearray;
+                        [self.tblconversation reloadData];
                          textView.text=@"";
                     }];
                     
@@ -491,7 +492,8 @@ if(comparetime==7)
 //                        }];
                         
                         [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id andquestion:nil andlistanswer:textView.text anduser_id:@"" callback:^(NSArray *Responsearray) {
-                            
+                            conversationarray=Responsearray;
+                            [self.tblconversation reloadData];
                              textView.text=@"";
                         }];
                     }

@@ -2878,7 +2878,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Controller/SYCQusetionAnswerController.m"
-            timestampString = "515761219.038293"
+            timestampString = "515763459.487405"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "539"
+            endingLineNumber = "539"
+            landmarkName = "-loadchat"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chatapp/Controller/SYCQusetionAnswerController.m"
+            timestampString = "515763459.487405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "537"
@@ -2894,27 +2910,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Controller/SYCQusetionAnswerController.m"
-            timestampString = "515761219.038293"
+            timestampString = "515763459.487405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "535"
-            endingLineNumber = "535"
-            landmarkName = "-loadchat"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chatapp/Controller/SYCQusetionAnswerController.m"
-            timestampString = "515761219.038293"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "521"
-            endingLineNumber = "521"
+            startingLineNumber = "523"
+            endingLineNumber = "523"
             landmarkName = "-loadchat"
             landmarkType = "7">
             <Locations>
@@ -2970,47 +2970,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Controller/SYCQusetionAnswerController.m"
-            timestampString = "515761219.038293"
+            timestampString = "515763459.487405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "482"
-            endingLineNumber = "482"
+            startingLineNumber = "483"
+            endingLineNumber = "483"
             landmarkName = "-sendMessage"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__42-[SYCQusetionAnswerController sendMessage]_block_invoke"
                   moduleName = "Chatapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/umenit/Desktop/Chatapp-1/Chatapp/Controller/SYCQusetionAnswerController.m"
-                  timestampString = "513509957.687606"
+                  timestampString = "515765199.752906"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "377"
-                  endingLineNumber = "377"
+                  startingLineNumber = "483"
+                  endingLineNumber = "483"
                   offsetFromSymbolStart = "810">
                </Location>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__42-[SYCQusetionAnswerController sendMessage]_block_invoke.271"
+                  symbolName = "__42-[SYCQusetionAnswerController sendMessage]_block_invoke.306"
                   moduleName = "Chatapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/umenit/Desktop/Chatapp-1/Chatapp/Controller/SYCQusetionAnswerController.m"
-                  timestampString = "513509957.689635"
+                  timestampString = "515765199.754848"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "379"
-                  endingLineNumber = "379"
-                  offsetFromSymbolStart = "18">
+                  startingLineNumber = "485"
+                  endingLineNumber = "485"
+                  offsetFromSymbolStart = "22">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3038,11 +3038,11 @@
                   moduleName = "Chatapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/umenit/Desktop/Chatapp-1/Chatapp/Controller/SYCQusetionAnswerController.m"
-                  timestampString = "513509957.704488"
+                  timestampString = "515764995.842307"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "349"
-                  endingLineNumber = "349"
+                  startingLineNumber = "446"
+                  endingLineNumber = "446"
                   offsetFromSymbolStart = "658">
                </Location>
                <Location
@@ -3053,11 +3053,11 @@
                   moduleName = "Chatapp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/umenit/Desktop/Chatapp-1/Chatapp/Controller/SYCQusetionAnswerController.m"
-                  timestampString = "513509957.706564"
+                  timestampString = "515764995.844644"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "351"
-                  endingLineNumber = "351"
+                  startingLineNumber = "448"
+                  endingLineNumber = "448"
                   offsetFromSymbolStart = "18">
                </Location>
             </Locations>
@@ -3118,11 +3118,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Controller/SYCQusetionAnswerController.m"
-            timestampString = "515761219.038293"
+            timestampString = "515763459.487405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "524"
-            endingLineNumber = "524"
+            startingLineNumber = "526"
+            endingLineNumber = "526"
             landmarkName = "-loadchat"
             landmarkType = "7">
          </BreakpointContent>
@@ -3614,11 +3614,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chatapp/Controller/SYCQusetionAnswerController.m"
-            timestampString = "515761219.038293"
+            timestampString = "515763459.487405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "522"
-            endingLineNumber = "522"
+            startingLineNumber = "524"
+            endingLineNumber = "524"
             landmarkName = "-loadchat"
             landmarkType = "7">
          </BreakpointContent>

@@ -292,12 +292,12 @@
         }
         NSArray *gg=[[SYCChatModule sharedInstance]readToSycChat:filepath];
         NSLog(@"%@",@"ff");
-        if (askerChannel.length && mentorChannel.length )
-                            {
-                     NSArray *arrfinal=      [[gg reverseObjectEnumerator] allObjects];
-                            callback (arrfinal);
-                            }
-                            else
+//        if (askerChannel.length && mentorChannel.length )
+//                            {
+//                     NSArray *arrfinal=      [[gg reverseObjectEnumerator] allObjects];
+//                            callback (arrfinal);
+//                            }
+//                            else
                             callback (gg);
         
      //   callback ([[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST]);
@@ -456,8 +456,8 @@
         else
         {
           chatconv=  gg.lastObject;
-            NSArray *answer=[[NSArray alloc]initWithObjects:@"fffddf", nil];
-            chatconv.answer=answer;
+          //  NSArray *answer=[[NSArray alloc]initWithObjects:@"fffddf", nil];
+            chatconv.answer=answerlist;
           // arr =[[NSMutableArray alloc]init];
             [arr addObjectsFromArray:gg];
             [arr replaceObjectAtIndex:arr.count-1 withObject:chatconv];

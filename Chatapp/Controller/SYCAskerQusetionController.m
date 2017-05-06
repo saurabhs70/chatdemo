@@ -94,7 +94,7 @@
     }
     SYCChatConversation *vv=[arrayofquestion objectAtIndex:indexPath.row];
     NSString *dd=vv.answer;
-    if (dd)
+    if (dd.length)
         cell.lbltagforqa.text=@"Answered";
     else
         cell.lbltagforqa.text=@"new question";
