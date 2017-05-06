@@ -15,8 +15,9 @@
 + (SYCRequestManager *)sharedInstance;
 -(void)Requestforlist:(NSString*)name callback:(void (^)(NSArray *allchanels))callback;
 -(void)askQuestion:(NSString*)Qustion andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel andTask:(NSString*)taskName callback:(void (^)(bool send))callback;
--(void)getChatList:(NSString*)taskName andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel callback:(void (^)(NSArray* Responsearray))callback;
+-(void)getChatList:(NSString*)taskName andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel anduser_id:(NSString*)user_id callback:(void (^)(NSArray *Responsearray))callback;
 -(void)giveAnswerbyid:(NSString*)Qustionid andAnswer:(NSString*)answer andTask:(NSString*)taskName callback:(void (^)(bool send))callback;
 -(void)checkdata:(NSString*)Qustionid  callback:(void (^)(NSAttributedString *send))callback;
 - (void)ResponseObjectMappingConfiguration;
+-(void)getChatListforquestionanswer:(NSString*)taskName andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel andquestion:(NSString*)question andlistanswer:(NSString*)answerlist anduser_id:(NSString*)user_id callback:(void (^)(NSArray *Responsearray))callback;
 @end

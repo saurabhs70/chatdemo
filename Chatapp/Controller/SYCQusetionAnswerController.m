@@ -264,6 +264,7 @@
 }
 -(BOOL)growingTextView:(HPGrowingTextView *)growingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+    
 //    if (text.length)
 //        [self settyping:@"true"];
 //    else
@@ -271,10 +272,49 @@
     NSLog(@"f");
     return YES;
 }
+
+-(void)checkingTypingstatusnow
+{
+   NSTimeInterval comparetime= [self compareTimeSlot:timestamp];
+if(comparetime==7)
+{
+    [self settyping:@"false"];
+}
+    
+}
+-(NSDate*)backtonsdate:(NSString*)dateString
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    // this is imporant - we set our input date format to match our input string
+    // if format doesn't match you'll get nil from your string, so be careful
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dateFromString = [[NSDate alloc] init];
+    // voila!
+    dateFromString = [dateFormatter dateFromString:dateString];
+    return dateFromString;
+}
+-(NSString*)getTime
+{
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    // or @"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+    //NSLog(@"%@",[dateFormatter stringFromDate:[NSDate date]]);
+    return [dateFormatter stringFromDate:[NSDate date]];
+}
+-(NSTimeInterval)compareTimeSlot:(NSString*)prevtime
+{
+    NSString *crttime=[self getTime];
+    NSDate *prevdatetime=[self backtonsdate:prevtime];
+    NSDate *currentdatetime=[self backtonsdate:crttime];
+    NSTimeInterval secondsBetween = [currentdatetime timeIntervalSinceDate:prevdatetime];
+    return secondsBetween;
+}
 -(void)growingTextViewDidChange:(HPGrowingTextView *)growingTextView
 {
    
-
+    timestamp = [self getTime];//[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+    checktypingstatusval= [NSTimer scheduledTimerWithTimeInterval: 1.0 target: self
+                                                         selector: @selector(checkingTypingstatusnow) userInfo: nil repeats: YES];
 //    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updatestatus) object:nil];
 //    // start a new one in 0.3 seconds
 //    [self performSelector:@selector(updatestatus) withObject:nil afterDelay:0.5];
@@ -283,16 +323,22 @@
     if (growingTextView.text.length==1) {
         [self settyping:@"true"];
     }
+    else if (growingTextView.text.length==0)
+    {
+        [self settyping:@"false"];
+    }
+    else if ([val  isEqualToString:@"false"])
+    {
+        val=@"true";
+        [self settyping:@"true"];
+    }
 //    else if (growingTextView.text.length>1)
 //    {
 //        if (_lblIsTyping.hidden==YES) {
 //            [self settyping:@"true"];
 //        }
 //    }
-    else if (growingTextView.text.length==0)
-    {
-        [self settyping:@"false"];
-    }
+    
         _tblchatcontsant.constant=(SCREENHEIGHT-keyboardBoundsview.size.height)+growingTextView.frame.size.height;
 }
 
@@ -331,18 +377,19 @@
 -(void)postMessage
 {
     if (textView.text.length) {
+        [self sendMessage];
         //
-        [[ChatConfig sharedInstance]hearPerticularChannel:_reciver callback:^(bool sent) {
-            
-            if (sent) {
-                
-                [self sendMessage];
-            }
-            else
-            {
-                [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCOFFLINEERROR];
-            }
-        }];
+//        [[ChatConfig sharedInstance]hearPerticularChannel:_reciver callback:^(bool sent) {
+//            
+//            if (sent) {
+//                
+//                [self sendMessage];
+//            }
+//            else
+//            {
+//                [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCOFFLINEERROR];
+//            }
+//        }];
         
         
         
@@ -363,6 +410,7 @@
     NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];
     [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
     [checktypingstatus invalidate];
+    [checktypingstatusval invalidate];
 }
 -(void)isTypingUpdate:(NSNotification *)anote
 {
@@ -403,13 +451,21 @@
             [[SYCRequestManager sharedInstance]askQuestion:textView.text andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id andTask:@"askQuestion" callback:^(bool send) {
                 
                 if (send) {
-                    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id callback:^(NSArray *send) {
-                        if (send) {
-                            conversationarray=send;
-                            [self.tblconversation reloadData];
-                        }
+//                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"1"  callback:^(NSArray *send) {
+//                        if (send) {
+//                            conversationarray=send;
+//                            [self.tblconversation reloadData];
+//                        }
+//                        
+//                    }];
+                    
+                    
+                    
+                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
                         
+                         textView.text=@"";
                     }];
+                    
                 }
             }];
             
@@ -421,12 +477,17 @@
                 [[SYCRequestManager sharedInstance] giveAnswerbyid:chatcove.qusetion_id andAnswer:textView.text andTask:@"submitAnswerByEducatorMentor" callback:^(bool send) {
                     
                     if (send) {
-                        [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id callback:^(NSArray *send) {
-                            if (send) {
-                                conversationarray=send;
-                                [self.tblconversation reloadData];
-                            }
+//                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"2" callback:^(NSArray *send) {
+//                            if (send) {
+//                                conversationarray=send;
+//                                [self.tblconversation reloadData];
+//                            }
+//                            
+//                        }];
+                        
+                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id andquestion:nil andlistanswer:textView.text anduser_id:@"" callback:^(NSArray *Responsearray) {
                             
+                             textView.text=@"";
                         }];
                     }
                     
@@ -435,7 +496,7 @@
             }
             
             
-            textView.text=@"";
+           
            // [[Constantobject sharedInstance]showAlertWithMessage:@"SEND!" withTitle:nil withCancelTitle:SYCOK];
         }
         else
@@ -452,7 +513,7 @@
    
    
     /*---------online case---------*/
-    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id callback:^(NSArray *send) {
+    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"1"  callback:^(NSArray *send) {
         if (send) {
             conversationarray=send;
             [self.tblconversation reloadData];

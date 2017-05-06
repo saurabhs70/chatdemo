@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "AppDelegate.h"
 @interface ViewController ()
 
 @end
@@ -53,9 +53,11 @@
 -(void)updatestatus:(BOOL)status
 {
     if (status==true && [[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
+        AppDelegate *vv2=[[AppDelegate alloc]init];
+        [vv2 refreshpresence];
+//        [NSTimer scheduledTimerWithTimeInterval: 2.0 target: self
+//                                       selector: @selector(hearchannle) userInfo: nil repeats: YES];
         
-        [NSTimer scheduledTimerWithTimeInterval: 2.0 target: self
-                                       selector: @selector(hearchannle) userInfo: nil repeats: YES];
 //    [[ChatConfig sharedInstance] hereall:(nil) callback:^(NSArray *allchanels) {
 //        
 //        if (allchanels) {

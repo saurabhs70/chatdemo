@@ -21,8 +21,8 @@
 #define SYCONLINEDOC @"Online"
 #define SYCONLINEDOCLIST @"MENTOR-LIST"
 #define SYCCHATDOCDFORMAT @"json"
-#define SYCCHATHEARTBEAT 5//120
-#define SYCCHATHEARTBEATINTERVAL 2
+#define SYCCHATHEARTBEAT 60
+#define SYCCHATHEARTBEATINTERVAL 30
 #define SCREENWIDTH  [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT  [UIScreen mainScreen].bounds.size.height
 #define SYCOFFLINEERROR  @"Reciver Not Available!"

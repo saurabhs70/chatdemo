@@ -14,7 +14,7 @@
 @property (strong, nonatomic) SWRevealViewController *viewController;
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) IBOutlet  UINavigationController *frontNavigationController;
-
+-(void)refreshpresence;
 
 @end
 

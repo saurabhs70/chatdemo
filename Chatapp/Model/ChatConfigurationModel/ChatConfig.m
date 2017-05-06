@@ -25,8 +25,9 @@
         configuration.uuid=channelname;// 4s_id simulator_id 5555648583
         //configuration.presenceHeartbeatInterval=20;//remove after
         //configuration.presenceHeartbeatValue=10;//againjoin
-        configuration.presenceHeartbeatValue = SYCCHATHEARTBEAT;
-        configuration.presenceHeartbeatInterval = SYCCHATHEARTBEATINTERVAL;
+        configuration.presenceHeartbeatValue = SYCCHATHEARTBEAT;//120
+        configuration.presenceHeartbeatInterval = SYCCHATHEARTBEATINTERVAL;//60
+    
         self.client = [PubNub clientWithConfiguration:configuration];
         [self.client addListener:self];
   _delegateconfig=delegate;
@@ -87,7 +88,7 @@
 {
     
     NSString *str=[[Constantobject sharedInstance]getloggedchannel];
-    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:nil andMentorChannel:str callback:^(NSArray *send) {
+    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:nil andMentorChannel:str  anduser_id:@""  callback:^(NSArray *send) {
         if (send) {
             NSDictionary* userInfo = @{@"total":send};
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshmentormessasge" object:userInfo];
@@ -108,7 +109,7 @@
 {
     
                 NSString *str=[[Constantobject sharedInstance]getloggedchannel];
-    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:str andMentorChannel:nil callback:^(NSArray *send) {
+    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:str andMentorChannel:nil anduser_id:@""  callback:^(NSArray *send) {
                         if (send) {
                             NSDictionary* userInfo = @{@"total":send};
                              [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshaskermessasge" object:userInfo];
@@ -230,7 +231,9 @@
     else {
         
         if (![client.uuid isEqualToString:event.data.presence.uuid]) {
+            NSLog(@"shyamlal no res");
             NSDictionary *dd=event.data.presence.state;
+            NSLog(@"shyamlal%@",dd);
             if ([[dd valueForKey:@"isTyping"] isEqualToString:@"true"])
               //  NSLog(@"%@ is typing....",event.data.presence.uuid);
                 [self setTypingStatus:@"true" Andby:event.data.presence.uuid];

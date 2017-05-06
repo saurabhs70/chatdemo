@@ -27,7 +27,7 @@
 }
 -(void)askerrefresh
 {
-    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:[[Constantobject sharedInstance]getloggedchannel] andMentorChannel:nil callback:^(NSArray *send) {
+    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:[[Constantobject sharedInstance]getloggedchannel] andMentorChannel:nil anduser_id:@""  callback:^(NSArray *send) {
         if (send) {
             conversationarray=[[NSMutableArray alloc]init];
             [conversationarray addObjectsFromArray:send];

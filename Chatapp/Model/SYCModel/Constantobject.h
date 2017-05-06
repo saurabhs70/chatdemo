@@ -17,6 +17,7 @@
 @property (strong,nonatomic) NSArray *onlineMentorList;
 @property (strong,nonatomic) NSArray *allMentorList;
 @property (nonatomic, strong) PubNub *client;
+@property (strong,nonatomic)NSTimer *timer;
 -(void)allocInit;
 @property (nonatomic, strong) UIAlertView *alertview;
 -(void)setmodeoflooged:(NSString*)mode andstringforlogged:(NSString*)logged;

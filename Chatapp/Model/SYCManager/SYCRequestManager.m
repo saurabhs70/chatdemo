@@ -54,9 +54,9 @@
   //  SYCChatConversationAnswer
   
   _chatConAnswervOM=[RKObjectMapping mappingForClass:[SYCChatConversationAnswer class]];
-    [_chatConAnswervOM  addAttributeMappingsFromArray:@[@"answer",@"chat_time",]];
+    [_chatConAnswervOM  addAttributeMappingsFromArray:@[@"chat_time",]];
     /*--------Merge for Answer to chat question-------*/
-    [_chatConvOM addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"answer" toKeyPath:@"answer" withMapping:_chatConAnswervOM]];
+    //[_chatConvOM addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"answer" toKeyPath:@"answer" withMapping:_chatConAnswervOM]];
     
     
     /*---------_MessageStatus--------*/
@@ -226,8 +226,9 @@
    
     
 }
--(void)getChatList:(NSString*)taskName andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel callback:(void (^)(NSArray *Responsearray))callback
+-(void)getChatList:(NSString*)taskName andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel anduser_id:(NSString*)user_id callback:(void (^)(NSArray *Responsearray))callback
 {
+    user_id=@"2";
 //    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
 //    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
 //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -240,7 +241,7 @@
     NSString *filepath;
     if (askerChannel.length && mentorChannel.length )
     {
-    callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&mentor_educator_channel_id=%@",SYCBASEURL,taskName,askerChannel,mentorChannel];
+    callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&mentor_educator_channel_id=%@&user_id=%@",SYCBASEURL,taskName,askerChannel,mentorChannel,user_id];
         filepath=[NSString stringWithFormat:@"%@-%@",askerChannel,mentorChannel];
     }
     else if (askerChannel.length)
@@ -250,7 +251,7 @@
     }
     else if (mentorChannel.length)
     {
-        callurl=[NSString stringWithFormat:@"%@?task=%@&mentor_educator_channel_id=%@",SYCBASEURL,taskName,mentorChannel];
+        callurl=[NSString stringWithFormat:@"%@?task=%@&mentor_educator_channel_id=%@&user_id=%@",SYCBASEURL,taskName,mentorChannel,user_id];
         filepath=mentorChannel;
     }
   
@@ -265,6 +266,12 @@
     // NSString *strbase=@"http://138.68.175.0/api/index.php?task=getEducatorOrMentorListBySubjectId&subject_id=6&page_id=1";  response.mentor_or_educator_list
     
     NSURL *url = [NSURL URLWithString:callurl];
+    
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    // or @"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+    NSLog(@"%@",[dateFormatter stringFromDate:[NSDate date]]);
+    
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"text/html"];
@@ -378,6 +385,116 @@
     
 }
 
+-(void)getChatListforquestionanswer:(NSString*)taskName andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel andquestion:(NSString*)question andlistanswer:(NSString*)answerlist anduser_id:(NSString*)user_id callback:(void (^)(NSArray *Responsearray))callback
+{
+    //    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    //    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    // http://floovr.in/syc/index.php?task=getQuestionAnswerChat&asker_channel_id=ASK_email1@email.com
+    
+    //NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
+    //NSString *result = [Qustion stringByAddingPercentEncodingWithAllowedCharacters:set];
+    NSString *callurl;
+    NSString *filepath;
+    if (askerChannel.length && mentorChannel.length )
+    {
+        callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&mentor_educator_channel_id=%@&user_id=%@",SYCBASEURL,taskName,askerChannel,mentorChannel,user_id];
+        filepath=[NSString stringWithFormat:@"%@-%@",askerChannel,mentorChannel];
+    }
+    else if (askerChannel.length)
+    {
+        callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&user_id=%@",SYCBASEURL,taskName,askerChannel,user_id];
+        filepath=askerChannel;
+    }
+    else if (mentorChannel.length)
+    {
+        callurl=[NSString stringWithFormat:@"%@?task=%@&mentor_educator_channel_id=%@&user_id=%@",SYCBASEURL,taskName,mentorChannel,user_id];
+        filepath=mentorChannel;
+    }
+    
+    
+    
+//    NSIndexSet *successStatusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);
+//    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:_chatConvOM method:RKRequestMethodGET pathPattern:nil keyPath:@"response.response" statusCodes:successStatusCodes];
+//    
+    //@"http://floovr.in/syc/index.php?task=getEducatorMentorList"];mentor_educator_list
+    
+    // NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASEURL,@"/wp_mpfeedback"]];
+    // NSString *strbase=@"http://138.68.175.0/api/index.php?task=getEducatorOrMentorListBySubjectId&subject_id=6&page_id=1";  response.mentor_or_educator_list
+    
+    NSURL *url = [NSURL URLWithString:callurl];
+    
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    // or @"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+    NSString *dattime=[dateFormatter stringFromDate:[NSDate date]];
+    
+    
+   // NSURLRequest *request = [NSURLRequest requestWithURL:url];
+   // [RKMIMETypeSerialization registerClass:[RKNSJSONSerialization class] forMIMEType:@"text/html"];
+//    RKObjectRequestOperation *operation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[responseDescriptor]];
+    
+    // NSMutableDictionary *parameters=[[NSMutableDictionary alloc]init];
+    //[parameters setObject:ObjectOrNull(methodname) forKey:@"task"];
+    
+    //[operation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        
+        // parse the response---
+        //NSArray *myDic = [NSJSONSerialization JSONObjectWithData:operation.HTTPRequestOperation.responseData options:NSJSONReadingMutableLeaves error:nil];
+        SYCChatConversation *chatconv;
+    NSMutableArray *arr;
+    arr =[[NSMutableArray alloc]init];
+        NSArray *gg=[[SYCChatModule sharedInstance]readToSycChat:filepath];
+        if (question.length) {
+            
+        
+       chatconv =[[SYCChatConversation alloc]initWithSycConverstion:askerChannel andMentorId:mentorChannel andQuestionId:@"23" andquestion:question andquestimestamp:dattime andAnswerlist:nil];
+            [arr addObjectsFromArray:gg];
+            [arr addObject:chatconv];
+        }
+        else
+        {
+          chatconv=  gg.lastObject;
+            NSArray *answer=[[NSArray alloc]initWithObjects:@"fffddf", nil];
+            chatconv.answer=answer;
+          // arr =[[NSMutableArray alloc]init];
+            [arr addObjectsFromArray:gg];
+            [arr replaceObjectAtIndex:arr.count-1 withObject:chatconv];
+        }
+       // NSArray *list = mappingResult.array;
+        
+    
+        if (arr.count) {
+            NSData *dataArray = [NSKeyedArchiver archivedDataWithRootObject:arr];
+            [[SYCChatModule sharedInstance]writeToSycChat:dataArray atFilePath:filepath];
+      
+        }
+        NSArray *gg2=[[SYCChatModule sharedInstance]readToSycChat:filepath];
+        NSLog(@"%@",@"ff");
+//        if (askerChannel.length && mentorChannel.length )
+//        {
+//            NSArray *arrfinal=      [[gg reverseObjectEnumerator] allObjects];
+//            callback (arrfinal);
+//        }
+//        else
+            callback (gg2);
+        
+        //   callback ([[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST]);
+        //   Allsellerlist *gg=[arrlocation objectAtIndex:0];
+        //callback(list);
+        // NSLog(@"=======:%@",myDic);
+        //NSLog(@"MY email============ %@ ",[myDic objectForKey:@"Email"]);
+    /*} failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+        callback(nil);
+        
+    }];
+    [operation start];
+    
+   */
+    
+}
 
 -(void)savejson:(NSData*)urldata
 {

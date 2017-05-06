@@ -36,7 +36,10 @@ else
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     if ([[Constantobject sharedInstance] getloggedchannel].length)
+    {
     [[ChatConfig sharedInstance]unsubscribechannle:[[Constantobject sharedInstance] getloggedchannel]];
+        [[Constantobject sharedInstance].timer invalidate];
+    }
 }
 
 
@@ -117,11 +120,16 @@ else
 }
 -(void)updatestatus:(BOOL)status
 {
-    [NSTimer scheduledTimerWithTimeInterval: 2.0 target: self
-                                   selector: @selector(hearchannle) userInfo: nil repeats: YES];
+    [self refreshpresence];
 }
 -(void)hearchannle
 {
      [[ChatConfig sharedInstance] hereAllChannels];
+}
+-(void)refreshpresence
+{
+
+   [Constantobject sharedInstance].timer= [NSTimer scheduledTimerWithTimeInterval: 3.0 target: self
+                                  selector: @selector(hearchannle) userInfo: nil repeats: YES];
 }
 @end
