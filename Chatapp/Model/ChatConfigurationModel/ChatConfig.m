@@ -33,8 +33,18 @@
   _delegateconfig=delegate;
     
         // Subscribe to demo channel with presence observation
-        [self.client subscribeToChannels: @[channelname] withPresence:YES];// simulator
+    [self.client subscribeToChannels: @[channelname] withPresence:NO];// simulator
+//    [self.client subscribeToChannels: @[channelname] withPresence:NO
+//                         clientState: @{@"chat": @{@"full": @"Robert Plant",
+//                                                   @"country": @"UK",
+//                                                   @"appstate": @"foreground",
+//                                                   }}];
    
+    
+}
+
+-(void)inticonfigsetsate:(NSString*)changestatue forchannel:(NSString*)channel
+{
     
 }
 -(void)intiSubscribeChannel:(NSString*)channelname
@@ -355,6 +365,17 @@
                withCompletion:^(PNChannelClientStateResult *result, PNErrorStatus *status) {
                    
                    if (!status) {
+                       //self.navigationController.viewControllers
+                     NSArray *arr=  APPDELEGATE.frontNavigationController.viewControllers;
+                       if (arr.count) {
+                           UIViewController *vv=[arr lastObject];
+                           if ([vv isKindOfClass:[SYCQusetionAnswerController class]]) {
+                               SYCQusetionAnswerController *ss=(SYCQusetionAnswerController*)vv;
+                               NSLog(@"%@",ss.reciver);
+                           }
+                       }
+                       
+                       
                        NSDictionary *dd=  result.data.state;
                        [self setTypingStatus:[dd valueForKey:@"isTyping"] Andby:uuidfortyping];
                        
@@ -464,9 +485,9 @@
      [self.client subscribeToChannels: @[channelname] withPresence:YES];
 }
 
--(void)updatestatus:(NSString*)key andvalue:(NSString*)value anduuid:(NSString*)uuid andchannel:(NSString*)chhhanel
+-(void)updatestatus:(NSString*)key andvalue:(NSString*)value andtotyping:(NSString*)to anduuid:(NSString*)uuid andchannel:(NSString*)chhhanel
 {
-    [self.client setState: @{key: value} forUUID:uuid onChannel: chhhanel
+    [self.client setState: @{key: value,@"TOtyping":to} forUUID:uuid onChannel: chhhanel
            withCompletion:^(PNClientStateUpdateStatus *status) {
                
                if (!status.isError) {

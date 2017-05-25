@@ -37,7 +37,7 @@ else
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     if ([[Constantobject sharedInstance] getloggedchannel].length)
     {
-    [[ChatConfig sharedInstance]unsubscribechannle:[[Constantobject sharedInstance] getloggedchannel]];
+    //[[ChatConfig sharedInstance]unsubscribechannle:[[Constantobject sharedInstance] getloggedchannel]];
         [[Constantobject sharedInstance].timer invalidate];
     }
 }
@@ -74,17 +74,17 @@ else
         // PremiumHomeViewController *frontViewController = [storyboard instantiateViewControllerWithIdentifier:@"PremiumHomeId"];
         UIViewController *frontViewController;
         if (IsLoggedFlag) {
-            if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
+           // if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
                 [self connectyoaskerchannel];
                 OnlineuserViewController *frontViewControllerhome=(OnlineuserViewController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"OnlineuserViewControllerid"];
                 frontViewController=frontViewControllerhome;
-            }
-            else
-            {
-                 [self connectyoaskerchannel];
-            SYCAskerQusetionController *frontViewControllerhome=(SYCAskerQusetionController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCAskerQusetionControllerId"];
-            frontViewController=frontViewControllerhome;
-            }
+//            }
+//            else
+//            {
+//                 [self connectyoaskerchannel];
+//            SYCAskerQusetionController *frontViewControllerhome=(SYCAskerQusetionController*)[[Constantobject sharedInstance]getviewcontrollerbyid:@"SYCAskerQusetionControllerId"];
+//            frontViewController=frontViewControllerhome;
+//            }
             
         }
         else

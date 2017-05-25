@@ -15,5 +15,7 @@
 @property (strong,nonatomic) NSString *question;
 @property (strong,nonatomic) NSString *qusetion_time;
 @property (strong,nonatomic) NSString *answer;
--(id)initWithSycConverstion:(NSString*)askerId andMentorId:(NSString*)mentorId andQuestionId:(NSString*)questionId andquestion:(NSString*)questiontitle andquestimestamp:(NSString*)timesamp andAnswerlist:(NSString*)Answerlist;
+@property (strong,nonatomic) NSString *sycSender;
+@property (strong,nonatomic) NSString *sycReciver;
+-(id)initWithSycConverstion:(NSString*)askerId andMentorId:(NSString*)mentorId andQuestionId:(NSString*)questionId andquestion:(NSString*)questiontitle andquestimestamp:(NSString*)timesamp andAnswerlist:(NSString*)Answerlist Andsender:(NSString*)sender andReciver:(NSString*)Reciver;
 @end

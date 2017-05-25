@@ -17,17 +17,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   _lblIsTyping.hidden=YES;
-    if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
-    {
-        _reciver=conversationchannel.mentor_id;
-    [[ChatConfig sharedInstance]addmorechannel:[[Constantobject sharedInstance]TypingToChannel:conversationchannel.mentor_id]];
-    }
-    else
-    {
-         _reciver=conversationchannel.asker_id;
-       [[ChatConfig sharedInstance]addmorechannel:[[Constantobject sharedInstance]TypingToChannel:conversationchannel.asker_id]];
-    }
-    
+//    if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
+//    {
+//        _reciver=conversationchannel.mentor_id;
+//    [[ChatConfig sharedInstance]addmorechannel:[[Constantobject sharedInstance]TypingToChannel:conversationchannel.mentor_id]];
+//        NSString *typinch=[[Constantobject sharedInstance]TypingToChannel:conversationchannel.mentor_id];
+//        NSLog(@"rr");
+//       
+//    }
+//    else
+//    {
+//         _reciver=conversationchannel.asker_id;
+//       [[ChatConfig sharedInstance]addmorechannel:[[Constantobject sharedInstance]TypingToChannel:conversationchannel.asker_id]];
+//        NSString *typinch=[[Constantobject sharedInstance]TypingToChannel:conversationchannel.asker_id];
+//        NSLog(@"rr");
+//    }
+    _reciver=conversationchannel.sycReciver;
+    [[ChatConfig sharedInstance]addmorechannel:@"TYPINGCHANNEL"];
       [self settyping:@"false"];
  [self keyboaradstyatus];
 [self viewloadf];
@@ -43,7 +49,7 @@
 }
 -(void)checkingTypingstatus
 {
-     NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];
+     NSString *conversationchahhel=@"TYPINGCHANNEL";//[[Constantobject sharedInstance]TypingToChannel:_reciver];
     [[ChatConfig sharedInstance]hearPerticularChannelforTyping:conversationchahhel anduuid:_reciver callback:^(bool sent) {
         
     }];
@@ -280,12 +286,12 @@
 
 -(void)checkingTypingstatusnow
 {
-   NSTimeInterval comparetime= [self compareTimeSlot:timestamp];
-if(comparetime==7)
-{
-    [self settyping:@"false"];
-}
-    
+//   NSTimeInterval comparetime= [self compareTimeSlot:timestamp];
+//if(comparetime==7)
+//{
+//    [self settyping:@"false"];
+//}
+//    
 }
 -(NSDate*)backtonsdate:(NSString*)dateString
 {
@@ -362,21 +368,30 @@ if(comparetime==7)
 //    [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:@"true" anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
     
     
-    if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
+    //if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
         
         if (conversationarray.count) {
           SYCChatConversation *conversationchannel2=conversationarray.lastObject;
             if (conversationchannel2.answer.length) {
-                [self postMessage];
+                [self postMessage];//ask question
             }
             else
-             [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCNOTFINDANSWER];
+                
+            {
+                if ([conversationchannel2.asker_id isEqual:conversationchannel.sycSender]) {
+                    [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCNOTFINDANSWER];
+                }
+                else
+                     [self postMessage];//give answer
+                
+            }
+            
         }
         else
             [self postMessage];
-    }
-    else
-        [self postMessage];
+//    }
+//    else
+//        [self postMessage];
    
 }
 -(void)postMessage
@@ -412,7 +427,7 @@ if(comparetime==7)
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self settyping:@"false"];
-    NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];
+    NSString *conversationchahhel=@"TYPINGCHANNEL";//[[Constantobject sharedInstance]TypingToChannel:_reciver];
     [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
     [checktypingstatus invalidate];
     [checktypingstatusval invalidate];
@@ -431,9 +446,9 @@ if(comparetime==7)
 -(void)settyping:(NSString*)status
 {
     val=status;
-    NSString *conversationchahhel=[[Constantobject sharedInstance]TypingToChannel:_reciver];
+    NSString *conversationchahhel=@"TYPINGCHANNEL";//[[Constantobject sharedInstance]TypingToChannel:_reciver];
    // [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
-    [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:status anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
+    [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:status andtotyping:_reciver anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
 }
 -(void)sendMessage
 {
@@ -450,10 +465,12 @@ if(comparetime==7)
             NSLog(@"send!");
             
             [self settyping:@"false"];
-            if ([[[Constantobject sharedInstance]getlogged]isEqualToString:SYCCHATMODEASKER]) {
+           // if ([[[Constantobject sharedInstance]getlogged]isEqualToString:SYCCHATMODEASKER]) {
+               SYCChatConversation *chatcove=  [conversationarray lastObject]; 
+            if (chatcove.answer.length) {
                 
             
-            [[SYCRequestManager sharedInstance]askQuestion:textView.text andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id andTask:@"askQuestion" callback:^(bool send) {
+            [[SYCRequestManager sharedInstance]askQuestion:textView.text andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andTask:@"askQuestion" callback:^(bool send) {
                 
                 if (send) {
 //                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"1"  callback:^(NSArray *send) {
@@ -466,7 +483,7 @@ if(comparetime==7)
                     
                     
                     
-                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
+                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
                         conversationarray=Responsearray;
                         [self.tblconversation reloadData];
                          textView.text=@"";
@@ -474,12 +491,14 @@ if(comparetime==7)
                     
                 }
             }];
-            
+           
            }
             else
             {
             //-----for mentor-------------
               SYCChatConversation *chatcove=  [conversationarray lastObject];
+                if (chatcove) {
+          
                 [[SYCRequestManager sharedInstance] giveAnswerbyid:chatcove.qusetion_id andAnswer:textView.text andTask:@"submitAnswerByEducatorMentor" callback:^(bool send) {
                     
                     if (send) {
@@ -491,7 +510,7 @@ if(comparetime==7)
 //                            
 //                        }];
                         
-                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id andquestion:nil andlistanswer:textView.text anduser_id:@"" callback:^(NSArray *Responsearray) {
+                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:nil andlistanswer:textView.text anduser_id:@"" callback:^(NSArray *Responsearray) {
                             conversationarray=Responsearray;
                             [self.tblconversation reloadData];
                              textView.text=@"";
@@ -499,6 +518,32 @@ if(comparetime==7)
                     }
                     
                 }];
+            }
+            else
+            {
+                [[SYCRequestManager sharedInstance]askQuestion:textView.text andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andTask:@"askQuestion" callback:^(bool send) {
+                    
+                    if (send) {
+                        //                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"1"  callback:^(NSArray *send) {
+                        //                        if (send) {
+                        //                            conversationarray=send;
+                        //                            [self.tblconversation reloadData];
+                        //                        }
+                        //
+                        //                    }];
+                        
+                        
+                        
+                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
+                            conversationarray=Responsearray;
+                            [self.tblconversation reloadData];
+                            textView.text=@"";
+                        }];
+                        
+                    }
+                }];
+
+            }
         
             }
             
@@ -520,7 +565,7 @@ if(comparetime==7)
    
    
     /*---------online case---------*/
-    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"1"  callback:^(NSArray *send) {
+    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver anduser_id:@"1"  callback:^(NSArray *send) {
         if (send) {
             conversationarray=send;
             [self.tblconversation reloadData];

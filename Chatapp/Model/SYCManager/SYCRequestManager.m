@@ -100,7 +100,10 @@
                    mentorobj.loggedchannel=[NSString stringWithFormat:@"%@%@",SYCCHANNELMENTORPREFIX,mentorobj.email];
                 [arr addObject:mentorobj];
             }
-            NSData *dataArray = [NSKeyedArchiver archivedDataWithRootObject:list];
+            NSArray *arr1=[self listarry:arr];
+            arr=[[NSMutableArray alloc]init];
+            [arr addObjectsFromArray:arr1];
+            NSData *dataArray = [NSKeyedArchiver archivedDataWithRootObject:arr];
             [[SYCChatModule sharedInstance]writeToSycChat:dataArray atFilePath:SYCONLINEDOCLIST];
         }
         callback ([[SYCChatModule sharedInstance]readToSycChat:SYCONLINEDOCLIST]);
@@ -117,6 +120,17 @@
     
 
 
+}
+-(NSArray*)listarry:(NSMutableArray*)arr
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"loggedchannel CONTAINS[cd] %@", [[Constantobject sharedInstance]getloggedchannel]];
+    NSArray *results = [arr filteredArrayUsingPredicate:predicate];
+    if (results.count) {
+        SYCMentor *mentorobj =[results objectAtIndex:0];
+        [arr removeObject:mentorobj];
+        
+    }
+    return arr;
 }
 -(void)askQuestion:(NSString*)Qustion andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel andTask:(NSString*)taskName callback:(void (^)(bool send))callback
 {
@@ -449,7 +463,7 @@
         if (question.length) {
             
         
-       chatconv =[[SYCChatConversation alloc]initWithSycConverstion:askerChannel andMentorId:mentorChannel andQuestionId:@"23" andquestion:question andquestimestamp:dattime andAnswerlist:nil];
+       chatconv =[[SYCChatConversation alloc]initWithSycConverstion:askerChannel andMentorId:mentorChannel andQuestionId:@"23" andquestion:question andquestimestamp:dattime andAnswerlist:nil Andsender:nil andReciver:nil];
             [arr addObjectsFromArray:gg];
             [arr addObject:chatconv];
         }

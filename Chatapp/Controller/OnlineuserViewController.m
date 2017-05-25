@@ -36,6 +36,7 @@
 }
 -(void)Presencestatusmentor:(NSNotification*)notification
 {
+   
   //  mentorPresencelist=[Constantobject sharedInstance].allMentorList;
     [_tblonline reloadData];
     //onlineuser= [Constantobject sharedInstance].onlinecontact;
@@ -81,11 +82,20 @@
     //vv.reciver=[[mentorPresencelist lastObject]objectForKey:SYCCHANNELNAME];
     SYCChatConversation *chatcon;
    // if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER])
-        chatcon =[[SYCChatConversation alloc]initWithSycConverstion:[[Constantobject sharedInstance]getloggedchannel] andMentorId:mentor.loggedchannel  andQuestionId:nil andquestion:nil andquestimestamp:nil andAnswerlist:nil];
+        chatcon =[[SYCChatConversation alloc]initWithSycConverstion:[[Constantobject sharedInstance]getloggedchannel] andMentorId:mentor.loggedchannel  andQuestionId:nil andquestion:nil andquestimestamp:nil andAnswerlist:nil Andsender:[[Constantobject sharedInstance]getloggedchannel] andReciver:mentor.loggedchannel];
     
-    
+
     vv.conversationchannel=chatcon;
     [self.navigationController pushViewController:vv animated:YES];
+    
+    /*------------Start for -----------*/
+ //   [[ChatConfig sharedInstance]updatestatus:@"isstatus" andvalue:@"busy" anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:[[Constantobject sharedInstance]getloggedchannel]];
+    
+    
+    /*---------end of status--------*/
+    
+   // [[Constantobject sharedInstance]getloggedchannel];
+    //[[ChatConfig sharedInstance] inticonfigsetsate:nil forchannel:[[Constantobject sharedInstance]getloggedchannel]];
     //[[ChatConfig sharedInstance]unsubscribechannle:@"my@gmail.com"];
 }
 /*

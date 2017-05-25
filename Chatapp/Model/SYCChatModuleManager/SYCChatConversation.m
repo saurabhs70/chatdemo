@@ -9,8 +9,8 @@
 #import "SYCChatConversation.h"
 
 @implementation SYCChatConversation
-@synthesize asker_id,mentor_id,qusetion_id,answer,qusetion_time,question;
--(id)initWithSycConverstion:(NSString*)askerId andMentorId:(NSString*)mentorId andQuestionId:(NSString*)questionId andquestion:(NSString*)questiontitle andquestimestamp:(NSString*)timesamp andAnswerlist:(NSString*)Answerlist
+@synthesize asker_id,mentor_id,qusetion_id,answer,qusetion_time,question,sycSender,sycReciver;
+-(id)initWithSycConverstion:(NSString*)askerId andMentorId:(NSString*)mentorId andQuestionId:(NSString*)questionId andquestion:(NSString*)questiontitle andquestimestamp:(NSString*)timesamp andAnswerlist:(NSString*)Answerlist Andsender:(NSString*)sender andReciver:(NSString*)Reciver
 {
     self=[super init];
     if (self) {
@@ -20,8 +20,8 @@
         answer=Answerlist;
         qusetion_time=timesamp;
         question=questiontitle;
-        
-       
+        sycSender=sender;
+        sycReciver=Reciver;
         
     }
     return self;
@@ -30,7 +30,7 @@
 {
     NSMutableArray *listarrayfinal=[[NSMutableArray alloc]init];
     for (NSDictionary *conversation in listarray) {
-         SYCChatConversation *chat=[[SYCChatConversation alloc]initWithSycConverstion:[conversation objectForKey:@"asker_id"] andMentorId:[conversation objectForKey:@"mentor_id"] andQuestionId:[conversation objectForKey:@"qusetion_id"]andquestion:[conversation objectForKey:@"question"] andquestimestamp:[conversation objectForKey:@"qusetion_time"] andAnswerlist:[conversation objectForKey:@"answer"]];
+         SYCChatConversation *chat=[[SYCChatConversation alloc]initWithSycConverstion:[conversation objectForKey:@"asker_id"] andMentorId:[conversation objectForKey:@"mentor_id"] andQuestionId:[conversation objectForKey:@"qusetion_id"]andquestion:[conversation objectForKey:@"question"] andquestimestamp:[conversation objectForKey:@"qusetion_time"] andAnswerlist:[conversation objectForKey:@"answer"] Andsender:nil andReciver:nil];
         [listarrayfinal addObject:chat];
     }
     return listarrayfinal;

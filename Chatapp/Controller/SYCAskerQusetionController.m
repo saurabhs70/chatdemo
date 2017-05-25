@@ -109,7 +109,7 @@
     SYCChatConversation *question=[arrayofquestion objectAtIndex:indexPath.row];
     SYCChatConversation *chatcon;
     if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEMENTOR])
-   chatcon =[[SYCChatConversation alloc]initWithSycConverstion:@"ASK_bill@gmail.com" andMentorId: [[Constantobject sharedInstance]getloggedchannel] andQuestionId:nil andquestion:nil andquestimestamp:nil andAnswerlist:nil];
+   chatcon =[[SYCChatConversation alloc]initWithSycConverstion:@"ASK_bill@gmail.com" andMentorId: [[Constantobject sharedInstance]getloggedchannel] andQuestionId:nil andquestion:nil andquestimestamp:nil andAnswerlist:nil Andsender:[[Constantobject sharedInstance]getloggedchannel] andReciver:@"ASK_bill@gmail.com"];
     vv.conversationchannel=chatcon;//[dd valueForKey:@"Asker_id"];
     [self.navigationController pushViewController:vv animated:YES];
    // [[ChatConfig sharedInstance]unsubscribechannle:[[Constantobject sharedInstance] getloggedchannel]];
