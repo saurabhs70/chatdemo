@@ -11,7 +11,7 @@
 //#import "IndividualchatViewController.h"
 #import "SYCQusetionAnswerController.h"
 #import "SWRevealViewController.h"
-@interface OnlineuserViewController : UIViewController<SWRevealViewControllerDelegate>
+@interface OnlineuserViewController : UIViewController<SWRevealViewControllerDelegate,delegateforconnection>
 {
     NSArray *mentorPresencelist;
 }

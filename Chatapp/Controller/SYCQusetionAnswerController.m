@@ -483,11 +483,12 @@
                     
                     
                     
-                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
-                        conversationarray=Responsearray;
-                        [self.tblconversation reloadData];
-                         textView.text=@"";
-                    }];
+//                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
+//                        conversationarray=Responsearray;
+//                        [self.tblconversation reloadData];
+//                         textView.text=@"";
+//                    }];
+                    [self loadchat];
                     
                 }
             }];
@@ -510,11 +511,12 @@
 //                            
 //                        }];
                         
-                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:nil andlistanswer:textView.text anduser_id:@"" callback:^(NSArray *Responsearray) {
-                            conversationarray=Responsearray;
-                            [self.tblconversation reloadData];
-                             textView.text=@"";
-                        }];
+//                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:nil andlistanswer:textView.text anduser_id:@"" callback:^(NSArray *Responsearray) {
+//                            conversationarray=Responsearray;
+//                            [self.tblconversation reloadData];
+//                             textView.text=@"";
+//                        }];
+                        [self loadchat];
                     }
                     
                 }];
@@ -534,11 +536,13 @@
                         
                         
                         
-                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
-                            conversationarray=Responsearray;
-                            [self.tblconversation reloadData];
-                            textView.text=@"";
-                        }];
+//                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
+//                            conversationarray=Responsearray;
+//                            [self.tblconversation reloadData];
+//                            textView.text=@"";
+//                        }];
+                        
+                        [self loadchat];
                         
                     }
                 }];

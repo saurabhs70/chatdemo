@@ -258,16 +258,16 @@
     callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@&mentor_educator_channel_id=%@&user_id=%@",SYCBASEURL,taskName,askerChannel,mentorChannel,user_id];
         filepath=[NSString stringWithFormat:@"%@-%@",askerChannel,mentorChannel];
     }
-    else if (askerChannel.length)
+    else // if (askerChannel.length)
     {
-        callurl=[NSString stringWithFormat:@"%@?task=%@&asker_channel_id=%@",SYCBASEURL,taskName,askerChannel];
+        callurl=[NSString stringWithFormat:@"%@?task=%@&user_id=%@",SYCBASEURL,taskName,user_id];
         filepath=askerChannel;
     }
-    else if (mentorChannel.length)
-    {
-        callurl=[NSString stringWithFormat:@"%@?task=%@&mentor_educator_channel_id=%@&user_id=%@",SYCBASEURL,taskName,mentorChannel,user_id];
-        filepath=mentorChannel;
-    }
+//    else if (mentorChannel.length)
+//    {
+//        callurl=[NSString stringWithFormat:@"%@?task=%@&mentor_educator_channel_id=%@&user_id=%@",SYCBASEURL,taskName,mentorChannel,user_id];
+//        filepath=mentorChannel;
+//    }
   
     
     

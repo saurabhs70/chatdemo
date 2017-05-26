@@ -42,6 +42,7 @@ _loggedtext.text=[NSString stringWithFormat:@"%@%@",SYCCHANNELMENTORPREFIX,@"dau
     if (_loggedtext.text.length) {
       //  ChatConfig *chaat=[[ChatConfig alloc]init];
      //   chaat.delegateconfig=self;
+        
         [[ChatConfig sharedInstance]initConfig:_loggedtext.text andprotocol:self];
     }
     
