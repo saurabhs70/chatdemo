@@ -130,7 +130,19 @@
     return cell;
     
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    SYCChatConversation *vv=[conversationarray objectAtIndex:indexPath.section];
+    if (vv.answer.length) {
+        //ask question
+    }
+    else
+    {
+        //give answer
+    }
+  
+}
 - (void)viewloadf {
   //self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
   //self.view.backgroundColor = [UIColor colorWithRed:219.0f/255.0f green:226.0f/255.0f blue:237.0f/255.0f alpha:1];
@@ -370,49 +382,43 @@
     
     //if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEASKER]) {
         
-        if (conversationarray.count) {
-          SYCChatConversation *conversationchannel2=conversationarray.lastObject;
-            if (conversationchannel2.answer.length) {
-                [self postMessage];//ask question
-            }
-            else
-                
-            {
-                if ([conversationchannel2.asker_id isEqual:conversationchannel.sycSender]) {
-                    [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCNOTFINDANSWER];
-                }
-                else
-                     [self postMessage];//give answer
-                
-            }
-            
-        }
-        else
+//        if (conversationarray.count) {
+//          SYCChatConversation *conversationchannel2=conversationarray.lastObject;
+//            if (conversationchannel2.answer.length) {
+//                [self postMessage];//ask question
+//            }
+//            else
+//                
+//            {
+//                if ([conversationchannel2.asker_id isEqual:conversationchannel.sycSender]) {
+//                    [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCNOTFINDANSWER];
+//                }
+//                else
+//                     [self postMessage];//give answer
+//                
+//            }
+//            
+//        }
+//        else
             [self postMessage];
-//    }
-//    else
-//        [self postMessage];
+
    
 }
 -(void)postMessage
 {
-    if (textView.text.length) {
-        [self sendMessage];
-        //
-//        [[ChatConfig sharedInstance]hearPerticularChannel:_reciver callback:^(bool sent) {
-//            
-//            if (sent) {
-//                
-//                [self sendMessage];
-//            }
-//            else
-//            {
-//                [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCOFFLINEERROR];
-//            }
-//        }];
-        
-        
-        
+    if (textView.text.length)
+    {
+        int vv=(int)questionid;
+        if (questionid.length) {
+            
+        SYCChatConversation *conversationchannel2=[conversationarray objectAtIndex:vv];
+        if ([conversationchannel2.asker_id isEqual:conversationchannel.sycSender])
+            [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCNOTFINDANSWER];
+        else
+        [self sendMessage:questionid];
+        }
+        else
+            [self sendMessage:questionid];
     }
 }
 /*
@@ -450,7 +456,122 @@
    // [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
     [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:status andtotyping:_reciver anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
 }
--(void)sendMessage
+//-(void)sendMessage:(NSString*)qusetionID
+//{
+//    NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
+//    [msg setValue:textView.text forKey:@"message"];
+//    [msg setValue:[[Constantobject sharedInstance]getlogged] forKey:@"sendormode"];
+//    [msg setValue:[[Constantobject sharedInstance]getloggedchannel] forKey:@"sendorchannel"];
+//    [msg setValue:@"mycategory" forKey:@"sendorcategory"];
+//    
+//    [[ChatConfig sharedInstance]sendmessage:msg andtochannel:_reciver callback:^(bool sent) {
+//        
+//        if (sent)
+//        {
+//            NSLog(@"send!");
+//            
+//            [self settyping:@"false"];
+//           // if ([[[Constantobject sharedInstance]getlogged]isEqualToString:SYCCHATMODEASKER]) {
+//               SYCChatConversation *chatcove=  [conversationarray lastObject]; 
+//            if (chatcove.answer.length) {
+//                
+//            
+//            [[SYCRequestManager sharedInstance]askQuestion:textView.text andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andTask:@"askQuestion" callback:^(bool send) {
+//                
+//                if (send) {
+////                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"1"  callback:^(NSArray *send) {
+////                        if (send) {
+////                            conversationarray=send;
+////                            [self.tblconversation reloadData];
+////                        }
+////                        
+////                    }];
+//                    
+//                    
+//                    
+////                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
+////                        conversationarray=Responsearray;
+////                        [self.tblconversation reloadData];
+////                         textView.text=@"";
+////                    }];
+//                    [self loadchat];
+//                    
+//                }
+//            }];
+//           
+//           }
+//            else
+//            {
+//            //-----for mentor-------------
+//              SYCChatConversation *chatcove=  [conversationarray lastObject];
+//                if (chatcove) {
+//          
+//                [[SYCRequestManager sharedInstance] giveAnswerbyid:chatcove.qusetion_id andAnswer:textView.text andTask:@"submitAnswerByEducatorMentor" callback:^(bool send) {
+//                    
+//                    if (send) {
+////                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"2" callback:^(NSArray *send) {
+////                            if (send) {
+////                                conversationarray=send;
+////                                [self.tblconversation reloadData];
+////                            }
+////                            
+////                        }];
+//                        
+////                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:nil andlistanswer:textView.text anduser_id:@"" callback:^(NSArray *Responsearray) {
+////                            conversationarray=Responsearray;
+////                            [self.tblconversation reloadData];
+////                             textView.text=@"";
+////                        }];
+//                        [self loadchat];
+//                    }
+//                    
+//                }];
+//            }
+//            else
+//            {
+//                [[SYCRequestManager sharedInstance]askQuestion:textView.text andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andTask:@"askQuestion" callback:^(bool send) {
+//                    
+//                    if (send) {
+//                        //                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"1"  callback:^(NSArray *send) {
+//                        //                        if (send) {
+//                        //                            conversationarray=send;
+//                        //                            [self.tblconversation reloadData];
+//                        //                        }
+//                        //
+//                        //                    }];
+//                        
+//                        
+//                        
+////                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
+////                            conversationarray=Responsearray;
+////                            [self.tblconversation reloadData];
+////                            textView.text=@"";
+////                        }];
+//                        
+//                        [self loadchat];
+//                        
+//                    }
+//                }];
+//
+//            }
+//        
+//            }
+//            
+//            
+//           
+//           // [[Constantobject sharedInstance]showAlertWithMessage:@"SEND!" withTitle:nil withCancelTitle:SYCOK];
+//        }
+//        else
+//          //  NSLog(@"send error!");
+//        {
+//            [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:SYCMESSAGESENDERROR andmessagetext:SYCOK];
+//        }
+//        
+//    }];
+//}
+
+
+-(void)sendMessage:(NSString*)qusetionID
 {
     NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
     [msg setValue:textView.text forKey:@"message"];
@@ -465,104 +586,53 @@
             NSLog(@"send!");
             
             [self settyping:@"false"];
-           // if ([[[Constantobject sharedInstance]getlogged]isEqualToString:SYCCHATMODEASKER]) {
-               SYCChatConversation *chatcove=  [conversationarray lastObject]; 
-            if (chatcove.answer.length) {
-                
             
-            [[SYCRequestManager sharedInstance]askQuestion:textView.text andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andTask:@"askQuestion" callback:^(bool send) {
+            if (!qusetionID.length) {
                 
-                if (send) {
-//                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"1"  callback:^(NSArray *send) {
-//                        if (send) {
-//                            conversationarray=send;
-//                            [self.tblconversation reloadData];
-//                        }
-//                        
-//                    }];
-                    
-                    
-                    
-//                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
-//                        conversationarray=Responsearray;
-//                        [self.tblconversation reloadData];
-//                         textView.text=@"";
-//                    }];
-                    [self loadchat];
-                    
-                }
-            }];
-           
-           }
-            else
-            {
-            //-----for mentor-------------
-              SYCChatConversation *chatcove=  [conversationarray lastObject];
-                if (chatcove) {
-          
-                [[SYCRequestManager sharedInstance] giveAnswerbyid:chatcove.qusetion_id andAnswer:textView.text andTask:@"submitAnswerByEducatorMentor" callback:^(bool send) {
-                    
-                    if (send) {
-//                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"2" callback:^(NSArray *send) {
-//                            if (send) {
-//                                conversationarray=send;
-//                                [self.tblconversation reloadData];
-//                            }
-//                            
-//                        }];
-                        
-//                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:nil andlistanswer:textView.text anduser_id:@"" callback:^(NSArray *Responsearray) {
-//                            conversationarray=Responsearray;
-//                            [self.tblconversation reloadData];
-//                             textView.text=@"";
-//                        }];
-                        [self loadchat];
-                    }
-                    
-                }];
-            }
-            else
-            {
+                
                 [[SYCRequestManager sharedInstance]askQuestion:textView.text andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andTask:@"askQuestion" callback:^(bool send) {
                     
                     if (send) {
-                        //                    [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.asker_id andMentorChannel:conversationchannel.mentor_id anduser_id:@"1"  callback:^(NSArray *send) {
-                        //                        if (send) {
-                        //                            conversationarray=send;
-                        //                            [self.tblconversation reloadData];
-                        //                        }
-                        //
-                        //                    }];
-                        
-                        
-                        
-//                        [[SYCRequestManager sharedInstance]getChatListforquestionanswer:@"getQuestionAnswerChat" andAskerChannel:conversationchannel.sycSender andMentorChannel:conversationchannel.sycReciver andquestion:textView.text andlistanswer:nil anduser_id:@"" callback:^(NSArray *Responsearray) {
-//                            conversationarray=Responsearray;
-//                            [self.tblconversation reloadData];
-//                            textView.text=@"";
-//                        }];
-                        
+                       
                         [self loadchat];
+                        questionid=nil;
+                           textView.text=nil;
                         
                     }
                 }];
-
+                
             }
-        
-            }
-            
-            
-           
-           // [[Constantobject sharedInstance]showAlertWithMessage:@"SEND!" withTitle:nil withCancelTitle:SYCOK];
+            else
+            {
+                //-----for mentor-------------
+//                SYCChatConversation *chatcove=  [conversationarray lastObject];
+//                if (chatcove) {
+                
+                    [[SYCRequestManager sharedInstance] giveAnswerbyid:qusetionID andAnswer:textView.text andTask:@"submitAnswerByEducatorMentor" callback:^(bool send) {
+                        
+                        if (send) {
+                           
+                            [self loadchat];
+                             questionid=nil;
+                            textView.text=nil;
+                        }
+                        
+                    }];
+                }
         }
         else
-          //  NSLog(@"send error!");
         {
             [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:SYCMESSAGESENDERROR andmessagetext:SYCOK];
         }
         
+        
     }];
+    
+
+
 }
+
+
 
 -(void)loadchat
 {
