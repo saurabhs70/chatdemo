@@ -136,9 +136,13 @@
     SYCChatConversation *vv=[conversationarray objectAtIndex:indexPath.section];
     if (vv.answer.length) {
         //ask question
+        questionid=nil;
+        pathsec=nil;
     }
     else
     {
+        pathsec=indexPath;
+        questionid=vv.qusetion_id;
         //give answer
     }
   
@@ -408,17 +412,40 @@
 {
     if (textView.text.length)
     {
-        int vv=(int)questionid;
-        if (questionid.length) {
-            
-        SYCChatConversation *conversationchannel2=[conversationarray objectAtIndex:vv];
-        if ([conversationchannel2.asker_id isEqual:conversationchannel.sycSender])
-            [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCNOTFINDANSWER];
-        else
-        [self sendMessage:questionid];
+        NSString *reciver=conversationchannel.sycReciver;
+        reciver=[reciver substringToIndex:3];
+        if ([reciver isEqualToString:@"ASK"]) {
+            if (questionid.length) {
+                
+                SYCChatConversation *conversationchannel2=[conversationarray objectAtIndex:pathsec.section];
+                if ([conversationchannel2.asker_id isEqualToString:conversationchannel.sycSender])
+                    [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCNOTFINDANSWER];
+                else
+                  [self sendMessage:questionid];
+                   // NSLog(@"fff");
+            }
+            else
+            {
+                [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCMENTOTOASKERANSWER];
+            }
         }
         else
-            [self sendMessage:questionid];
+        {
+        //int vv=(int)questionid;
+        
+        if (questionid.length) {
+            
+        SYCChatConversation *conversationchannel2=[conversationarray objectAtIndex:pathsec.section];
+        if ([conversationchannel2.asker_id isEqualToString:conversationchannel.sycSender])
+            [[Constantobject sharedInstance]showAlertWithText:self andmessagetitle:nil andmessagetext:SYCNOTFINDANSWER];
+        else
+     [self sendMessage:questionid];
+       //   NSLog(@"fff");
+        }
+        else
+        [self sendMessage:questionid];
+         // NSLog(@"ddd");
+    }
     }
 }
 /*
@@ -576,6 +603,7 @@
     NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
     [msg setValue:textView.text forKey:@"message"];
     [msg setValue:[[Constantobject sharedInstance]getlogged] forKey:@"sendormode"];
+    [msg setValue:conversationchannel.sycReciver forKey:@"recivermode"];
     [msg setValue:[[Constantobject sharedInstance]getloggedchannel] forKey:@"sendorchannel"];
     [msg setValue:@"mycategory" forKey:@"sendorcategory"];
     

@@ -25,6 +25,7 @@
     //NSString *mentorchannel;
     //NSString * timestamp;
     NSString *questionid;
+    NSIndexPath *pathsec;
 }
 @property (strong,nonatomic) SYCChatConversation *conversationchannel;
 @property (strong,nonatomic) NSString *reciver;

@@ -27,6 +27,7 @@
 #define SCREENHEIGHT  [UIScreen mainScreen].bounds.size.height
 #define SYCOFFLINEERROR  @"Reciver Not Available!"
 #define SYCNOTFINDANSWER  @"Wait for answer!"
+#define SYCMENTOTOASKERANSWER  @"Please give answer on selected question!"
 #define SYCMESSAGESENDERROR  @"Message can't send!"
 //#define SYCMESSAGESENDERROR  @"Message can't send!"
 #define SYCOK  @"Ok"

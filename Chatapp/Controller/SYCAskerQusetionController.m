@@ -21,7 +21,7 @@
     qustion=[[Constantobject sharedInstance]arr];
  [self setmenu];
     NSString *str=[[Constantobject sharedInstance]getloggedchannel];
-    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:nil andMentorChannel:str   anduser_id:@""  callback:^(NSArray *send) {
+    [[SYCRequestManager sharedInstance]getChatList:@"getQuestionAnswerChat" andAskerChannel:nil andMentorChannel:str   anduser_id:@"77"  callback:^(NSArray *send) {
         if (send) {
             arrayofquestion=[[NSMutableArray alloc]init];
             [arrayofquestion addObjectsFromArray:send];
@@ -109,7 +109,7 @@
     SYCChatConversation *question=[arrayofquestion objectAtIndex:indexPath.row];
     SYCChatConversation *chatcon;
     if ([[[Constantobject sharedInstance]getlogged] isEqualToString:SYCCHATMODEMENTOR])
-   chatcon =[[SYCChatConversation alloc]initWithSycConverstion:@"ASK_bill@gmail.com" andMentorId: [[Constantobject sharedInstance]getloggedchannel] andQuestionId:nil andquestion:nil andquestimestamp:nil andAnswerlist:nil Andsender:[[Constantobject sharedInstance]getloggedchannel] andReciver:@"ASK_bill@gmail.com"];
+   chatcon =[[SYCChatConversation alloc]initWithSycConverstion:@"ASK_bill@gmail.com" andMentorId: [[Constantobject sharedInstance]getloggedchannel] andQuestionId:nil andquestion:nil andquestimestamp:nil andAnswerlist:nil Andsender:[[Constantobject sharedInstance]getloggedchannel] andReciver:question.asker_id];
     vv.conversationchannel=chatcon;//[dd valueForKey:@"Asker_id"];
     [self.navigationController pushViewController:vv animated:YES];
    // [[ChatConfig sharedInstance]unsubscribechannle:[[Constantobject sharedInstance] getloggedchannel]];

@@ -242,7 +242,7 @@
 }
 -(void)getChatList:(NSString*)taskName andAskerChannel:(NSString*)askerChannel andMentorChannel:(NSString*)mentorChannel anduser_id:(NSString*)user_id callback:(void (^)(NSArray *Responsearray))callback
 {
-    user_id=@"2";
+   // user_id=@"2";
 //    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
 //    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
 //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
