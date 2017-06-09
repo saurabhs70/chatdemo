@@ -163,7 +163,7 @@
 		A56525691E8F9CA200BB676A /* SYCQACellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCQACellTableViewCell.m; sourceTree = "<group>"; };
 		A565256C1E8FBF8500BB676A /* Database.pages */ = {isa = PBXFileReference; lastKnownFileType = file; path = Database.pages; sourceTree = "<group>"; };
 		A56DF0441E2CD50600CE97C7 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
-		A570ECBF1E27A5FC001BA181 /* Chatapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A570ECBF1E27A5FC001BA181 /* ChatappDummy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatappDummy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A570ECC31E27A5FC001BA181 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A570ECC51E27A5FC001BA181 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A570ECC61E27A5FC001BA181 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -432,7 +432,7 @@
 		A570ECC01E27A5FC001BA181 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A570ECBF1E27A5FC001BA181 /* Chatapp.app */,
+				A570ECBF1E27A5FC001BA181 /* ChatappDummy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -548,9 +548,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A570ECBE1E27A5FC001BA181 /* Chatapp */ = {
+		A570ECBE1E27A5FC001BA181 /* ChatappDummy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A570ECD61E27A5FD001BA181 /* Build configuration list for PBXNativeTarget "Chatapp" */;
+			buildConfigurationList = A570ECD61E27A5FD001BA181 /* Build configuration list for PBXNativeTarget "ChatappDummy" */;
 			buildPhases = (
 				191A69FF87D13C901E528AAA /* [CP] Check Pods Manifest.lock */,
 				A570ECBB1E27A5FC001BA181 /* Sources */,
@@ -564,9 +564,9 @@
 			);
 			dependencies = (
 			);
-			name = Chatapp;
+			name = ChatappDummy;
 			productName = Chatapp;
-			productReference = A570ECBF1E27A5FC001BA181 /* Chatapp.app */;
+			productReference = A570ECBF1E27A5FC001BA181 /* ChatappDummy.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -585,7 +585,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A570ECBA1E27A5FC001BA181 /* Build configuration list for PBXProject "Chatapp" */;
+			buildConfigurationList = A570ECBA1E27A5FC001BA181 /* Build configuration list for PBXProject "ChatappDummy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -598,7 +598,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A570ECBE1E27A5FC001BA181 /* Chatapp */,
+				A570ECBE1E27A5FC001BA181 /* ChatappDummy */,
 			);
 		};
 /* End PBXProject section */
@@ -914,7 +914,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A570ECBA1E27A5FC001BA181 /* Build configuration list for PBXProject "Chatapp" */ = {
+		A570ECBA1E27A5FC001BA181 /* Build configuration list for PBXProject "ChatappDummy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A570ECD41E27A5FD001BA181 /* Debug */,
@@ -923,7 +923,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A570ECD61E27A5FD001BA181 /* Build configuration list for PBXNativeTarget "Chatapp" */ = {
+		A570ECD61E27A5FD001BA181 /* Build configuration list for PBXNativeTarget "ChatappDummy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A570ECD71E27A5FD001BA181 /* Debug */,
