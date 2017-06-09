@@ -1,0 +1,23 @@
+machine:
+xcode:
+version: "8.0"
+environment:
+# please specify your code signing identity name here
+GYM_CODE_SIGNING_IDENTITY: "iPhone Developer: Azim Hemani (TNG6V49C8F)"
+
+test:
+override:
+- set -o pipefail &&
+xcodebuild
+CODE_SIGNING_REQUIRED=NO
+CODE_SIGN_IDENTITY=
+PROVISIONING_PROFILE=
+-sdk iphonesimulator
+-destination 'platform=iOS Simulator,OS=10.0,name=iPhone 6'
+-workspace Chatapp.xcworkspace
+-scheme "Chatapp"
+clean build test |
+tee $CIRCLE_ARTIFACTS/xcode_raw.log |
+xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
+
+
