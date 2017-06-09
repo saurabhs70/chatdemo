@@ -246,9 +246,9 @@
             NSLog(@"shyamlal%@",dd);
             if ([[dd valueForKey:@"isTyping"] isEqualToString:@"true"])
               //  NSLog(@"%@ is typing....",event.data.presence.uuid);
-                [self setTypingStatus:@"true" Andby:event.data.presence.uuid];
+                [self setTypingStatus:@"true" Andby:event.data.presence.uuid andto:[dd valueForKey:@"TOtyping"] andfrom:[dd valueForKey:@"Fromtyping"]];
             else
-                [self setTypingStatus:@"false" Andby:event.data.presence.uuid];
+                [self setTypingStatus:@"false" Andby:event.data.presence.uuid andto:[dd valueForKey:@"TOtyping"] andfrom:[dd valueForKey:@"Fromtyping"]];
             
         }
       //  NSLog(@"%@ changed state at: %@ on %@ to: %@", event.data.presence.uuid,
@@ -377,7 +377,7 @@
                        
                        
                        NSDictionary *dd=  result.data.state;
-                       [self setTypingStatus:[dd valueForKey:@"isTyping"] Andby:uuidfortyping];
+                       [self setTypingStatus:[dd valueForKey:@"isTyping"] Andby:uuidfortyping andto:[dd valueForKey:@"TOtyping"] andfrom:[dd valueForKey:@"Fromtyping"]];
                        
                        NSLog(@"");
                        // Handle downloaded state information using: result.data.state
@@ -487,7 +487,7 @@
 
 -(void)updatestatus:(NSString*)key andvalue:(NSString*)value andtotyping:(NSString*)to anduuid:(NSString*)uuid andchannel:(NSString*)chhhanel
 {
-    [self.client setState: @{key: value,@"TOtyping":to} forUUID:uuid onChannel: chhhanel
+    [self.client setState: @{key: value,@"TOtyping":to,@"Fromtyping":uuid} forUUID:uuid onChannel: chhhanel
            withCompletion:^(PNClientStateUpdateStatus *status) {
                
                if (!status.isError) {
@@ -507,11 +507,11 @@
                }
            }];
 }
--(void)setTypingStatus:(NSString*)typingStatus Andby:(NSString*)uuid
+-(void)setTypingStatus:(NSString*)typingStatus Andby:(NSString*)uuid andto:(NSString*)totyping andfrom:(NSString*)from
 {
     NSDictionary *aDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
                                  typingStatus, @"isTyping",
-                                 uuid, @"isTypingUuid",
+                                 uuid, @"isTypingUuid", totyping,@"Totyping",from,@"Fromtyping",
                                  nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"isTypingUpdate" object:nil userInfo:aDictionary];
 }

@@ -174,6 +174,7 @@
 		A570ECDA1E27A61B001BA181 /* PubNub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PubNub.framework; sourceTree = "<group>"; };
 		A596D0691E94E57F002D01CB /* SYCChatModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCChatModule.h; sourceTree = "<group>"; };
 		A596D06A1E94E57F002D01CB /* SYCChatModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCChatModule.m; sourceTree = "<group>"; };
+		A5AEF6881ED842E600E1C8AA /* mACRO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mACRO.h; sourceTree = "<group>"; };
 		A5DFB46D1E97690500A6E3AE /* SYCChatConversationAsker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCChatConversationAsker.h; sourceTree = "<group>"; };
 		A5DFB46E1E97690500A6E3AE /* SYCChatConversationAsker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYCChatConversationAsker.m; sourceTree = "<group>"; };
 		A5DFB4701E97696500A6E3AE /* SYCAskerQuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYCAskerQuestionCell.h; sourceTree = "<group>"; };
@@ -439,6 +440,7 @@
 		A570ECC11E27A5FC001BA181 /* Chatapp */ = {
 			isa = PBXGroup;
 			children = (
+				A5AEF6881ED842E600E1C8AA /* mACRO.h */,
 				A53C1ADA1E8CE0860061E11D /* Cell */,
 				A53C1ACD1E8CE0170061E11D /* Controller */,
 				A53C1AC41E8CDFA10061E11D /* Model */,
@@ -578,8 +580,8 @@
 				TargetAttributes = {
 					A570ECBE1E27A5FC001BA181 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = CBZE86VY6D;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = Z2M49Q3HBJ;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -848,7 +850,9 @@
 			baseConfigurationReference = 716D62D260DAE429C2391700 /* Pods-Chatapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CBZE86VY6D;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Azim Hemani (TNG6V49C8F)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Azim Hemani (TNG6V49C8F)";
+				DEVELOPMENT_TEAM = Z2M49Q3HBJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
@@ -867,8 +871,10 @@
 				INFOPLIST_FILE = Chatapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Raza.Pushraza.Chatapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RazaTestapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b06b3dfa-7411-40a7-b72b-dc5baed35f22";
+				PROVISIONING_PROFILE_SPECIFIER = Testapp;
 			};
 			name = Debug;
 		};
@@ -877,7 +883,9 @@
 			baseConfigurationReference = DF3874C079D3A6062F397C13 /* Pods-Chatapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CBZE86VY6D;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Azim Hemani (TNG6V49C8F)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Azim Hemani (TNG6V49C8F)";
+				DEVELOPMENT_TEAM = Z2M49Q3HBJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
@@ -896,8 +904,10 @@
 				INFOPLIST_FILE = Chatapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Raza.Pushraza.Chatapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.RazaTestapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b06b3dfa-7411-40a7-b72b-dc5baed35f22";
+				PROVISIONING_PROFILE_SPECIFIER = Testapp;
 			};
 			name = Release;
 		};

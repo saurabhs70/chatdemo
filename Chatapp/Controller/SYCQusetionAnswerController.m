@@ -33,7 +33,7 @@
 //        NSLog(@"rr");
 //    }
     _reciver=conversationchannel.sycReciver;
-    [[ChatConfig sharedInstance]addmorechannel:@"TYPINGCHANNEL"];
+    [[ChatConfig sharedInstance]addmorechannel:SYCTYPINGCHANNEL];
       [self settyping:@"false"];
  [self keyboaradstyatus];
 [self viewloadf];
@@ -49,7 +49,7 @@
 }
 -(void)checkingTypingstatus
 {
-     NSString *conversationchahhel=@"TYPINGCHANNEL";//[[Constantobject sharedInstance]TypingToChannel:_reciver];
+     NSString *conversationchahhel=SYCTYPINGCHANNEL;//[[Constantobject sharedInstance]TypingToChannel:_reciver];
     [[ChatConfig sharedInstance]hearPerticularChannelforTyping:conversationchahhel anduuid:_reciver callback:^(bool sent) {
         
     }];
@@ -460,7 +460,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self settyping:@"false"];
-    NSString *conversationchahhel=@"TYPINGCHANNEL";//[[Constantobject sharedInstance]TypingToChannel:_reciver];
+    NSString *conversationchahhel=SYCTYPINGCHANNEL;//[[Constantobject sharedInstance]TypingToChannel:_reciver];
     [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
     [checktypingstatus invalidate];
     [checktypingstatusval invalidate];
@@ -469,8 +469,12 @@
 {
     NSDictionary *dict = [anote userInfo];
     if ([[dict objectForKey:@"isTyping"] isEqualToString:@"true"]) {
-        _lblIsTyping.hidden=NO;
-        _lblIsTyping.text=[NSString stringWithFormat:@"%@ is Typing.....",[dict objectForKey:@"isTypingUuid"]];
+        if ([[dict objectForKey:@"Fromtyping"] isEqualToString:_reciver]&&[[dict objectForKey:@"Totyping"] isEqualToString:[[Constantobject sharedInstance]getloggedchannel]]) {
+            _lblIsTyping.hidden=NO;
+            _lblIsTyping.text=[NSString stringWithFormat:@"%@ is Typing.....",[dict objectForKey:@"isTypingUuid"]];
+        }
+        else
+            _lblIsTyping.hidden=YES;
     }
     else
         _lblIsTyping.hidden=YES;
@@ -479,7 +483,7 @@
 -(void)settyping:(NSString*)status
 {
     val=status;
-    NSString *conversationchahhel=@"TYPINGCHANNEL";//[[Constantobject sharedInstance]TypingToChannel:_reciver];
+    NSString *conversationchahhel=SYCTYPINGCHANNEL;//[[Constantobject sharedInstance]TypingToChannel:_reciver];
    // [[ChatConfig sharedInstance]unsubscribechannle:conversationchahhel];
     [[ChatConfig sharedInstance]updatestatus:@"isTyping" andvalue:status andtotyping:_reciver anduuid:[[Constantobject sharedInstance]getloggedchannel] andchannel:conversationchahhel];
 }
